@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
- * 群操作
+ * 消息操作
  *
  * @Author: [liguiqin]
  * @Date: [2017-07-19 13:58]

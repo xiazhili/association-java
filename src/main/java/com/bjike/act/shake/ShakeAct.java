@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * @Author: [liguiqin]
  * @Date: [2017-07-06 13:51]
- * @Description: [ ]
+ * @Description: [摇一摇 ]
  * @Version: [1.0.0]
  * @Copy: [com.bjike]
  */

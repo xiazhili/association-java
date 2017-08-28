@@ -1,0 +1,16 @@
+allprojects {
+
+    ext {
+        mysql_connector_version = '5.1.21'
+        poi_version = '3.16'
+        httpclient_version= '4.5.3'
+        fastjson_version = '1.2.23'
+        commons_lang_version = '3.6'
+        commons_io_version = '2.5'
+        thumbnailator_version= '0.4.8'
+        guava_version = '21.0'
+        zxing_version = '3.3.0'
+
+    }
+
+}

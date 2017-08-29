@@ -7,6 +7,7 @@ import com.bjike.ser.Ser;
 import com.bjike.to.user.RecommendTO;
 
 /**
+ * 推荐信息业务
  * @Author: [liguiqin]
  * @Date: [2017-08-23 14:20]
  * @Description: [ ]

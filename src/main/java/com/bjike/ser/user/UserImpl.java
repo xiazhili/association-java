@@ -5,12 +5,17 @@ import com.bjike.common.constant.UserCommon;
 import com.bjike.common.exception.SerException;
 import com.bjike.common.util.PasswordHash;
 import com.bjike.common.util.UserUtil;
+import com.bjike.common.util.bean.BeanCopy;
 import com.bjike.dao.user.UserRep;
+import com.bjike.dto.Restrict;
 import com.bjike.dto.user.UserDTO;
+import com.bjike.dto.user.UserInfoDTO;
 import com.bjike.entity.user.User;
+import com.bjike.entity.user.UserInfo;
 import com.bjike.redis.client.RedisClient;
 import com.bjike.ser.ServiceImpl;
 import com.bjike.session.UserSession;
+import com.bjike.vo.user.UserInfoVO;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,7 +32,7 @@ public class UserImpl extends ServiceImpl<User, UserDTO> implements UserSer {
     @Autowired
     private UserRep userRep;
     @Autowired
-    private RedisClient redis;
+    private UserInfoSer userInfoSer;
 
     @Override
     public User findByUsername(String username) throws SerException {
@@ -46,37 +51,16 @@ public class UserImpl extends ServiceImpl<User, UserDTO> implements UserSer {
     }
 
     @Override
-    public Boolean findPwd(String phone, String password) throws SerException {
-        try {
-            User user = this.findByPhone(phone);
-            if (null != user) {
-                user.setPassword(PasswordHash.createHash(password));
-                super.update(user);
-            } else {
-                throw new SerException("手机号不存在!");
-            }
-        } catch (Exception e) {
-            throw new SerException(e.getMessage());
-        }
-        return true;
+    public UserInfoVO userInfo(String userId) throws SerException {
+        UserInfoVO userInfoVO = new UserInfoVO();
+        UserInfoDTO dto = new UserInfoDTO();
+        dto.getConditions().add(Restrict.eq("user.id",userId));
+        UserInfo info =  userInfoSer.findOne(dto);
+        User user = UserUtil.currentUser();
+        BeanCopy.copyProperties(user,userInfoVO);
+        BeanCopy.copyProperties(info,userInfoVO);
+        return userInfoVO;
     }
-
-    @Override
-    public Boolean editPwd(String userId, String password) throws SerException {
-        User user = super.findById(userId);
-        if (null != user) {
-            try {
-                user.setPassword(PasswordHash.createHash(password));
-            } catch (Exception e) {
-                throw new SerException(e.getMessage());
-            }
-            super.update(user);
-            return true;
-        }
-        return false;
-    }
-
-
 }
 
 

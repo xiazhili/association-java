@@ -3,9 +3,13 @@ package com.bjike.ser.user;
 import com.bjike.common.exception.SerException;
 import com.bjike.dto.user.UserDTO;
 import com.bjike.entity.user.User;
+import com.bjike.entity.user.UserInfo;
 import com.bjike.ser.Ser;
+import com.bjike.vo.user.UserInfoVO;
 
 /**
+ * 用户业务
+ *
  * @Author: [liguiqin]
  * @Date: [2017-07-06 14:11]
  * @Description: [ ]
@@ -47,24 +51,16 @@ public interface UserSer extends Ser<User, UserDTO> {
     }
 
     /**
-     * 找回密码
-     * @param phone
-     * @param password
-     * @return
-     * @throws SerException
-     */
-    default Boolean findPwd(String phone,String password) throws SerException {
-        return null;
-    }
-    /**
-     * 更改密码
+     * 获取用户详情
+     *
      * @param userId
-     * @param password
      * @return
      * @throws SerException
      */
-    default Boolean editPwd(String userId,String password) throws SerException {
+    default UserInfoVO userInfo(String userId) throws SerException {
         return null;
     }
+
+
 
 }

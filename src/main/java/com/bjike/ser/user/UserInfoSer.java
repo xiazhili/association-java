@@ -5,6 +5,8 @@ import com.bjike.entity.user.UserInfo;
 import com.bjike.ser.Ser;
 
 /**
+ * 用户详细信息业务
+ *
  * @Author: [liguiqin]
  * @Date: [2017-08-23 09:49]
  * @Description: [ ]

@@ -1,37 +1,39 @@
 package com.bjike.ser.user;
 
 import com.bjike.common.exception.SerException;
-import com.bjike.to.user.LoginTO;
 
 /**
- * 登录业务
+ * 密码业务
  *
  * @Author: [liguiqin]
- * @Date: [2017-08-22 10:27]
+ * @Date: [2017-08-22 10:09]
  * @Description: [ ]
  * @Version: [1.0.0]
  * @Copy: [com.bjike]
  */
-public interface LoginSer {
+public interface PwdSer {
     /**
-     * 登录
+     * 找回密码
      *
-     * @param to
+     * @param phone
+     * @param password
      * @return
      * @throws SerException
      */
-    default String login(LoginTO to) throws SerException {
+    default Boolean findPwd(String phone, String password) throws SerException {
         return null;
     }
 
     /**
-     * 注销
+     * 更改密码
      *
-     * @param token
+     * @param userId
+     * @param password
      * @return
      * @throws SerException
      */
-    default Boolean logout(String token) throws SerException {
+    default Boolean editPwd(String userId, String password) throws SerException {
         return null;
     }
+
 }

@@ -7,6 +7,8 @@ import com.bjike.to.user.LoginLogTO;
 import java.util.List;
 
 /**
+ * 登录日志业务
+ *
  * @Author: [liguiqin]
  * @Date: [2017-08-22 14:03]
  * @Description: [ ]
@@ -16,6 +18,7 @@ import java.util.List;
 public interface LoginLogSer {
     /**
      * 保存登录日志
+     *
      * @param loginLogTO
      * @throws SerException
      */

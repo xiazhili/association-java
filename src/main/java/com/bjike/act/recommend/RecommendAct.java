@@ -6,9 +6,11 @@ import com.bjike.common.exception.SerException;
 import com.bjike.common.interceptor.login.LoginAuth;
 import com.bjike.common.restful.ActResult;
 import com.bjike.common.util.QRCodeUtil;
+import com.bjike.dto.user.RecommendDTO;
 import com.bjike.entity.user.Recommend;
 import com.bjike.ser.user.RecommendSer;
 import com.bjike.to.user.RecommendTO;
+import com.bjike.vo.recommend.RecommendVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
@@ -59,9 +61,9 @@ public class RecommendAct {
      */
     @LoginAuth
     @GetMapping("/list")
-    public ActResult list() throws ActException {
+    public ActResult list(RecommendDTO dto) throws ActException {
         try {
-            List<Recommend> recommendList = recommendSer.myRecommends();
+            List<RecommendVO> recommendList = recommendSer.myRecommends(dto);
             return ActResult.initialize(recommendList);
         } catch (SerException e) {
             throw new ActException(e.getMessage());

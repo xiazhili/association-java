@@ -5,6 +5,7 @@ import com.bjike.dto.user.RecommendDTO;
 import com.bjike.entity.user.Recommend;
 import com.bjike.ser.Ser;
 import com.bjike.to.user.RecommendTO;
+import com.bjike.vo.recommend.RecommendVO;
 
 import java.util.List;
 
@@ -27,11 +28,15 @@ public interface RecommendSer extends Ser<Recommend,RecommendDTO> {
      * @return
      * @throws SerException
      */
-    default List<Recommend> myRecommends() throws SerException{
+    default List<RecommendVO> myRecommends(RecommendDTO dto) throws SerException{
         return null;
     }
 
     default Boolean validate(String code) throws SerException{
+        return null;
+    }
+
+    default Recommend findByInviteCode(String code) throws SerException{
         return null;
     }
 }

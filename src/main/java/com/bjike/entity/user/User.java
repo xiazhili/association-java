@@ -30,6 +30,9 @@ public class User extends BaseEntity {
     @Column(columnDefinition = "VARCHAR(30) COMMENT '昵称' ", nullable = false)
     private String nickname;
 
+    @Column(columnDefinition = "VARCHAR(30) COMMENT '编号' ", nullable = false)
+    private String number;
+
     @Column(columnDefinition = "VARCHAR(256) COMMENT '头像' ")
     private String headPath;
 
@@ -149,5 +152,13 @@ public class User extends BaseEntity {
 
     public void setUserType(UserType userType) {
         this.userType = userType;
+    }
+
+    public String getNumber() {
+        return number;
+    }
+
+    public void setNumber(String number) {
+        this.number = number;
     }
 }

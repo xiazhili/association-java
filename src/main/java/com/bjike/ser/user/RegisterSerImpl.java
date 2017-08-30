@@ -2,6 +2,7 @@ package com.bjike.ser.user;
 
 import com.bjike.common.exception.SerException;
 import com.bjike.common.util.PasswordHash;
+import com.bjike.common.util.SeqUtil;
 import com.bjike.common.util.bean.BeanCopy;
 import com.bjike.common.util.regex.Validator;
 import com.bjike.entity.chat.Friend;
@@ -35,8 +36,6 @@ public class RegisterSerImpl implements RegisterSer {
     @Autowired
     private LoginSer loginSer;
     @Autowired
-    private RedisClient redis;
-    @Autowired
     private RecommendSer recommendSer;
     @Autowired
     private FriendSer friendSer;
@@ -51,6 +50,7 @@ public class RegisterSerImpl implements RegisterSer {
         user.setPhone(to.getPhone());
         user.setUsername(to.getNickname());
         user.setNickname(to.getNickname());
+        user.setNumber(SeqUtil.genNumber(userSer.findByMaxField("number",User.class)));
         try {
             user.setPassword(PasswordHash.createHash(to.getPassword()));
         } catch (Exception e) {
@@ -60,7 +60,6 @@ public class RegisterSerImpl implements RegisterSer {
         if (StringUtils.isNotBlank(to.getInviteCode())) { //邀请码注册情况
             initUserInfo(user, recommend);//完善用户信息
             addFriend(recommend, user);//添加好友
-            redis.remove(to.getInviteCode()); //删除校验码
         }
         token = loginUser(to);//登录用户
         return token;
@@ -94,11 +93,11 @@ public class RegisterSerImpl implements RegisterSer {
      * @throws SerException
      */
     private Recommend initRecommend(RegisterTO to) throws SerException {
-        String invite = to.getInviteCode();
-        if (StringUtils.isNotBlank(invite)) { //邀请码注册
-            String recommendId = redis.get(invite);
-            if (StringUtils.isNotBlank(recommendId)) {
-                return recommendSer.findById(recommendId); //获取推荐详细信息
+        String inviteCode = to.getInviteCode();
+        if (StringUtils.isNotBlank(inviteCode)) { //邀请码注册
+            Recommend recommend = recommendSer.findByInviteCode(inviteCode);
+            if (null != recommend) {
+                return recommend; //获取推荐详细信息
             }
             throw new SerException("无效邀请码!");
         }

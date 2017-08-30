@@ -7,13 +7,12 @@ import com.bjike.dto.Restrict;
 import com.bjike.dto.user.RecommendDTO;
 import com.bjike.entity.user.Recommend;
 import com.bjike.entity.user.User;
-import com.bjike.redis.client.RedisClient;
 import com.bjike.ser.ServiceImpl;
 import com.bjike.to.user.RecommendTO;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.bjike.vo.recommend.RecommendVO;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -26,8 +25,7 @@ import java.util.UUID;
  */
 @Service
 public class RecommendSerImpl extends ServiceImpl<Recommend, RecommendDTO> implements RecommendSer {
-    @Autowired
-    private RedisClient redis;
+
 
     @Override
     public String add(RecommendTO to) throws SerException {
@@ -36,23 +34,36 @@ public class RecommendSerImpl extends ServiceImpl<Recommend, RecommendDTO> imple
         recommend.setUser(user);
         super.save(recommend);
         String code = "IKE-" + UUID.randomUUID().toString().substring(0, 8).toUpperCase();
-        redis.save(code, recommend.getId(), 30 * 60 * 60 * 24);
+        recommend.setInviteCode(code);
         return code;
 
     }
 
     @Override
-    public List<Recommend> myRecommends() throws SerException {
-        RecommendDTO dto = new RecommendDTO();
+    public List<RecommendVO> myRecommends(RecommendDTO dto) throws SerException {
         String userId = UserUtil.currentUserID();
         dto.getConditions().add(Restrict.eq("user.id", userId));
-        return super.findByCis(dto);
+        dto.getConditions().add(Restrict.isNotNull("user.id"));
+        List<Recommend> recommends = super.findByCis(dto);
+        List<RecommendVO> recommendVOS = new ArrayList<>();
+        for (Recommend recommend : recommends) {
+            RecommendVO vo = new RecommendVO();
+            vo.setNickname(recommend.getRealName());
+            vo.setInviteCode(recommend.getRecommended().getHeadPath());
+        }
+        return recommendVOS;
     }
 
     @Override
     public Boolean validate(String code) throws SerException {
-        boolean exist = (null != redis.get(code));
-        redis.remove(code);
-        return exist;
+
+        return null != findByInviteCode(code);
+    }
+
+    @Override
+    public Recommend findByInviteCode(String code) throws SerException {
+        RecommendDTO dto = new RecommendDTO();
+        dto.getConditions().add(Restrict.eq("inviteCode", code));
+        return super.findOne(dto);
     }
 }

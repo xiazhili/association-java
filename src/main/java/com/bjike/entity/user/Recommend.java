@@ -18,12 +18,14 @@ import javax.persistence.*;
 @Table(name = "recommend")
 public class Recommend extends BaseEntity {
     @ManyToOne(cascade = {CascadeType.REFRESH}, fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", unique = true, columnDefinition = "VARCHAR(36) COMMENT '推荐人id' ", nullable = false)
+    @JoinColumn(name = "user_id", columnDefinition = "VARCHAR(36) COMMENT '推荐人id' ", nullable = false)
     private User user;
-    @ManyToOne(cascade = {CascadeType.REFRESH}, fetch = FetchType.LAZY)
-    @JoinColumn(name = "claim_id", unique = true, columnDefinition = "VARCHAR(36) COMMENT '认领人id' ")
-    private User claim;
+    @ManyToOne(cascade = {CascadeType.REFRESH}, fetch = FetchType.EAGER)
+    @JoinColumn(name = "recommended_id", columnDefinition = "VARCHAR(36) COMMENT '被推荐人id' ")
+    private User recommended;
 
+    @Column(columnDefinition = "VARCHAR(30) COMMENT '邀请码' ",unique = true,nullable = false)
+    private String inviteCode;
 
     @Column(columnDefinition = "VARCHAR(30) COMMENT '真实姓名' ", nullable = false)
     private String realName;
@@ -230,11 +232,19 @@ public class Recommend extends BaseEntity {
         this.weChat = weChat;
     }
 
-    public User getClaim() {
-        return claim;
+    public User getRecommended() {
+        return recommended;
     }
 
-    public void setClaim(User claim) {
-        this.claim = claim;
+    public void setRecommended(User recommended) {
+        this.recommended = recommended;
+    }
+
+    public String getInviteCode() {
+        return inviteCode;
+    }
+
+    public void setInviteCode(String inviteCode) {
+        this.inviteCode = inviteCode;
     }
 }

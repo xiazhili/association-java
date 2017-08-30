@@ -1,7 +1,6 @@
 package com.bjike.act.comment;
 
 import com.bjike.common.aspect.ADD;
-import com.bjike.common.constant.UserCommon;
 import com.bjike.common.exception.ActException;
 import com.bjike.common.exception.SerException;
 import com.bjike.common.interceptor.login.LoginAuth;
@@ -13,9 +12,7 @@ import com.bjike.common.util.date.DateUtil;
 import com.bjike.common.util.file.FileUtil;
 import com.bjike.dto.comment.CommentDTO;
 import com.bjike.entity.comment.Comment;
-import com.bjike.entity.user.User;
 import com.bjike.ser.comment.CommentSer;
-import com.bjike.ser.user.UserSer;
 import com.bjike.to.comment.CommentTO;
 import com.bjike.vo.comment.CommentDetailsVO;
 import com.bjike.vo.comment.CommentVO;
@@ -30,6 +27,8 @@ import java.time.LocalDate;
 import java.util.List;
 
 /**
+ * 点评
+ *
  * @Author: [liguiqin]
  * @Date: [2017-06-28 14:25]
  * @Description: [ 点评]
@@ -46,15 +45,13 @@ public class CommentAct {
     /**
      * 添加点评
      *
-     * @param to
-     * @param result
-     * @return
+     * @param to 点评内容
      * @throws Exception
      */
     @PostMapping("/add")
     public Result add(@Validated(ADD.class) CommentTO to, BindingResult result, HttpServletRequest request) throws ActException {
         try {
-            String userId =  UserUtil.currentUserID();
+            String userId = UserUtil.currentUserID();
             List<File> files = FileUtil.save(request, getCommentPath(userId));
             Comment comment = commentSer.add(to, files);
             CommentVO vo = BeanCopy.copyProperties(comment, CommentVO.class);
@@ -69,7 +66,7 @@ public class CommentAct {
     /**
      * 店铺点评列表
      *
-     * @return
+     * @return class CommentVO
      * @throws Exception
      */
     @GetMapping("/list")
@@ -88,7 +85,7 @@ public class CommentAct {
     /**
      * 店铺点评量
      *
-     * @return
+     * @param pointId 点评地址id
      * @throws Exception
      */
     @GetMapping("/count")
@@ -104,6 +101,7 @@ public class CommentAct {
     /**
      * 点评点赞
      *
+     * @param commentId 点评id
      * @return
      * @throws Exception
      */
@@ -121,8 +119,7 @@ public class CommentAct {
     /**
      * 点评取消点赞
      *
-     * @return
-     * @throws Exception
+     * @param commentId 点评id
      */
     @PutMapping("/cancel/like/{commentId}")
     public Result notLike(@PathVariable String commentId) throws ActException {
@@ -139,9 +136,7 @@ public class CommentAct {
     /**
      * 删除点评
      *
-     * @param commentId
-     * @return
-     * @throws Exception
+     * @param commentId 点评id
      */
     @DeleteMapping("/delete/{commentId}")
     public Result delete(@PathVariable String commentId) throws ActException {
@@ -158,8 +153,7 @@ public class CommentAct {
     /**
      * 店铺总评分
      *
-     * @return
-     * @throws Exception
+     * @param pointId 店铺地址id
      */
     @GetMapping("/score/{pointId}")
     public Result score(String pointId) throws ActException {
@@ -173,9 +167,7 @@ public class CommentAct {
     /**
      * 上传
      *
-     * @param commentId
-     * @return
-     * @throws Exception
+     * @param commentId 点评id
      */
     @PostMapping("/upload/img/{commentId}")
     public Result uploadImg(@PathVariable String commentId, HttpServletRequest request) throws ActException {
@@ -193,9 +185,8 @@ public class CommentAct {
     /**
      * 点评详情
      *
-     * @param commentId
-     * @return
-     * @throws Exception
+     * @param commentId 点评id
+     * @return class CommentDetailsVO
      */
     @GetMapping("/details/{commentId}")
     public Result details(@PathVariable String commentId) throws ActException {
@@ -212,12 +203,10 @@ public class CommentAct {
      * 评论图片保存路径
      *
      * @param userId
-     * @return
      */
     private String getCommentPath(String userId) {
         return "/" + userId + "/comment/" + DateUtil.dateToString(LocalDate.now()).replaceAll("-", "");
     }
-
 
 
 }

@@ -9,9 +9,16 @@ import com.bjike.vo.BaseVO;
  * @Version: [1.0.0]
  * @Copy: [com.bjike]
  */
-public class FriendGroupVO extends BaseVO{
+public class FriendGroupVO extends BaseVO {
+    /**
+     * 朋友分组名
+     */
     private String name;
+    /**
+     * 成员数
+     */
     private Integer counts;
+
     public String getName() {
         return name;
     }

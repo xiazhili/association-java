@@ -6,7 +6,6 @@ import com.bjike.common.interceptor.login.LoginAuth;
 import com.bjike.common.restful.ActResult;
 import com.bjike.common.restful.Result;
 import com.bjike.common.util.UserUtil;
-import com.bjike.entity.user.User;
 import com.bjike.ser.chat.FriendSer;
 import com.bjike.to.chat.FriendTO;
 import com.bjike.type.chat.ApplyType;
@@ -52,9 +51,9 @@ public class FriendAct {
     }
 
     /**
+     * 好友类型查询列表
      *
-     *好友类型查询列表
-     * @param type
+     * @param type 申请类型
      * @return
      * @throws ActException
      */
@@ -73,7 +72,7 @@ public class FriendAct {
     /**
      * 好友分组成员
      *
-     * @param id
+     * @param id 好友组id
      * @return
      * @throws ActException
      */
@@ -109,8 +108,7 @@ public class FriendAct {
     /**
      * 好友申请
      *
-     * @param to
-     * @return
+     * @param to 好友申请传输
      * @throws ActException
      */
     @RequestMapping(value = "apply", method = RequestMethod.POST)
@@ -128,7 +126,7 @@ public class FriendAct {
     /**
      * 同意好友申请
      *
-     * @param friendId
+     * @param friendId 好友id
      * @return
      * @throws ActException
      */
@@ -147,7 +145,7 @@ public class FriendAct {
     /**
      * 拒绝好友申请
      *
-     * @param friendId
+     * @param friendId 好友id
      * @return
      * @throws ActException
      */
@@ -167,7 +165,7 @@ public class FriendAct {
     /**
      * 删除好友
      *
-     * @param friendId
+     * @param friendId 好友id
      * @return
      * @throws ActException
      */
@@ -186,7 +184,7 @@ public class FriendAct {
     /**
      * 备注好友
      *
-     * @param friendId
+     * @param friendId 好友id
      * @return
      * @throws ActException
      */

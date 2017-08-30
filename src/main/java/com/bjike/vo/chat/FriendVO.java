@@ -29,8 +29,14 @@ public class FriendVO extends BaseVO {
      */
     private String friendGroupId;
 
+    /**
+     * 是否在线
+     */
     private Boolean online;
 
+    /**
+     * 好友申请类型
+     */
     private ApplyType applyType;
 
     public String getNickname() {

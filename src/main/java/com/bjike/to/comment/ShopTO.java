@@ -18,7 +18,6 @@ public class ShopTO extends BaseTO {
      * 地址
      */
     @NotBlank(message = "请填写店铺地址", groups = {ADD.class, EDIT.class})
-
     private String address;
     /**
      * x坐标
@@ -34,14 +33,12 @@ public class ShopTO extends BaseTO {
     /**
      * 范围(千米)
      */
-    private Double range=0.5;
+    private Double range = 0.5;
     /**
      * 店铺名
      */
     @NotBlank(message = "请填写店铺名", groups = {ADD.class, EDIT.class})
-
     private String name;
-
 
 
     public String getAddress() {

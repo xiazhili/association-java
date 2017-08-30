@@ -1,6 +1,8 @@
 package com.bjike.vo.recommend;
 
 /**
+ * 推荐
+ *
  * @Author: [liguiqin]
  * @Date: [2017-08-30 15:19]
  * @Description: [ ]
@@ -8,8 +10,17 @@ package com.bjike.vo.recommend;
  * @Copy: [com.bjike]
  */
 public class RecommendVO {
+    /**
+     * 昵称
+     */
     private String nickname;
+    /**
+     * 手机
+     */
     private String phone;
+    /**
+     * 邀请码
+     */
     private String inviteCode;
 
     public String getNickname() {

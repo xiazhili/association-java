@@ -30,7 +30,7 @@ public class Msg extends BaseEntity{
     /**
      * 消息类型
      */
-    private MsgType msgType ;//消息类型
+    private MsgType msgType ;
 
     /**
      * 接收组

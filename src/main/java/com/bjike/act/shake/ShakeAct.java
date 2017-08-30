@@ -7,7 +7,6 @@ import com.bjike.common.restful.ActResult;
 import com.bjike.common.restful.Result;
 import com.bjike.entity.user.User;
 import com.bjike.ser.shake.ShakeSer;
-import com.bjike.ser.user.UserSer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,6 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServletRequest;
 
 /**
+ * 摇一摇
+ *
  * @Author: [liguiqin]
  * @Date: [2017-07-06 13:51]
  * @Description: [摇一摇 ]
@@ -34,9 +35,9 @@ public class ShakeAct {
     private ShakeSer shakeSer;
 
     @GetMapping("/shake")
-    public Result list(String pointX,String pointY,HttpServletRequest request) throws ActException {
+    public Result list(String pointX, String pointY, HttpServletRequest request) throws ActException {
         try {
-             User vos = shakeSer.shake(pointX,pointY);
+            User vos = shakeSer.shake(pointX, pointY);
             return ActResult.initialize(vos);
 
         } catch (SerException e) {

@@ -8,9 +8,18 @@ package com.bjike.type.chat;
  * @Copy: [com.bjike]
  */
 public enum ApplyType {
-    APPLY(0), //申请状态
-    PASS(1),//通过
-    REFUSE(2),;//拒绝
+    /**
+     * 申请状态
+     */
+    APPLY(0),
+    /**
+     * 通过
+     */
+    PASS(1),
+    /**
+     * 拒绝
+     */
+    REFUSE(2),;
     private int value;
 
     ApplyType(int value) {

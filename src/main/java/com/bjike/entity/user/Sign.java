@@ -16,6 +16,9 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "sign")
 public class Sign extends BaseEntity {
+    /**
+     * 签到用户
+     */
     @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_id", columnDefinition = "VARCHAR(36) COMMENT '签到用户id' ", nullable = false)
     private User user;

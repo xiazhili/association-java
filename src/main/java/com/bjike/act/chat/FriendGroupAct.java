@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 /**
+ * 朋友分组
+ *
  * @Author: [liguiqin]
  * @Date: [2017-07-21 10:47]
  * @Description: [ 好友分组]
@@ -28,8 +30,7 @@ public class FriendGroupAct {
     /**
      * 添加分组
      *
-     * @param to
-     * @return
+     * @param to 好友分组数据传输
      * @throws ActException
      */
     @RequestMapping(value = "add", method = RequestMethod.POST)
@@ -47,8 +48,7 @@ public class FriendGroupAct {
     /**
      * 删除分组
      *
-     * @param id
-     * @return
+     * @param id 分组id
      * @throws ActException
      */
     @RequestMapping(value = "delete/{id}", method = RequestMethod.DELETE)
@@ -65,8 +65,7 @@ public class FriendGroupAct {
     /**
      * 编辑分组
      *
-     * @param to
-     * @return
+     * @param to 好友分组数据传输
      * @throws ActException
      */
     @RequestMapping(value = "edit", method = RequestMethod.PUT)

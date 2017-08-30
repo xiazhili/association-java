@@ -12,9 +12,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
+ * 后台找人
+ *
  * @Author: [liguiqin]
  * @Date: [2017-06-27 16:29]
- * @Description: [ ]
+ * @Description: [后台找人 ]
  * @Version: [1.0.0]
  * @Copy: [com.bjike]
  */
@@ -27,9 +29,8 @@ public class RelationshipAct {
 
     /**
      * 后台找人
-     * @param name
-     * @return
-     * @throws ActException
+     *
+     * @param name 昵称
      */
     @RequestMapping(value = {"/chain/{name}"})
     public Result search(@PathVariable String name) throws ActException {

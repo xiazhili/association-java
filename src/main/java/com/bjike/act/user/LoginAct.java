@@ -22,6 +22,8 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServletRequest;
 
 /**
+ * 登录
+ *
  * @Author: [liguiqin]
  * @Date: [2017-08-22 09:58]
  * @Description: [ ]

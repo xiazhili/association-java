@@ -9,13 +9,13 @@ import com.bjike.entity.chat.Friend;
 import com.bjike.entity.user.Recommend;
 import com.bjike.entity.user.User;
 import com.bjike.entity.user.UserInfo;
-import com.bjike.redis.client.RedisClient;
 import com.bjike.ser.chat.FriendSer;
 import com.bjike.session.AuthCodeSession;
 import com.bjike.to.user.LoginTO;
 import com.bjike.to.user.RegisterTO;
 import com.bjike.type.chat.ApplyType;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -48,9 +48,9 @@ public class RegisterSerImpl implements RegisterSer {
         String token = null;
         User user = new User();
         user.setPhone(to.getPhone());
-        user.setUsername(to.getNickname());
-        user.setNickname(to.getNickname());
-        user.setNumber(SeqUtil.genNumber(userSer.findByMaxField("number",User.class)));
+        user.setUsername(recommend.getRealName());
+        user.setNickname(recommend.getRealName());
+        user.setNumber(SeqUtil.genNumber(userSer.findByMaxField("number", User.class)));
         try {
             user.setPassword(PasswordHash.createHash(to.getPassword()));
         } catch (Exception e) {
@@ -60,6 +60,8 @@ public class RegisterSerImpl implements RegisterSer {
         if (StringUtils.isNotBlank(to.getInviteCode())) { //邀请码注册情况
             initUserInfo(user, recommend);//完善用户信息
             addFriend(recommend, user);//添加好友
+            recommend.setRecommended(user); //设置被推荐人
+            recommendSer.update(recommend);
         }
         token = loginUser(to);//登录用户
         return token;
@@ -144,7 +146,7 @@ public class RegisterSerImpl implements RegisterSer {
     private void initUserInfo(User user, Recommend recommend) throws SerException {
         UserInfo userInfo = new UserInfo();
         if (null != recommend) {
-            BeanCopy.copyProperties(recommend, userInfo, "user"); //从推荐信息表获得用户详情
+            BeanUtils.copyProperties(recommend, userInfo, "user"); //从推荐信息表获得用户详情
         }
         userInfo.setUser(user);
         userInfoSer.save(userInfo);//初始化保存用户详情信息

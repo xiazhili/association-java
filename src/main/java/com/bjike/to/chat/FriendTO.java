@@ -8,8 +8,17 @@ package com.bjike.to.chat;
  * @Copy: [com.bjike]
  */
 public class FriendTO {
+    /**
+     * 用户id
+     */
     private String userId;
+    /**
+     * 朋友id
+     */
     private String friendId;
+    /**
+     * 备注
+     */
     private String remark;
     public String getUserId() {
         return userId;

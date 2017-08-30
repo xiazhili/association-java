@@ -8,9 +8,18 @@ package com.bjike.type.chat;
  * @Copy: [com.bjike]
  */
 public enum  MemberType {
-    MASTER(0), //群主
-    MANAGER(1),//管理员
-    ORDINARY(2),;//普通的
+    /**
+     * 群主
+     */
+    MASTER(0),
+    /**
+     * 管理员
+     */
+    MANAGER(1),
+    /**
+     * 普通的
+     */
+    ORDINARY(2),;
     private int value;
 
     MemberType(int value) {

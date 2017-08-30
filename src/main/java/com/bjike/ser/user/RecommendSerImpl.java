@@ -32,9 +32,9 @@ public class RecommendSerImpl extends ServiceImpl<Recommend, RecommendDTO> imple
         Recommend recommend = BeanCopy.copyProperties(to, Recommend.class);
         User user = UserUtil.currentUser();
         recommend.setUser(user);
-        super.save(recommend);
         String code = "IKE-" + UUID.randomUUID().toString().substring(0, 8).toUpperCase();
         recommend.setInviteCode(code);
+        super.save(recommend);
         return code;
 
     }
@@ -56,7 +56,6 @@ public class RecommendSerImpl extends ServiceImpl<Recommend, RecommendDTO> imple
 
     @Override
     public Boolean validate(String code) throws SerException {
-
         return null != findByInviteCode(code);
     }
 

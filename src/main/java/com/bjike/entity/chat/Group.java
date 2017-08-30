@@ -18,17 +18,29 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "chat_group")
 public class Group extends BaseEntity {
+    /**
+     * 聊天室名称
+     */
     @Column(columnDefinition = "VARCHAR(36) COMMENT '聊天室名称' ", nullable = false)
     private String name;
 
+    /**
+     * 创建人
+     */
     @Column(columnDefinition = "VARCHAR(36) COMMENT '创建人' ", nullable = false)
-    private String userId;//创建人
+    private String userId;
 
+    /**
+     * 群头像
+     */
     @Column(columnDefinition = "VARCHAR(200) COMMENT '群头像' ")
-    private String headPath;//群头像
+    private String headPath;
 
+    /**
+     * 群描述
+     */
     @Column(columnDefinition = "VARCHAR(500) COMMENT '群描述' ")
-    private String description;//群描述
+    private String description;
 
     public String getName() {
         return name;

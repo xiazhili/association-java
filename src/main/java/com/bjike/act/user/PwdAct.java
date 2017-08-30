@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * 密码操作
+ * 密码
  *
  * @Author: [liguiqin]
  * @Date: [2017-08-29 08:48]

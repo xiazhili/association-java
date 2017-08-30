@@ -1,10 +1,6 @@
 package com.bjike.vo.comment;
 
-import com.bjike.common.aspect.ADD;
-import com.bjike.common.aspect.EDIT;
-import com.bjike.to.BaseTO;
 import com.bjike.vo.BaseVO;
-import org.hibernate.validator.constraints.NotBlank;
 
 /**
  * @Author: [liguiqin]
@@ -42,6 +38,9 @@ public class ShopVO extends BaseVO {
      */
     private String images[];
 
+    /**
+     * 店铺坐标
+     */
     private String pointId;
 
     public String getAddress() {

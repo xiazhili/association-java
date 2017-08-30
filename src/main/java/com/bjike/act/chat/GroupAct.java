@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * 群操作
+ * 群
  *
  * @Author: [liguiqin]
  * @Date: [2017-07-19 13:58]
@@ -37,8 +37,8 @@ public class GroupAct {
     /**
      * 群成员
      *
-     * @param groupId
-     * @return
+     * @param groupId 群id
+     * @return class FriendVO
      * @throws ActException
      */
     @RequestMapping(value = "member/{groupId}", method = RequestMethod.GET)
@@ -51,6 +51,11 @@ public class GroupAct {
         }
     }
 
+    /**
+     * 用户所拥有的群
+     * @return class Group
+     * @throws ActException
+     */
     @RequestMapping(value = "user/list", method = RequestMethod.GET)
     @ResponseBody
     public Result listByUser() throws ActException {
@@ -64,7 +69,11 @@ public class GroupAct {
     }
 
 
-
+    /**
+     * 添加群
+     * @param to 群信息
+     * @throws ActException
+     */
     @RequestMapping(value = "add", method = RequestMethod.POST)
     @ResponseBody
     public Result add(GroupTO to) throws ActException {
@@ -77,6 +86,12 @@ public class GroupAct {
 
     }
 
+    /**
+     * 解散群
+     * @param id 群id
+     * @return
+     * @throws ActException
+     */
     @RequestMapping(value = "delete/{id}", method = RequestMethod.DELETE)
     @ResponseBody
     public Result delete(@PathVariable String id) throws ActException {
@@ -88,6 +103,12 @@ public class GroupAct {
         }
     }
 
+    /**
+     * 编辑群信息
+     * @param to 群信息
+     * @return
+     * @throws ActException
+     */
     @RequestMapping(value = "edit", method = RequestMethod.PUT)
     @ResponseBody
     public Result edit(GroupTO to) throws ActException {

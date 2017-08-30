@@ -51,7 +51,7 @@ public class RecommendTO extends BaseTO {
     private String school;
 
     //学历
-    @NotBlank(message = "学历不能关系!", groups = {ADD.class, EDIT.class})
+    @NotBlank(message = "学历不能为空!", groups = {ADD.class, EDIT.class})
     private String education;
 
     //公司

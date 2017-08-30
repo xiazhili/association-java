@@ -17,66 +17,111 @@ import javax.persistence.*;
 @Entity
 @Table(name = "recommend")
 public class Recommend extends BaseEntity {
+    /**
+     * 推荐人
+     */
     @ManyToOne(cascade = {CascadeType.REFRESH}, fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", columnDefinition = "VARCHAR(36) COMMENT '推荐人id' ", nullable = false)
     private User user;
+    /**
+     * 被推荐人
+     */
     @ManyToOne(cascade = {CascadeType.REFRESH}, fetch = FetchType.EAGER)
     @JoinColumn(name = "recommended_id", columnDefinition = "VARCHAR(36) COMMENT '被推荐人id' ")
     private User recommended;
-
-    @Column(columnDefinition = "VARCHAR(30) COMMENT '邀请码' ",unique = true,nullable = false)
+    /**
+     * 邀请码
+     */
+    @Column(columnDefinition = "VARCHAR(30) COMMENT '邀请码' ", unique = true, nullable = false)
     private String inviteCode;
-
+    /**
+     * 真实姓名
+     */
     @Column(columnDefinition = "VARCHAR(30) COMMENT '真实姓名' ", nullable = false)
     private String realName;
-
+    /**
+     * 联系号码
+     */
     @Column(columnDefinition = "VARCHAR(20) COMMENT '联系号码' ", nullable = false)
     private String telephone;
-
+    /**
+     * 兴趣
+     */
     @Column(columnDefinition = "VARCHAR(256) COMMENT '兴趣' ", nullable = false)
     private String interest;
-
+    /**
+     * 地址
+     */
     @Column(columnDefinition = "VARCHAR(256) COMMENT '地址' ", nullable = false)
     private String address;
-
+    /**
+     * 关系
+     */
     @Column(columnDefinition = "TINYINT(1) DEFAULT 0 COMMENT '关系' ", nullable = false)
     private RelationshipType relationshipType;
-
+    /**
+     * 生日
+     */
     @Column(columnDefinition = "VARCHAR(100) COMMENT '生日' ")
     private String birthday;
-
+    /**
+     * 性格
+     */
     @Column(columnDefinition = "VARCHAR(256) COMMENT '性格' ")
     private String disposition;
-
+    /**
+     * 籍贯
+     */
     @Column(columnDefinition = "VARCHAR(100) COMMENT '籍贯' ")
     private String nativePlace;
-
+    /**
+     * 毕业学校
+     */
     @Column(columnDefinition = "VARCHAR(100) COMMENT '毕业学校' ")
     private String school;
-
+    /**
+     * 学历
+     */
     @Column(columnDefinition = "VARCHAR(50) COMMENT '学历' ", nullable = false)
     private String education;
-
+    /**
+     * 公司
+     */
     @Column(columnDefinition = "VARCHAR(100) COMMENT '公司' ")
     private String company;
-
+    /**
+     * 职位
+     */
     @Column(columnDefinition = "VARCHAR(100) COMMENT '职位' ")
     private String job;
-
+    /**
+     * 父亲姓名
+     */
     @Column(columnDefinition = "VARCHAR(30) COMMENT '父亲姓名' ")
     private String fatherName;
-
+    /**
+     * 母亲姓名
+     */
     @Column(columnDefinition = "VARCHAR(30) COMMENT '母亲姓名' ")
     private String motherName;
-
+    /**
+     * 婚姻状况
+     */
     @Column(name = "is_expired", columnDefinition = "TINYINT(1) DEFAULT 0 COMMENT '婚姻状况'")
     private Boolean marriage;
-
+    /**
+     * qq
+     */
     @Column(columnDefinition = "VARCHAR(30) COMMENT 'qq' ")
     private String qq;
+    /**
+     * 邮箱
+     */
     @Column(columnDefinition = "VARCHAR(30) COMMENT 'email' ")
-
     private String email;
+    /**
+     * 微信
+     */
     @Column(columnDefinition = "VARCHAR(30) COMMENT '微信' ")
     private String weChat;
 

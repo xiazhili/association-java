@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
- * 消息操作
+ * 消息
  *
  * @Author: [liguiqin]
  * @Date: [2017-07-19 13:58]
@@ -31,10 +31,9 @@ public class MsgAct {
     private MsgSer msgSer;
 
     /**
-     * Point 单独聊天消息记录
+     * Point单独聊天消息记录
      *
-     * @param request
-     * @return
+     * @return class Msg
      * @throws ActException
      */
     @RequestMapping(value = "/point/{reviver}", method = RequestMethod.GET)
@@ -50,7 +49,7 @@ public class MsgAct {
     }
 
     /**
-     * Group 群聊天消息记录
+     * Group群聊天消息记录
      *
      * @return
      * @throws ActException

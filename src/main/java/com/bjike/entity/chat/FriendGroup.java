@@ -18,10 +18,16 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "chat_friend_group")
 public class FriendGroup extends BaseEntity {
+    /**
+     * 分组名
+     */
     @Column(columnDefinition = "VARCHAR(36) COMMENT '朋友分组名' ", nullable = false)
-    private String name;//分组名
+    private String name;
+    /**
+     * 归属人
+     */
     @Column(columnDefinition = "VARCHAR(36) COMMENT '归属人' ", nullable = false)
-    private String userId;//归属人
+    private String userId;
 
     public String getName() {
         return name;

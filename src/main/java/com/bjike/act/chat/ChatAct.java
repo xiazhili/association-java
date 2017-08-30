@@ -21,6 +21,8 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * 聊天
+ *
  * @Author: [liguiqin]
  * @Date: [2017-07-19 13:58]
  * @Description: [ ]
@@ -34,6 +36,11 @@ public class ChatAct {
     @Autowired
     private ChatSer chatSer;
 
+    /**
+     * 在线用户
+     *
+     * @return
+     */
     @RequestMapping(value = "online", method = RequestMethod.GET)
     @ResponseBody
     public Result online() {

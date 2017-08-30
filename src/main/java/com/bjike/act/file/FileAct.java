@@ -9,12 +9,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletResponse;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
 /**
+ * 文件
+ *
  * @Author: [liguiqin]
  * @Date: [2017-06-28 16:38]
  * @Description: [ ]
@@ -29,7 +30,7 @@ public class FileAct {
     /**
      * 获取缩略图
      *
-     * @return
+     * @param path 图片路径
      * @throws ActException
      */
     @GetMapping("thumbnails")
@@ -70,7 +71,7 @@ public class FileAct {
     /**
      * 获取原图
      *
-     * @return
+     * @param path 图片路径
      * @throws ActException
      */
     @GetMapping("original/pic")
@@ -100,6 +101,12 @@ public class FileAct {
         }
     }
 
+    /**
+     * 下载
+     *
+     * @param path 文件路径
+     * @throws ActException
+     */
     @GetMapping("download")
     public void download(HttpServletResponse response, String path) throws ActException {
         try {

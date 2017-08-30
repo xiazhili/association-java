@@ -18,17 +18,26 @@ import java.util.List;
 @Entity
 @Table(name = "friends_relationship")
 public class Relationship extends BaseEntity {
+    /**
+     * 用户
+     */
     @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_id", columnDefinition = "VARCHAR(36) COMMENT '用户id' ", nullable = false)
     private User user;
-
+    /**
+     * 朋友
+     */
     @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "friend_id", columnDefinition = "VARCHAR(36) COMMENT '朋友id' ", nullable = false)
     private User friend;
-
+    /**
+     * 朋友关系
+     */
     @Column(columnDefinition = "TINYINT(1) DEFAULT 0 COMMENT '朋友关系' ", nullable = false, insertable = false)
     private RelationshipType relationshipType;
-
+    /**
+     * 状态
+     */
     @Column(columnDefinition = "TINYINT(1) DEFAULT 0 COMMENT '状态' ", nullable = false, insertable = false)
     private Status status=Status.CONGEAL;
 
@@ -37,6 +46,7 @@ public class Relationship extends BaseEntity {
      */
     @Transient
     private List<List<FriendChain>> friendChains = new ArrayList<>();
+
     @Transient
     private boolean yourFriend = false;
 

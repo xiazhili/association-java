@@ -48,6 +48,9 @@ public class CommentVO extends BaseVO {
      */
     private Boolean alreadyLikes;
 
+    /**
+     * 点评时间
+     */
     private String createTime;
 
 

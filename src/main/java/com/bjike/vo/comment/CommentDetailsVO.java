@@ -43,7 +43,13 @@ public class CommentDetailsVO {
      */
     private String createTime;
 
+    /**
+     * 昵称
+     */
     private String nickname;
+    /**
+     * 头像
+     */
     private String headPath;
 
     public String getId() {

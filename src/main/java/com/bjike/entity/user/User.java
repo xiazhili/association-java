@@ -21,33 +21,55 @@ import javax.persistence.Transient;
 @Entity
 @Table(name = "user")
 public class User extends BaseEntity {
+    /**
+     * 用户名
+     */
     @Column(columnDefinition = "VARCHAR(30) COMMENT '用户名' ", nullable = false)
     private String username;
-
+    /**
+     * 密码
+     */
     @Column(columnDefinition = "VARCHAR(256) COMMENT '密码' ", nullable = false)
     private String password;
-
+    /**
+     * 昵称
+     */
     @Column(columnDefinition = "VARCHAR(30) COMMENT '昵称' ", nullable = false)
     private String nickname;
-
-    @Column(columnDefinition = "VARCHAR(30) COMMENT '编号' ", nullable = false)
+    /**
+     * 编号
+     */
+    @Column(columnDefinition = "VARCHAR(30) COMMENT '编号' ", nullable = false,unique = true)
     private String number;
-
+    /**
+     * 头像
+     */
     @Column(columnDefinition = "VARCHAR(256) COMMENT '头像' ")
     private String headPath;
-
+    /**
+     * 性别
+     */
     @Column(columnDefinition = "TINYINT(1) DEFAULT 0 COMMENT '性别' ", nullable = false, insertable = false)
     private SexType sexType = SexType.UNKNOWN;
-
+    /**
+     * 邮箱
+     */
     @Column(columnDefinition = "VARCHAR(256) COMMENT '邮箱' ")
     @Email
     private String email;
-
+    /**
+     * 手机号码
+     */
     @Column(columnDefinition = "VARCHAR(11) COMMENT '手机号码' ", nullable = false, unique = true)
     private String phone;
-
+    /**
+     * 状态
+     */
     @Column(columnDefinition = "TINYINT(1) DEFAULT 0 COMMENT '状态' ", nullable = false, insertable = false)
     private Status status = Status.CONGEAL;
+    /**
+     * 会员类型
+     */
     @Column(columnDefinition = "TINYINT(1) DEFAULT 0 COMMENT '会员类型' ", nullable = false, insertable = false)
     private UserType userType = UserType.NORMAL;
 

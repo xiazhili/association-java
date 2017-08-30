@@ -10,17 +10,33 @@ import com.bjike.type.user.SexType;
  * @Copy: [com.bjike]
  */
 public class UserVO {
+    /**
+     * 用户id
+     */
     private String id;
+    /**
+     * 用户名
+     */
     private String username;
-
+    /**
+     * 昵称
+     */
     private String nickname;
-
+    /**
+     * 头像
+     */
     private String headPath;
-
-    private SexType sexType ;
-
+    /**
+     * 性别
+     */
+    private SexType sexType;
+    /**
+     * 邮箱
+     */
     private String email;
-
+    /**
+     * 手机号
+     */
     private String phone;
 
     public String getUsername() {

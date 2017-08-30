@@ -10,11 +10,19 @@ import com.bjike.to.BaseTO;
  * @Copy: [com.bjike]
  */
 public class GroupTO extends BaseTO {
+    /**
+     * 群名
+     */
     private String name;
 
-    private String userId;//创建人
-
-    private String description;//群描述
+    /**
+     * 创建人
+     */
+    private String userId;
+    /**
+     * 群描述
+     */
+    private String description;
 
     public String getName() {
         return name;

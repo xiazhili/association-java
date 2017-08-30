@@ -10,8 +10,14 @@ import com.bjike.to.BaseTO;
  * @Copy: [com.bjike]
  */
 public class FriendGroupTO extends BaseTO {
-    private String name;//分组名
-    private String userId;//归属人
+    /**
+     * 分组名
+     */
+    private String name;
+    /**
+     * 归属人
+     */
+    private String userId;
 
     public String getName() {
         return name;

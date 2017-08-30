@@ -9,16 +9,15 @@ import com.bjike.dto.Restrict;
 import com.bjike.dto.comment.ShopDTO;
 import com.bjike.entity.comment.Shop;
 import com.bjike.ser.comment.ShopSer;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletRequest;
-
 /**
+ * 店铺
+ *
  * @Author: [liguiqin]
  * @Date: [2017-06-28 14:07]
  * @Description: [店铺 ]
@@ -36,7 +35,7 @@ public class ShopAct {
      * 附近店铺
      *
      * @param dto
-     * @return
+     * @return class ShopVO
      * @throws Exception
      */
     @GetMapping("/nearby")
@@ -51,15 +50,13 @@ public class ShopAct {
     /**
      * 店铺删除
      *
-     * @param pointId
-     * @return
-     * @throws Exception
+     * @param pointId 店铺坐标id
      */
     @DeleteMapping("/del")
     public Result del(String pointId) throws ActException {
         try {
             ShopDTO dto = new ShopDTO();
-            dto.getConditions().add(Restrict.eq("pointId",pointId));
+            dto.getConditions().add(Restrict.eq("pointId", pointId));
             Shop shop = shopSer.findOne(dto);
             if (null != shop) {
                 shopSer.remove(shop);

@@ -2,6 +2,7 @@ package com.bjike.ser.user;
 
 import com.bjike.common.exception.SerException;
 import com.bjike.common.util.PasswordHash;
+import com.bjike.common.util.bean.BeanCopy;
 import com.bjike.common.util.regex.Validator;
 import com.bjike.entity.chat.Friend;
 import com.bjike.entity.user.Recommend;
@@ -56,12 +57,9 @@ public class RegisterSerImpl implements RegisterSer {
             throw new SerException(e.getMessage());
         }
         userSer.save(user);
-        UserInfo userInfo = new UserInfo();
-        userInfo.setUser(user);
-        userInfoSer.save(userInfo);//初始化保存用户详情信息
-        if(null != recommend){
-            addFriend(recommend,user);//添加好友
-            //邀请码注册,完善信息
+        if (StringUtils.isNotBlank(to.getInviteCode())) { //邀请码注册情况
+            initUserInfo(user, recommend);//完善用户信息
+            addFriend(recommend, user);//添加好友
             redis.remove(to.getInviteCode()); //删除校验码
         }
         token = loginUser(to);//登录用户
@@ -127,14 +125,30 @@ public class RegisterSerImpl implements RegisterSer {
 
     /**
      * 注册完成添加好友
+     *
      * @param recommend
      */
-    private void addFriend(Recommend recommend,User user)throws SerException{
+    private void addFriend(Recommend recommend, User user) throws SerException {
         Friend friend = new Friend();
         friend.setUser(recommend.getUser());
         friend.setFriend(user);
         friend.setApplyType(ApplyType.PASS);
         friendSer.save(friend);
+    }
+
+    /**
+     * 注册完成,完善用户信息
+     *
+     * @param user
+     * @param recommend
+     */
+    private void initUserInfo(User user, Recommend recommend) throws SerException {
+        UserInfo userInfo = new UserInfo();
+        if (null != recommend) {
+            BeanCopy.copyProperties(recommend, userInfo, "user"); //从推荐信息表获得用户详情
+        }
+        userInfo.setUser(user);
+        userInfoSer.save(userInfo);//初始化保存用户详情信息
     }
 
 }

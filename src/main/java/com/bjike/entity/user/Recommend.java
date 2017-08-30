@@ -20,6 +20,10 @@ public class Recommend extends BaseEntity {
     @ManyToOne(cascade = {CascadeType.REFRESH}, fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", unique = true, columnDefinition = "VARCHAR(36) COMMENT '推荐人id' ", nullable = false)
     private User user;
+    @ManyToOne(cascade = {CascadeType.REFRESH}, fetch = FetchType.LAZY)
+    @JoinColumn(name = "claim_id", unique = true, columnDefinition = "VARCHAR(36) COMMENT '认领人id' ")
+    private User claim;
+
 
     @Column(columnDefinition = "VARCHAR(30) COMMENT '真实姓名' ", nullable = false)
     private String realName;
@@ -54,7 +58,7 @@ public class Recommend extends BaseEntity {
     @Column(columnDefinition = "VARCHAR(100) COMMENT '公司' ")
     private String company;
 
-   @Column(columnDefinition = "VARCHAR(100) COMMENT '职位' ")
+    @Column(columnDefinition = "VARCHAR(100) COMMENT '职位' ")
     private String job;
 
     @Column(columnDefinition = "VARCHAR(30) COMMENT '父亲姓名' ")
@@ -63,7 +67,7 @@ public class Recommend extends BaseEntity {
     @Column(columnDefinition = "VARCHAR(30) COMMENT '母亲姓名' ")
     private String motherName;
 
-    @Column(name ="is_expired", columnDefinition = "TINYINT(1) DEFAULT 0 COMMENT '婚姻状况'")
+    @Column(name = "is_expired", columnDefinition = "TINYINT(1) DEFAULT 0 COMMENT '婚姻状况'")
     private Boolean marriage;
 
     @Column(columnDefinition = "VARCHAR(30) COMMENT 'qq' ")
@@ -224,5 +228,13 @@ public class Recommend extends BaseEntity {
 
     public void setWeChat(String weChat) {
         this.weChat = weChat;
+    }
+
+    public User getClaim() {
+        return claim;
+    }
+
+    public void setClaim(User claim) {
+        this.claim = claim;
     }
 }

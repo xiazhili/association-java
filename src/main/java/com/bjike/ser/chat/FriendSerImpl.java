@@ -90,11 +90,11 @@ public class FriendSerImpl extends ServiceImpl<Friend, FriendDTO> implements Fri
 
     @Override
     public List<FriendVO> list(String userId) throws SerException {
-        String sql = "select b.id ,b.nickname,a.remark,b.head_path as headPath,a.friend_group_id as friendGroupId" +
-                " from  chat_friend a " +
-                " left join  user b on a.user_id = b.id and a.apply_type = 1  " +
-                " and a.user_id='" + userId + "' " +
-                " order by a.friend_group_id desc";
+        String sql = "select b.id ,b.nickname,a.remark,b.head_path as headPath "+
+        ",a.friend_group_id as friendGroupId from "+
+        "(select remark,friend_id,friend_group_id  from chat_friend where "+
+                "user_id='"+userId+"' )a,"+
+                "user b where a.friend_id =b.id order by a.friend_group_id desc";
         List<FriendVO> friendVOS = super.findBySql(sql, FriendVO.class, new String[]{"id", "nickname", "remark", "headPath", "friendGroupId"});
         for (FriendVO vo : friendVOS) {
             Client client = ChatSession.get(vo.getId());

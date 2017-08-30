@@ -1,5 +1,6 @@
 package com.bjike.ser.user;
 
+import com.bjike.common.exception.SerException;
 import com.bjike.dto.user.UserInfoDTO;
 import com.bjike.entity.user.UserInfo;
 import com.bjike.ser.Ser;
@@ -14,4 +15,14 @@ import com.bjike.ser.Ser;
  * @Copy: [com.bjike]
  */
 public interface UserInfoSer extends Ser<UserInfo, UserInfoDTO> {
+    /**
+     * 是否已登录
+     *
+     * @param userId
+     * @return
+     * @throws SerException
+     */
+    default UserInfo findByUserId(String userId) throws SerException {
+        return null;
+    }
 }

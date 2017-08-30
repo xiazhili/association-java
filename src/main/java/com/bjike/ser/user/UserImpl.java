@@ -58,7 +58,7 @@ public class UserImpl extends ServiceImpl<User, UserDTO> implements UserSer {
         UserInfo info =  userInfoSer.findOne(dto);
         User user = UserUtil.currentUser();
         BeanCopy.copyProperties(user,userInfoVO);
-        BeanCopy.copyProperties(info,userInfoVO);
+        BeanCopy.copyProperties(info,userInfoVO,"user");
         return userInfoVO;
     }
 }

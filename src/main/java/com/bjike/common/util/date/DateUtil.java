@@ -3,6 +3,7 @@ package com.bjike.common.util.date;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
+import java.util.Date;
 
 /**
  * @Author: [liguiqin]
@@ -15,6 +16,7 @@ public class DateUtil {
     private static final DateTimeFormatter DATETIME = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
     private static final DateTimeFormatter DATE = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     private static final DateTimeFormatter TIME = DateTimeFormatter.ofPattern("HH:mm:ss");
+    private static Calendar calendar = null;
 
     /**
      * 日期时间转换
@@ -69,6 +71,38 @@ public class DateUtil {
         Instant instant = Instant.ofEpochMilli(time);
         ZoneId zone = ZoneId.systemDefault();
         return LocalDateTime.ofInstant(instant, zone);
+    }
+    /**
+     * 获取本月开始的时间
+     *
+     * @return
+     */
+
+    public static LocalDate getStartMonth() {
+        calendar = Calendar.getInstance();
+        calendar.set(Calendar.DAY_OF_MONTH, 1);
+        Date date = calendar.getTime();
+        Instant instant = date.toInstant();
+        ZoneId zoneId = ZoneId.systemDefault();
+        return LocalDateTime.ofInstant(instant, zoneId).toLocalDate();
+
+    }
+
+
+    /**
+     * 获取本月结束的时间
+     *
+     * @return
+     */
+
+    public static LocalDate getEndMonth() {
+        calendar = Calendar.getInstance();
+        calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMaximum(Calendar.DAY_OF_MONTH));
+        Date date = calendar.getTime();
+        Instant instant = date.toInstant();
+        ZoneId zoneId = ZoneId.systemDefault();
+        return LocalDateTime.ofInstant(instant, zoneId).toLocalDate();
+
     }
 
 }

@@ -6,6 +6,7 @@ import com.bjike.common.exception.SerException;
 import com.bjike.common.interceptor.login.LoginAuth;
 import com.bjike.common.restful.ActResult;
 import com.bjike.common.util.QRCodeUtil;
+import com.bjike.entity.user.Recommend;
 import com.bjike.ser.user.RecommendSer;
 import com.bjike.to.user.RecommendTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletResponse;
 import java.awt.image.BufferedImage;
+import java.util.List;
 
 /**
  * 推荐
@@ -49,6 +51,23 @@ public class RecommendAct {
         }
     }
 
+    /**
+     * 我推荐的人
+     *
+     * @return
+     * @throws ActException
+     */
+    @LoginAuth
+    @GetMapping("/list")
+    public ActResult list() throws ActException {
+        try {
+            List<Recommend> recommendList = recommendSer.myRecommends();
+            return ActResult.initialize(recommendList);
+        } catch (SerException e) {
+            throw new ActException(e.getMessage());
+        }
+    }
+
 
     /**
      * 通过推荐码获取二维码
@@ -57,7 +76,6 @@ public class RecommendAct {
      * @return
      * @throws ActException
      */
-    @LoginAuth
     @GetMapping("/qr/{code}")
     public ActResult QRCode(@PathVariable String code, HttpServletResponse response) throws ActException {
         try {
@@ -81,7 +99,6 @@ public class RecommendAct {
      * @return
      * @throws ActException
      */
-    @LoginAuth
     @GetMapping("/validate/{code}")
     public ActResult validate(@PathVariable String code) throws ActException {
         try {

@@ -3,7 +3,9 @@ package com.bjike.ser.user;
 import com.bjike.common.exception.SerException;
 import com.bjike.common.util.PasswordHash;
 import com.bjike.common.util.regex.Validator;
+import com.bjike.entity.user.Recommend;
 import com.bjike.entity.user.User;
+import com.bjike.entity.user.UserInfo;
 import com.bjike.redis.client.RedisClient;
 import com.bjike.session.AuthCodeSession;
 import com.bjike.to.user.LoginTO;
@@ -25,44 +27,36 @@ public class RegisterSerImpl implements RegisterSer {
     @Autowired
     private UserSer userSer;
     @Autowired
+    private UserInfoSer userInfoSer;
+    @Autowired
     private LoginSer loginSer;
     @Autowired
     private RedisClient redis;
+    @Autowired
+    private RecommendSer recommendSer;
 
     @Transactional
     @Override
     public String register(RegisterTO to) throws SerException {
-        String invite = to.getInvite();
-        if (StringUtils.isNotBlank(invite)) { //邀请码注册
-            if (null != redis.get(invite)) {
-                redis.remove(invite);
-            } else {
-                throw new SerException("无效邀请码!");
-            }
-        } else if (false && !to.getAuthCode().equalsIgnoreCase(AuthCodeSession.get(to.getSid()))) {//验证码
-            throw new SerException("验证码错误!");
-        }
+        validRegister(to); //注册验证
+        Recommend recommend = initRecommend(to);//验证邀请码并获得推荐详情信息
         String token = null;
-        if (to.getPassword().equals(to.getRePassword())) { //密码
-            if (Validator.isPassword(to.getPassword())) { //密码强度
-                User user = new User();
-                user.setPhone(to.getPhone());
-                user.setUsername(to.getNickname());
-                user.setNickname(to.getNickname());
-                try {
-                    user.setPassword(PasswordHash.createHash(to.getPassword()));
-                } catch (Exception e) {
-                    throw new SerException(e.getMessage());
-                }
-                userSer.save(user);
-                token = loginUser(to);
-                return token;
-            } else {
-                throw new SerException("密码过于简单！");
-            }
-        } else {
-            throw new SerException("密码不一致!");
+        User user = new User();
+        user.setPhone(to.getPhone());
+        user.setUsername(to.getNickname());
+        user.setNickname(to.getNickname());
+        try {
+            user.setPassword(PasswordHash.createHash(to.getPassword()));
+        } catch (Exception e) {
+            throw new SerException(e.getMessage());
         }
+        userSer.save(user);
+        UserInfo userInfo = new UserInfo();
+        userInfo.setUser(user);
+        userInfoSer.save(userInfo);//初始化保存用户详情信息
+        token = loginUser(to);//登录用户
+        redis.remove(to.getInviteCode()); //删除校验码
+        return token;
     }
 
     @Override
@@ -83,6 +77,42 @@ public class RegisterSerImpl implements RegisterSer {
         loginTO.setPassword(to.getPassword());
         loginTO.setIp(to.getIp());
         return loginSer.login(loginTO);
+    }
+
+    /**
+     * 验证邀请码并获得推荐详情信息
+     *
+     * @param to
+     * @return
+     * @throws SerException
+     */
+    private Recommend initRecommend(RegisterTO to) throws SerException {
+        String invite = to.getInviteCode();
+        if (StringUtils.isNotBlank(invite)) { //邀请码注册
+            String recommendId = redis.get(invite);
+            if (StringUtils.isNotBlank(recommendId)) {
+                return recommendSer.findById(recommendId); //获取推荐详细信息
+            }
+        }
+        throw new SerException("无效邀请码!");
+    }
+
+    /**
+     * 注册验证
+     *
+     * @param to
+     * @throws SerException
+     */
+    private void validRegister(RegisterTO to) throws SerException {
+        if (!Validator.isPhone(to.getPhone())) {
+            throw new SerException("手机号码格式错误!");
+        } else if (false && !to.getAuthCode().equalsIgnoreCase(AuthCodeSession.get(to.getSid()))) {//验证码
+            throw new SerException("验证码错误!");
+        } else if (!to.getPassword().equals(to.getRePassword())) { //密码
+            throw new SerException("密码不一致!");
+        } else if (!Validator.isPassword(to.getPassword())) { //密码强度
+            throw new SerException("密码过于简单！");
+        }
     }
 
 }

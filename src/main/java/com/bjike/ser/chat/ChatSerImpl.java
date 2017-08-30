@@ -155,11 +155,11 @@ public class ChatSerImpl implements ChatSer {
 
     private void sendLineMsg(Msg msg) throws SerException {
         FriendDTO dto = new FriendDTO();
-        dto.getConditions().add(Restrict.eq("userId", msg.getUserId()));
+        dto.getConditions().add(Restrict.eq("user.id", msg.getUserId()));
         dto.getConditions().add(Restrict.eq("applyType", 1));
         List<Friend> friends = friendSer.findByCis(dto);
         for (Friend friend : friends) {
-            Client client = ChatSession.get(friend.getUserId());
+            Client client = ChatSession.get(friend.getUser().getId());
             if (null != client && client.getSession().isOpen()) {
                 try {
                     client.getSession().getBasicRemote().sendText(JSON.toJSONString(msg));

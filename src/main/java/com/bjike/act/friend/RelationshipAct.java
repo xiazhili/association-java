@@ -11,8 +11,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletRequest;
-
 /**
  * @Author: [liguiqin]
  * @Date: [2017-06-27 16:29]
@@ -27,6 +25,12 @@ public class RelationshipAct {
     @Autowired
     private RelationshipSer relationshipSer;
 
+    /**
+     * 后台找人
+     * @param name
+     * @return
+     * @throws ActException
+     */
     @RequestMapping(value = {"/chain/{name}"})
     public Result search(@PathVariable String name) throws ActException {
         try {

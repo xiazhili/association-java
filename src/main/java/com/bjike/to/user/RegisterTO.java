@@ -31,8 +31,10 @@ public class RegisterTO {
     @NotBlank(message = "密码不能为空!", groups = {RegisterTO.INVITE.class, RegisterTO.PHONE.class})
     private String password;
     @NotBlank(message = "邀请码不能为空!", groups = {RegisterTO.INVITE.class})
-    private String invite;
+    private String inviteCode;
+    //登录类型
     private LoginType loginType;
+    //会话id
     private String sid;
 
     public String getPhone() {
@@ -99,12 +101,11 @@ public class RegisterTO {
         this.sid = sid;
     }
 
-    public String getInvite() {
-        return invite;
+    public String getInviteCode() {
+        return inviteCode;
     }
 
-    public void setInvite(String invite) {
-        this.invite = invite;
+    public void setInviteCode(String inviteCode) {
+        this.inviteCode = inviteCode;
     }
-
 }

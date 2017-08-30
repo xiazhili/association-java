@@ -90,7 +90,7 @@ public class FriendSerImpl extends ServiceImpl<Friend, FriendDTO> implements Fri
 
     @Override
     public List<FriendVO> list(String userId) throws SerException {
-        String sql = "select b.id ,b.nickname,a.remark,b.headPath,a.friend_group_id as friendGroupId" +
+        String sql = "select b.id ,b.nickname,a.remark,b.head_path as headPath,a.friend_group_id as friendGroupId" +
                 " from  chat_friend a " +
                 " left join  user b on a.user_id = b.id and a.apply_type = 1  " +
                 " and a.user_id='" + userId + "' " +
@@ -151,7 +151,7 @@ public class FriendSerImpl extends ServiceImpl<Friend, FriendDTO> implements Fri
             coin = " and a.apply_type in(0,2)";
         }
 
-        String sql = "select * from(select b.id,b.nickname,a.remark,b.headPath,a.friend_group_id as friendGroupId,a.apply_type as applyType" +
+        String sql = "select * from(select b.id,b.nickname,a.remark,b.head_path as headPath,a.friend_group_id as friendGroupId,a.apply_type as applyType" +
                 " from  chat_friend a " +
                 " left join  ike_user b on a.user_id = b.tu_id " + coin +
                 " and a.user_id='" + userId + "' " +
@@ -162,7 +162,7 @@ public class FriendSerImpl extends ServiceImpl<Friend, FriendDTO> implements Fri
 
     @Override
     public List<FriendVO> groupMember(String groupId) throws SerException {
-        String sql = "select *  from(select c.id ,c.nickname,b.remark,c.headPath,a.id as groupId from " +
+        String sql = "select *  from(select c.id ,c.nickname,b.remark,c.head_path as headPath,a.id as groupId from " +
                 "chat_group a left join chat_friend b on a.user_id=b.user_id and b.apply_type=1 and a.id='" + groupId + "'" +
                 "left join user c on c.id=b.user_id )a";
         List<FriendVO> friendVOS = super.findBySql(sql, FriendVO.class, new String[]{"id", "nickname", "remark", "headPath", "groupId"});
@@ -171,7 +171,7 @@ public class FriendSerImpl extends ServiceImpl<Friend, FriendDTO> implements Fri
 
     @Override
     public List<FriendVO> friendGroup(String id) throws SerException {
-        String sql = "select *  from(select c.nickname,b.remark,c headPath,a.id as friendGroupId from " +
+        String sql = "select *  from(select c.nickname,b.remark,c.head_path as headPath,a.id as friendGroupId from " +
                 " chat_friend_group a left join chat_friend b on a.user_id=b.user_id and b.apply_type=1 " +
                 " left join ike_user c on c.id=b.user_id )a where a.friendGroupId" +
                 "='" + id + "'";

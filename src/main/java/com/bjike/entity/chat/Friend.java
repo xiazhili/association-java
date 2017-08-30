@@ -1,6 +1,7 @@
 package com.bjike.entity.chat;
 
 import com.bjike.entity.BaseEntity;
+import com.bjike.entity.user.User;
 import com.bjike.type.chat.ApplyType;
 
 import javax.persistence.*;
@@ -18,13 +19,15 @@ public class Friend extends BaseEntity {
     /**
      * 归属人
      */
-    @Column(columnDefinition = "VARCHAR(36) COMMENT '归属人id' ", nullable = false)
-    private String userId;
+    @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "user_id",unique = true,columnDefinition = "VARCHAR(36) COMMENT '用户id' ", nullable = false)
+    private User user;
     /**
      * 朋友id
      */
-    @Column(columnDefinition = "VARCHAR(36) COMMENT '朋友id' ", nullable = false)
-    private String friendId;
+    @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "friend_id",unique = true,columnDefinition = "VARCHAR(36) COMMENT '朋友id' ", nullable = false)
+    private User friend;
 
     /**
      * 朋友备注
@@ -41,20 +44,20 @@ public class Friend extends BaseEntity {
     @Column(columnDefinition = "TINYINT(2) DEFAULT 0 COMMENT '申请状态'", nullable = false, insertable = false)
     private ApplyType applyType;
 
-    public String getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    public String getFriendId() {
-        return friendId;
+    public User getFriend() {
+        return friend;
     }
 
-    public void setFriendId(String friendId) {
-        this.friendId = friendId;
+    public void setFriend(User friend) {
+        this.friend = friend;
     }
 
     public FriendGroup getFriendGroup() {

@@ -40,9 +40,12 @@ public class Friend extends BaseEntity {
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
     @JoinColumn(name = "friend_group_id", columnDefinition = "VARCHAR(36) COMMENT '朋友所在分组id' ")
     private FriendGroup friendGroup;
-
+    /**
+     * 朋友申请状态
+     */
     @Column(columnDefinition = "TINYINT(2) DEFAULT 0 COMMENT '申请状态'", nullable = false, insertable = false)
     private ApplyType applyType;
+
 
     public User getUser() {
         return user;

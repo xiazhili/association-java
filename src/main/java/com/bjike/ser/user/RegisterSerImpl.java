@@ -3,13 +3,16 @@ package com.bjike.ser.user;
 import com.bjike.common.exception.SerException;
 import com.bjike.common.util.PasswordHash;
 import com.bjike.common.util.regex.Validator;
+import com.bjike.entity.chat.Friend;
 import com.bjike.entity.user.Recommend;
 import com.bjike.entity.user.User;
 import com.bjike.entity.user.UserInfo;
 import com.bjike.redis.client.RedisClient;
+import com.bjike.ser.chat.FriendSer;
 import com.bjike.session.AuthCodeSession;
 import com.bjike.to.user.LoginTO;
 import com.bjike.to.user.RegisterTO;
+import com.bjike.type.chat.ApplyType;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,6 +37,8 @@ public class RegisterSerImpl implements RegisterSer {
     private RedisClient redis;
     @Autowired
     private RecommendSer recommendSer;
+    @Autowired
+    private FriendSer friendSer;
 
     @Transactional
     @Override
@@ -54,8 +59,12 @@ public class RegisterSerImpl implements RegisterSer {
         UserInfo userInfo = new UserInfo();
         userInfo.setUser(user);
         userInfoSer.save(userInfo);//初始化保存用户详情信息
+        if(null != recommend){
+            addFriend(recommend,user);//添加好友
+            //邀请码注册,完善信息
+            redis.remove(to.getInviteCode()); //删除校验码
+        }
         token = loginUser(to);//登录用户
-        redis.remove(to.getInviteCode()); //删除校验码
         return token;
     }
 
@@ -93,8 +102,9 @@ public class RegisterSerImpl implements RegisterSer {
             if (StringUtils.isNotBlank(recommendId)) {
                 return recommendSer.findById(recommendId); //获取推荐详细信息
             }
+            throw new SerException("无效邀请码!");
         }
-        throw new SerException("无效邀请码!");
+        return null;
     }
 
     /**
@@ -113,6 +123,18 @@ public class RegisterSerImpl implements RegisterSer {
         } else if (!Validator.isPassword(to.getPassword())) { //密码强度
             throw new SerException("密码过于简单！");
         }
+    }
+
+    /**
+     * 注册完成添加好友
+     * @param recommend
+     */
+    private void addFriend(Recommend recommend,User user)throws SerException{
+        Friend friend = new Friend();
+        friend.setUser(recommend.getUser());
+        friend.setFriend(user);
+        friend.setApplyType(ApplyType.PASS);
+        friendSer.save(friend);
     }
 
 }

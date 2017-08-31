@@ -13,6 +13,7 @@ import com.bjike.session.AuthCodeSession;
 import com.bjike.to.user.LoginTO;
 import com.bjike.to.user.RegisterTO;
 import com.bjike.type.chat.ApplyType;
+import com.bjike.type.user.UserType;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,9 +46,11 @@ public class RegisterSerImpl implements RegisterSer {
         validRegister(to); //注册验证
         Recommend recommend = initRecommend(to);//验证邀请码并获得推荐详情信息,如无邀请码,则为普通注册情况
         String name = null != recommend ? recommend.getRealName() : to.getNickname();
+        UserType userType = null != recommend ? UserType.PERSONAL_VIP : UserType.ORDINARY; //是否为vip
         User user = new User();
         user.setUsername(name);
         user.setNickname(name);
+        user.setUserType(userType);
         user.setPhone(to.getPhone());
         user.setNumber(SeqUtil.genNumber(userSer.findByMaxField("number", User.class)));
         try {

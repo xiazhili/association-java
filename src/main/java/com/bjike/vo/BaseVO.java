@@ -8,6 +8,9 @@ package com.bjike.vo;
  * @Copy: [com.bjike]
  */
 public abstract  class BaseVO  {
+    /**
+     * 数据id
+     */
     private String id;
 
     public String getId() {

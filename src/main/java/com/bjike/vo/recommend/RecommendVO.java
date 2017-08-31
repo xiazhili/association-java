@@ -1,5 +1,7 @@
 package com.bjike.vo.recommend;
 
+import com.bjike.vo.BaseVO;
+
 /**
  * 推荐
  *
@@ -9,7 +11,7 @@ package com.bjike.vo.recommend;
  * @Version: [1.0.0]
  * @Copy: [com.bjike]
  */
-public class RecommendVO {
+public class RecommendVO extends BaseVO{
     /**
      * 昵称
      */

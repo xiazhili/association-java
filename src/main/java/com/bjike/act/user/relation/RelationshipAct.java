@@ -1,4 +1,4 @@
-package com.bjike.act.friend;
+package com.bjike.act.user.relation;
 
 import com.bjike.common.exception.ActException;
 import com.bjike.common.exception.SerException;
@@ -12,15 +12,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * 后台找人
+ * 关系
  *
  * @Author: [liguiqin]
  * @Date: [2017-06-27 16:29]
- * @Description: [后台找人 ]
+ * @Description: [ ]
  * @Version: [1.0.0]
  * @Copy: [com.bjike]
  */
-@RequestMapping("friend")
+@RequestMapping("relation")
 @RestController
 @LoginAuth
 public class RelationshipAct {
@@ -31,8 +31,9 @@ public class RelationshipAct {
      * 后台找人
      * @version v1
      * @param name 昵称
+     * @desc 五种途径可找到该人
      */
-    @RequestMapping("chain/{name}")
+    @RequestMapping("search/{name}")
     public Result search(@PathVariable String name) throws ActException {
         try {
             return ActResult.initialize(relationshipSer.search(name));
@@ -41,5 +42,7 @@ public class RelationshipAct {
             throw new ActException(e.getMessage());
         }
     }
+
+
 
 }

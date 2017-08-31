@@ -39,7 +39,7 @@ public class User extends BaseEntity {
     /**
      * 编号
      */
-    @Column(columnDefinition = "VARCHAR(30) COMMENT '编号' ", nullable = false,unique = true)
+    @Column(columnDefinition = "VARCHAR(30) COMMENT '编号' ", nullable = false, unique = true)
     private String number;
     /**
      * 头像
@@ -71,12 +71,21 @@ public class User extends BaseEntity {
      * 会员类型
      */
     @Column(columnDefinition = "TINYINT(1) DEFAULT 0 COMMENT '会员类型' ", nullable = false, insertable = false)
-    private UserType userType = UserType.NORMAL;
+    private UserType userType = UserType.ORDINARY;
 
+    /**
+     * 坐标x
+     */
     @Transient
     private String pointX;
+    /**
+     * 坐标y
+     */
     @Transient
     private String pointY;
+    /**
+     * 用户链
+     */
     @Transient
     private User chain;
 

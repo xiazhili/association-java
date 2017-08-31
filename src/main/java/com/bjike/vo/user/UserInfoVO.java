@@ -1,6 +1,7 @@
 package com.bjike.vo.user;
 
 import com.bjike.type.user.SexType;
+import com.bjike.vo.BaseVO;
 
 /**
  * 用户详情
@@ -11,11 +12,8 @@ import com.bjike.type.user.SexType;
  * @Version: [1.0.0]
  * @Copy: [com.bjike]
  */
-public class UserInfoVO {
-    /**
-     * 用户详情id
-     */
-    private String id;
+public class UserInfoVO extends BaseVO {
+
     /**
      * 用户名
      */
@@ -55,13 +53,6 @@ public class UserInfoVO {
      */
     private Double reputation = 0.0;
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
 
     public String getUsername() {
         return username;

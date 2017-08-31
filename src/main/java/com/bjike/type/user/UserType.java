@@ -8,10 +8,10 @@ package com.bjike.type.user;
  * @Copy: [com.bjike]
  */
 public enum UserType {
-    VIP(0),//VIP
-    NORMAL(1),; //普通成员
-
-
+    ORDINARY(0),//普通成员
+    PERSONAL_VIP(1), //个人vip
+    ENTERPRISE_VIP(2),//企业vip
+    NEW_ENTERPRISE_VIP(3),;//新企业vip
     private int code;
 
     UserType(int code) {

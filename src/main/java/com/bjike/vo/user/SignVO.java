@@ -1,5 +1,7 @@
 package com.bjike.vo.user;
 
+import com.bjike.vo.BaseVO;
+
 import java.time.LocalDate;
 
 /**
@@ -11,18 +13,18 @@ import java.time.LocalDate;
  * @Version: [1.0.0]
  * @Copy: [com.bjike]
  */
-public class SignVO {
+public class SignVO extends BaseVO{
 
     /**
      * 签到日期
      */
-    protected LocalDate signDate;
+    private String signDate;
 
-    public LocalDate getSignDate() {
+    public String getSignDate() {
         return signDate;
     }
 
-    public void setSignDate(LocalDate signDate) {
+    public void setSignDate(String signDate) {
         this.signDate = signDate;
     }
 }

@@ -1,6 +1,7 @@
 package com.bjike.vo.comment;
 
 import com.bjike.type.comment.ScoreType;
+import com.bjike.vo.BaseVO;
 
 /**
  * 点评详情
@@ -11,11 +12,8 @@ import com.bjike.type.comment.ScoreType;
  * @Version: [1.0.0]
  * @Copy: [com.bjike]
  */
-public class CommentDetailsVO {
-    /**
-     * 点评id
-     */
-    private String id;
+public class CommentDetailsVO extends BaseVO {
+
     /**
      * 点评图
      */
@@ -52,13 +50,6 @@ public class CommentDetailsVO {
      */
     private String headPath;
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
 
     public String[] getImages() {
         return images;

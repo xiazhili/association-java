@@ -57,6 +57,7 @@ public class LoginSerImpl implements LoginSer {
     @Override
     public Boolean logout(String token) throws SerException {
         UserSession.remove(token);
+        redis.removeMap(UserCommon.LOGIN_USER, token);
         return true;
     }
 

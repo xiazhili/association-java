@@ -40,7 +40,7 @@ public class UserAct {
     private UserSer userSer;
 
     /**
-     * 当前用户信息个人资料
+     * 当前用户详细个人资料
      *
      * @return class UserInfoVO
      * @version v1
@@ -50,6 +50,24 @@ public class UserAct {
     public ActResult userInfo() throws ActException {
         try {
             User user = UserUtil.currentUser();
+            UserInfoVO vo = userSer.userInfo(user.getId());
+            return ActResult.initialize(vo);
+        } catch (SerException e) {
+            throw new ActException(e.getMessage());
+        }
+    }
+
+    /**
+     * 通过用户id查询详细个人资料
+     *
+     * @param userId 用户id
+     * @return class UserInfoVO
+     * @version v1
+     */
+    @GetMapping("find/{userId}")
+    public ActResult findByUserId(@PathVariable String userId) throws ActException {
+        try {
+            User user = userSer.findById(userId);
             UserInfoVO vo = userSer.userInfo(user.getId());
             return ActResult.initialize(vo);
         } catch (SerException e) {
@@ -96,7 +114,7 @@ public class UserAct {
         try {
             User user = UserUtil.currentUser();
             List<File> files = FileUtil.save(request, "/" + user.getPhone() + "/head");
-            String path = StringUtils.substringAfter(files.get(0).getPath(),FileUtil.ROOT_PATH);
+            String path = StringUtils.substringAfter(files.get(0).getPath(), FileUtil.ROOT_PATH);
             userSer.uploadHeadPath(path);
         } catch (Exception e) {
             e.printStackTrace();

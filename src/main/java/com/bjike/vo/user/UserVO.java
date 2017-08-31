@@ -1,6 +1,7 @@
 package com.bjike.vo.user;
 
 import com.bjike.type.user.SexType;
+import com.bjike.vo.BaseVO;
 
 /**
  * 用户
@@ -11,11 +12,8 @@ import com.bjike.type.user.SexType;
  * @Version: [1.0.0]
  * @Copy: [com.bjike]
  */
-public class UserVO {
-    /**
-     * 用户id
-     */
-    private String id;
+public class UserVO extends BaseVO {
+
     /**
      * 用户名
      */
@@ -89,11 +87,4 @@ public class UserVO {
         this.phone = phone;
     }
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
 }

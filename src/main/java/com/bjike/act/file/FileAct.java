@@ -29,7 +29,7 @@ public class FileAct {
 
     /**
      * 获取缩略图
-     *
+     * @return {name:'name',type:'bytes',defaultValue:'',description:'图片流.'}
      * @param path 图片路径
      * @throws ActException
      * @version v1
@@ -71,7 +71,7 @@ public class FileAct {
 
     /**
      * 获取原图
-     *
+     * @return {name:'name',type:'bytes',defaultValue:'',description:'图片流.'}
      * @param path 图片路径
      * @throws ActException
      * @version v1
@@ -105,8 +105,9 @@ public class FileAct {
 
     /**
      * 下载
-     *
+     * @return {name:'name',type:'bytes',defaultValue:'',description:'文件流.'}
      * @param path 文件路径
+     * @version v1
      * @throws ActException
      */
     @GetMapping("download")

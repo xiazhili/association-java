@@ -32,7 +32,7 @@ public class RelationshipAct {
      * @version v1
      * @param name 昵称
      */
-    @RequestMapping(value = {"chain/{name}"})
+    @RequestMapping("chain/{name}")
     public Result search(@PathVariable String name) throws ActException {
         try {
             return ActResult.initialize(relationshipSer.search(name));

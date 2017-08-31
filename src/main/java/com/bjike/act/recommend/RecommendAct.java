@@ -1,6 +1,5 @@
 package com.bjike.act.recommend;
 
-import com.bjike.common.aspect.ADD;
 import com.bjike.common.exception.ActException;
 import com.bjike.common.exception.SerException;
 import com.bjike.common.interceptor.login.LoginAuth;
@@ -8,12 +7,12 @@ import com.bjike.common.restful.ActResult;
 import com.bjike.common.util.QRCodeUtil;
 import com.bjike.dto.user.RecommendDTO;
 import com.bjike.ser.user.RecommendSer;
-import com.bjike.to.user.RecommendTO;
 import com.bjike.vo.recommend.RecommendVO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletResponse;
@@ -35,27 +34,13 @@ public class RecommendAct {
     @Autowired
     private RecommendSer recommendSer;
 
-    /**
-     * 添加推荐并生成推荐码(通过推荐码生存二维码)
-     *
-     * @throws ActException
-     */
-    @LoginAuth
-    @PostMapping("add")
-    public ActResult add(@Validated({ADD.class}) RecommendTO to, BindingResult result) throws ActException {
-        try {
-            String code = recommendSer.add(to);
-            return new ActResult(code);
-        } catch (SerException e) {
-            throw new ActException(e.getMessage());
-        }
-    }
 
     /**
      * 我推荐的人
      *
      * @return class RecommendVO
      * @throws ActException
+     * @version v1
      */
     @LoginAuth
     @GetMapping("list")
@@ -72,7 +57,7 @@ public class RecommendAct {
     /**
      * 通过推荐码获取二维码
      *
-     * @param code
+     * @param code 推荐码
      * @throws ActException
      * @version v1
      */

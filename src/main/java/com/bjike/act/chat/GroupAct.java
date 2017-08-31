@@ -10,6 +10,7 @@ import com.bjike.entity.chat.Group;
 import com.bjike.ser.chat.FriendSer;
 import com.bjike.ser.chat.GroupSer;
 import com.bjike.to.chat.GroupTO;
+import com.bjike.vo.chat.FriendVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -46,7 +47,8 @@ public class GroupAct {
     @GetMapping("member/{groupId}")
     public Result groupMember(@PathVariable String groupId) throws ActException {
         try {
-            return ActResult.initialize(friendSer.groupMember(groupId));
+            List<FriendVO> friendVOS = friendSer.groupMember(groupId);
+            return ActResult.initialize(friendVOS);
         } catch (SerException e) {
             throw new ActException(e.getMessage());
         }

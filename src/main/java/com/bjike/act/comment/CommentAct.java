@@ -210,7 +210,7 @@ public class CommentAct {
     /**
      * 评论图片保存路径
      *
-     * @param userId
+     * @param userId 用户
      */
     private String getCommentPath(String userId) {
         return "/" + userId + "/comment/" + DateUtil.dateToString(LocalDate.now()).replaceAll("-", "");

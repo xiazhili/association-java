@@ -50,6 +50,7 @@ public class ShopAct {
 
     /**
      * 店铺删除
+     *
      * @param pointId 店铺坐标id
      * @version v1
      */

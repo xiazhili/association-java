@@ -35,7 +35,9 @@ public class FriendAct {
     /**
      * 所有好友成员
      *
+     * @return class FriendVO
      * @throws ActException
+     * @version v1
      */
     @GetMapping("list")
     public Result list() throws ActException {
@@ -52,7 +54,9 @@ public class FriendAct {
      * 好友类型查询列表
      *
      * @param type 申请类型
+     * @return class FriendVO
      * @throws ActException
+     * @version v1
      */
     @GetMapping("type/list")
     public Result findByApplyType(ApplyType type) throws ActException {
@@ -69,6 +73,8 @@ public class FriendAct {
      * 好友分组成员
      *
      * @param id 好友组id
+     * @return class FriendVO
+     * @version v1
      */
     @GetMapping("friendGroup/{id}")
     public Result friendGroup(@PathVariable String id) throws ActException {
@@ -81,6 +87,9 @@ public class FriendAct {
 
     /**
      * 好友分组信息
+     *
+     * @return class FriendGroupVO
+     * @version v1
      */
     @GetMapping("friendGroup/info")
     public Result groupInfo() throws ActException {
@@ -99,6 +108,7 @@ public class FriendAct {
      *
      * @param to 好友申请传输
      * @throws ActException
+     * @version v1
      */
     @PostMapping("apply")
     public Result apply(FriendTO to) throws ActException {
@@ -115,8 +125,8 @@ public class FriendAct {
      * 同意好友申请
      *
      * @param friendId 好友id
-     * @return
      * @throws ActException
+     * @version v1
      */
     @PutMapping("agree")
     public Result agree(String friendId) throws ActException {
@@ -133,6 +143,7 @@ public class FriendAct {
      * 拒绝好友申请
      *
      * @param friendId 好友id
+     * @version v1
      */
     @PutMapping("refuse")
     public Result refuse(String friendId) throws ActException {
@@ -150,6 +161,7 @@ public class FriendAct {
      * 删除好友
      *
      * @param friendId 好友id
+     * @version v1
      */
     @DeleteMapping("delete/{friendId}")
     public Result delete(@PathVariable String friendId) throws ActException {
@@ -166,8 +178,8 @@ public class FriendAct {
      * 备注好友
      *
      * @param friendId 好友id
-     * @return
      * @throws ActException
+     * @version v1
      */
     @PutMapping("remark")
     public Result editNickname(String nickname, String friendId, HttpServletRequest request) throws ActException {

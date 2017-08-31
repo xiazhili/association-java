@@ -35,6 +35,13 @@ public class LoginAct {
     @Autowired
     private LoginSer loginSer;
 
+    /**
+     * 登录
+     *
+     * @param to      登录信息
+     * @throws ActException
+     * @version v1
+     */
     @PostMapping("login")
     public Result login(@Validated({ADD.class}) LoginTO to, BindingResult rs, HttpServletRequest request) throws ActException {
         try {
@@ -52,6 +59,12 @@ public class LoginAct {
         }
     }
 
+    /**
+     * 退出登录
+     *
+     * @throws ActException
+     * @version v1
+     */
     @LoginAuth
     @GetMapping("logout")
     public Result logout(HttpServletRequest request) throws ActException {

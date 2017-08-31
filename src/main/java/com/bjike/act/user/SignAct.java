@@ -34,8 +34,8 @@ public class SignAct {
     /**
      * 签到
      *
-     * @return
      * @throws ActException
+     * @version v1
      */
     @PostMapping("sign")
     public ActResult sign() throws ActException {
@@ -52,6 +52,8 @@ public class SignAct {
      *
      * @param startDate 开始日期
      * @param endDate   结束日期
+     * @return class Sign
+     * @version v1
      */
     @GetMapping("sign/list")
     public ActResult signList(String startDate, String endDate) throws ActException {

@@ -34,6 +34,7 @@ public class PwdAct {
      *
      * @param phone 手机
      * @throws ActException
+     * @version v1
      */
     @PutMapping("find/{phone}")
     public ActResult findPwd(@PathVariable String phone, String password, String rePassword) throws ActException {
@@ -53,10 +54,10 @@ public class PwdAct {
      * 更新密码
      *
      * @param oldPassword 旧密码
-     * @param password 新密码
-     * @param rePassword 确认新密码
-     * @return
+     * @param password    新密码
+     * @param rePassword  确认新密码
      * @throws ActException
+     * @version v1
      */
     @LoginAuth
     @PutMapping("edit")

@@ -29,7 +29,7 @@ public class RelationshipAct {
 
     /**
      * 后台找人
-     *
+     * @version v1
      * @param name 昵称
      */
     @RequestMapping(value = {"chain/{name}"})

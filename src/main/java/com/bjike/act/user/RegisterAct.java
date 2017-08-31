@@ -33,10 +33,11 @@ public class RegisterAct {
 
     /**
      * 手机号注册
-     * 注册,注册之前请先获取到注册验证码:AuthCodeAct
+     * 注册之前请先获取到注册验证码:AuthCodeAct
      *
      * @param to 注册信息
      * @throws ActException
+     * @version v1
      */
     @PostMapping("register")
     public Result register(@Validated({RegisterTO.PHONE.class}) RegisterTO to, BindingResult rs, HttpServletRequest request) throws ActException {
@@ -59,10 +60,8 @@ public class RegisterAct {
     /**
      * 邀请码注册
      *
-     * @param to
-     * @param rs
-     * @param request
-     * @return
+     * @param to 注册信息
+     * @version v1
      * @throws ActException
      */
     @PostMapping("invite/register")

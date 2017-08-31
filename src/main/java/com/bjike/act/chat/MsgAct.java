@@ -9,7 +9,10 @@ import com.bjike.dto.chat.MsgDTO;
 import com.bjike.entity.chat.Msg;
 import com.bjike.ser.chat.mongo.MsgSer;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -35,6 +38,7 @@ public class MsgAct {
      *
      * @return class Msg
      * @throws ActException
+     * @version v1
      */
     @GetMapping("point/{reviver}")
     public Result pointMsg(MsgDTO dto, @PathVariable String reviver, HttpServletRequest request) throws ActException {
@@ -52,6 +56,7 @@ public class MsgAct {
      *
      * @return class Msg
      * @throws ActException
+     * @version v1
      */
     @GetMapping("group/{groupId}")
     public Result groupMsg(MsgDTO dto, @PathVariable String groupId) throws ActException {

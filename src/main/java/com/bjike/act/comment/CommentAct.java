@@ -47,6 +47,7 @@ public class CommentAct {
      *
      * @param to 点评内容
      * @throws Exception
+     * @version v1
      */
     @PostMapping("add")
     public Result add(@Validated(ADD.class) CommentTO to, BindingResult result, HttpServletRequest request) throws ActException {
@@ -68,6 +69,7 @@ public class CommentAct {
      *
      * @return class CommentVO
      * @throws Exception
+     * @version v1
      */
     @GetMapping("list")
     public Result list(CommentDTO dto) throws ActException {
@@ -87,6 +89,7 @@ public class CommentAct {
      *
      * @param pointId 点评地址id
      * @throws Exception
+     * @version v1
      */
     @GetMapping("count")
     public Result count(String pointId) throws ActException {
@@ -102,8 +105,8 @@ public class CommentAct {
      * 点评点赞
      *
      * @param commentId 点评id
-     * @return
      * @throws Exception
+     * @version v1
      */
     @PutMapping("like/{commentId}")
     public Result like(@PathVariable String commentId) throws ActException {
@@ -120,6 +123,7 @@ public class CommentAct {
      * 点评取消点赞
      *
      * @param commentId 点评id
+     * @version v1
      */
     @PutMapping("cancel/like/{commentId}")
     public Result notLike(@PathVariable String commentId) throws ActException {
@@ -137,6 +141,7 @@ public class CommentAct {
      * 删除点评
      *
      * @param commentId 点评id
+     * @version v1
      */
     @DeleteMapping("delete/{commentId}")
     public Result delete(@PathVariable String commentId) throws ActException {
@@ -154,6 +159,7 @@ public class CommentAct {
      * 店铺总评分
      *
      * @param pointId 店铺地址id
+     * @version v1
      */
     @GetMapping("score/{pointId}")
     public Result score(String pointId) throws ActException {
@@ -168,6 +174,7 @@ public class CommentAct {
      * 上传
      *
      * @param commentId 点评id
+     * @version v1
      */
     @PostMapping("upload/img/{commentId}")
     public Result uploadImg(@PathVariable String commentId, HttpServletRequest request) throws ActException {
@@ -187,6 +194,7 @@ public class CommentAct {
      *
      * @param commentId 点评id
      * @return class CommentDetailsVO
+     * @version v1
      */
     @GetMapping("details/{commentId}")
     public Result details(@PathVariable String commentId) throws ActException {

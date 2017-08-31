@@ -7,7 +7,6 @@ import com.bjike.common.interceptor.login.LoginAuth;
 import com.bjike.common.restful.ActResult;
 import com.bjike.common.util.QRCodeUtil;
 import com.bjike.dto.user.RecommendDTO;
-import com.bjike.entity.user.Recommend;
 import com.bjike.ser.user.RecommendSer;
 import com.bjike.to.user.RecommendTO;
 import com.bjike.vo.recommend.RecommendVO;
@@ -39,7 +38,6 @@ public class RecommendAct {
     /**
      * 添加推荐并生成推荐码(通过推荐码生存二维码)
      *
-     * @return
      * @throws ActException
      */
     @LoginAuth
@@ -56,7 +54,7 @@ public class RecommendAct {
     /**
      * 我推荐的人
      *
-     * @return
+     * @return class RecommendVO
      * @throws ActException
      */
     @LoginAuth
@@ -75,8 +73,8 @@ public class RecommendAct {
      * 通过推荐码获取二维码
      *
      * @param code
-     * @return
      * @throws ActException
+     * @version v1
      */
     @GetMapping("qr/{code}")
     public ActResult QRCode(@PathVariable String code, HttpServletResponse response) throws ActException {
@@ -97,9 +95,9 @@ public class RecommendAct {
     /**
      * 通过推荐码获取二维码
      *
-     * @param code
-     * @return
+     * @param code 推荐码
      * @throws ActException
+     * @version v1
      */
     @GetMapping("validate/{code}")
     public ActResult validate(@PathVariable String code) throws ActException {

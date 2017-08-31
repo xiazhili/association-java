@@ -7,6 +7,7 @@ import com.bjike.ser.user.RegisterSer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -33,6 +34,7 @@ public class AuthCodeAct {
      * 生成注册验证码
      *
      * @return {name:'testName',type:'string',defaultValue:'',description:'图片流.'}
+     * @version v1
      * @des 登录找回密码注册, 验证码图片流
      */
     @GetMapping("generate/code")

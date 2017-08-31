@@ -32,6 +32,7 @@ public class FileAct {
      *
      * @param path 图片路径
      * @throws ActException
+     * @version v1
      */
     @GetMapping("thumbnails")
     public void thumbnails(HttpServletResponse response, String path) throws ActException {
@@ -73,6 +74,7 @@ public class FileAct {
      *
      * @param path 图片路径
      * @throws ActException
+     * @version v1
      */
     @GetMapping("original/pic")
     public void original(HttpServletResponse response, String path) throws ActException {

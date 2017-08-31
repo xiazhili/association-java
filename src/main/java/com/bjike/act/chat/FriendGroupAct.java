@@ -29,9 +29,9 @@ public class FriendGroupAct {
 
     /**
      * 添加分组
-     *
      * @param to 好友分组数据传输
      * @throws ActException
+     * @version v1
      */
     @PostMapping("add")
     public Result add(FriendGroupTO to) throws ActException {
@@ -46,9 +46,9 @@ public class FriendGroupAct {
 
     /**
      * 删除分组
-     *
      * @param id 分组id
      * @throws ActException
+     * @version v1
      */
     @DeleteMapping("delete")
     public Result delete(@PathVariable String id) throws ActException {
@@ -65,6 +65,7 @@ public class FriendGroupAct {
      *
      * @param to 好友分组数据传输
      * @throws ActException
+     * @version v1
      */
     @PutMapping("edit")
     public Result edit(FriendGroupTO to) throws ActException {

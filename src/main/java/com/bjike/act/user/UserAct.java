@@ -37,7 +37,8 @@ public class UserAct {
     /**
      * 当前用户信息个人资料
      *
-     * @return
+     * @return class UserInfoVO
+     * @version v1
      */
     @LoginAuth
     @GetMapping("info")
@@ -51,6 +52,13 @@ public class UserAct {
         }
     }
 
+    /**
+     * 编辑用户信息
+     *
+     * @throws ActException
+     * @version v1
+     * @return  class UserVO
+     */
     @LoginAuth
     @GetMapping("edit/info")
     public ActResult editInfo() throws ActException {
@@ -66,8 +74,9 @@ public class UserAct {
      * 手机号昵称用户编号找人
      *
      * @param account 手机号昵称用户编号
-     * @return
+     * @return class User
      * @throws ActException
+     * @version v1
      */
     @GetMapping("search/{account}")
     public ActResult find(@PathVariable String account) throws ActException {

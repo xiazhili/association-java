@@ -41,6 +41,7 @@ public class GroupAct {
      * @param groupId 群id
      * @return class FriendVO
      * @throws ActException
+     * @version v1
      */
     @GetMapping("member/{groupId}")
     public Result groupMember(@PathVariable String groupId) throws ActException {
@@ -56,6 +57,7 @@ public class GroupAct {
      *
      * @return class Group
      * @throws ActException
+     * @version v1
      */
     @GetMapping("user/list")
     public Result listByUser() throws ActException {
@@ -74,6 +76,7 @@ public class GroupAct {
      *
      * @param to 群信息
      * @throws ActException
+     * @version v1
      */
     @PostMapping("add")
     public Result add(GroupTO to) throws ActException {
@@ -91,6 +94,7 @@ public class GroupAct {
      *
      * @param id 群id
      * @throws ActException
+     * @version v1
      */
     @DeleteMapping("delete/{id}")
     public Result delete(@PathVariable String id) throws ActException {
@@ -106,8 +110,8 @@ public class GroupAct {
      * 编辑群信息
      *
      * @param to 群信息
-     * @return
      * @throws ActException
+     * @version v1
      */
     @PutMapping("edit")
     public Result edit(GroupTO to) throws ActException {

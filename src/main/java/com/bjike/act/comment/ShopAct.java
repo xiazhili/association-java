@@ -34,9 +34,10 @@ public class ShopAct {
     /**
      * 附近店铺
      *
-     * @param dto
+     * @param dto 查询实体
      * @return class ShopVO
      * @throws Exception
+     * @version v1
      */
     @GetMapping("nearby")
     public Result nearby(ShopDTO dto) throws ActException {
@@ -49,8 +50,8 @@ public class ShopAct {
 
     /**
      * 店铺删除
-     *
      * @param pointId 店铺坐标id
+     * @version v1
      */
     @DeleteMapping("del")
     public Result del(String pointId) throws ActException {

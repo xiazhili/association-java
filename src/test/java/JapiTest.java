@@ -12,8 +12,7 @@ public class JapiTest {
 		JapiClient.setPrefixPath("/home/lgq/github/");//路径前缀
 		JapiClient.setpostfixPath("/src/main/java");
 		JapiClient.setProjectJavaPath("association-java");//主项目位置
-		JapiClient.setActionReletivePath("com/bjike/authcode");//主项目action位置
-
+		JapiClient.setActionReletivePath("com/bjike/act");//主项目action位置
 		JapiClient.setFlushServer(true);
 		JapiClient.setIncludePackages(new String[]{"com.bjike"});//可以准确快速搜索
 		IProject project = ProjectImpl.init();

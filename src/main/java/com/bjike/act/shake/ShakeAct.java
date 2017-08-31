@@ -28,7 +28,8 @@ public class ShakeAct {
     /**
      * 摇一摇
      *
-     * @return
+     * @return class User
+     * @version v1
      * @throws Exception
      */
     @Autowired

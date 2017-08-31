@@ -40,25 +40,11 @@ public class ChatAct {
     private ChatSer chatSer;
 
     /**
-     * 在线用户
+     * 退出聊天
      *
-     * @return
-     */
-    @GetMapping("online")
-    public Result online() {
-        List<Client> chatClients = new ArrayList<>();
-        Client c = new Client();
-        c.setHeadPath("xx");
-        c.setUsername("阿斯大赛");
-        chatClients.add(c);
-        return ActResult.initialize(chatClients);
-    }
-
-    /**
-     *退出聊天
      * @param userId 用户id
-     * @return
      * @throws ActException
+     * @version v1
      */
     @GetMapping("quit/{userId}")
     public Result quit(@PathVariable String userId) throws ActException {
@@ -79,10 +65,11 @@ public class ChatAct {
 
     /**
      * 加入语音聊天
-     * @param sender 发送人
+     *
+     * @param sender  发送人
      * @param reviver 接收人
-     * @return
      * @throws ActException
+     * @version v1
      */
     @GetMapping("join/audio/{sender}/{reviver}")
     public Result join(@PathVariable String sender, @PathVariable String reviver) throws ActException {
@@ -103,8 +90,8 @@ public class ChatAct {
     /**
      * 退出语音聊天
      * @param userId 用户id
-     * @return
      * @throws ActException
+     * @version v1
      */
     @GetMapping("quit/audio/{userId}")
     public Result quitAudio(@PathVariable String userId) throws ActException {

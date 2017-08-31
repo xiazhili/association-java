@@ -48,7 +48,7 @@ public class CommentAct {
      * @param to 点评内容
      * @throws Exception
      */
-    @PostMapping("/add")
+    @PostMapping("add")
     public Result add(@Validated(ADD.class) CommentTO to, BindingResult result, HttpServletRequest request) throws ActException {
         try {
             String userId = UserUtil.currentUserID();
@@ -69,7 +69,7 @@ public class CommentAct {
      * @return class CommentVO
      * @throws Exception
      */
-    @GetMapping("/list")
+    @GetMapping("list")
     public Result list(CommentDTO dto) throws ActException {
         try {
             String userId = UserUtil.currentUserID();
@@ -88,7 +88,7 @@ public class CommentAct {
      * @param pointId 点评地址id
      * @throws Exception
      */
-    @GetMapping("/count")
+    @GetMapping("count")
     public Result count(String pointId) throws ActException {
         try {
             return ActResult.initialize(commentSer.count(pointId));
@@ -105,7 +105,7 @@ public class CommentAct {
      * @return
      * @throws Exception
      */
-    @PutMapping("/like/{commentId}")
+    @PutMapping("like/{commentId}")
     public Result like(@PathVariable String commentId) throws ActException {
         try {
             commentSer.like(commentId);
@@ -121,7 +121,7 @@ public class CommentAct {
      *
      * @param commentId 点评id
      */
-    @PutMapping("/cancel/like/{commentId}")
+    @PutMapping("cancel/like/{commentId}")
     public Result notLike(@PathVariable String commentId) throws ActException {
         try {
             commentSer.cancelLike(commentId);
@@ -138,7 +138,7 @@ public class CommentAct {
      *
      * @param commentId 点评id
      */
-    @DeleteMapping("/delete/{commentId}")
+    @DeleteMapping("delete/{commentId}")
     public Result delete(@PathVariable String commentId) throws ActException {
         try {
             commentSer.remove(commentId);
@@ -155,7 +155,7 @@ public class CommentAct {
      *
      * @param pointId 店铺地址id
      */
-    @GetMapping("/score/{pointId}")
+    @GetMapping("score/{pointId}")
     public Result score(String pointId) throws ActException {
         try {
             return ActResult.initialize(commentSer.score(pointId));
@@ -169,7 +169,7 @@ public class CommentAct {
      *
      * @param commentId 点评id
      */
-    @PostMapping("/upload/img/{commentId}")
+    @PostMapping("upload/img/{commentId}")
     public Result uploadImg(@PathVariable String commentId, HttpServletRequest request) throws ActException {
         try {
             String userId = UserUtil.currentUserID();
@@ -188,7 +188,7 @@ public class CommentAct {
      * @param commentId 点评id
      * @return class CommentDetailsVO
      */
-    @GetMapping("/details/{commentId}")
+    @GetMapping("details/{commentId}")
     public Result details(@PathVariable String commentId) throws ActException {
         try {
             CommentDetailsVO vo = commentSer.details(commentId);

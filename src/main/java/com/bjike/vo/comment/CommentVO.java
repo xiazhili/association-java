@@ -5,6 +5,8 @@ import com.bjike.type.comment.VisibleType;
 import com.bjike.vo.BaseVO;
 
 /**
+ * 点评
+ *
  * @Author: [liguiqin]
  * @Date: [2017-06-28 14:44]
  * @Description: [ ]
@@ -28,8 +30,8 @@ public class CommentVO extends BaseVO {
     /**
      * 评分
      */
-    private ScoreType scoreType; /**
-
+    private ScoreType scoreType;
+    /**
      * 可见范围
      */
     private VisibleType visibleType;

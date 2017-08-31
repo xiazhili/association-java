@@ -3,6 +3,8 @@ package com.bjike.vo.comment;
 import com.bjike.vo.BaseVO;
 
 /**
+ * 店铺
+ *
  * @Author: [liguiqin]
  * @Date: [2017-06-27 16:34]
  * @Description: [ ]

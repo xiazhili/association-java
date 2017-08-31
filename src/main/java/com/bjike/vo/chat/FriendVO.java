@@ -4,6 +4,8 @@ import com.bjike.type.chat.ApplyType;
 import com.bjike.vo.BaseVO;
 
 /**
+ * 好友
+ *
  * @Author: [liguiqin]
  * @Date: [2017-07-21 13:56]
  * @Description: [ ]

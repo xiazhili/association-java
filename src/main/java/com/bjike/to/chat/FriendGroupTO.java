@@ -3,6 +3,8 @@ package com.bjike.to.chat;
 import com.bjike.to.BaseTO;
 
 /**
+ * 好友分组传输对象
+ *
  * @Author: [liguiqin]
  * @Date: [2017-07-21 11:09]
  * @Description: [ ]

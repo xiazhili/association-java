@@ -38,7 +38,7 @@ public class ShopAct {
      * @return class ShopVO
      * @throws Exception
      */
-    @GetMapping("/nearby")
+    @GetMapping("nearby")
     public Result nearby(ShopDTO dto) throws ActException {
         try {
             return ActResult.initialize(shopSer.nearby(dto));
@@ -52,7 +52,7 @@ public class ShopAct {
      *
      * @param pointId 店铺坐标id
      */
-    @DeleteMapping("/del")
+    @DeleteMapping("del")
     public Result del(String pointId) throws ActException {
         try {
             ShopDTO dto = new ShopDTO();

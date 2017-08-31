@@ -9,6 +9,8 @@ import org.hibernate.validator.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 /**
+ * 推荐传输对象
+ *
  * @Author: [liguiqin]
  * @Date: [2017-08-23 17:36]
  * @Description: [ ]

@@ -6,14 +6,14 @@ import com.bjike.common.interceptor.login.LoginAuth;
 import com.bjike.common.restful.ActResult;
 import com.bjike.common.restful.Result;
 import com.bjike.common.util.UserUtil;
-import com.bjike.entity.chat.Friend;
+import com.bjike.entity.chat.Group;
 import com.bjike.ser.chat.FriendSer;
 import com.bjike.ser.chat.GroupSer;
 import com.bjike.to.chat.GroupTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 /**
  * 群
@@ -34,6 +34,7 @@ public class GroupAct {
 
     @Autowired
     private FriendSer friendSer;
+
     /**
      * 群成员
      *
@@ -52,6 +53,7 @@ public class GroupAct {
 
     /**
      * 用户所拥有的群
+     *
      * @return class Group
      * @throws ActException
      */
@@ -59,8 +61,8 @@ public class GroupAct {
     public Result listByUser() throws ActException {
         try {
             String userId = UserUtil.currentUserID();
-            groupSer.listByUser(userId);
-            return new ActResult("add success");
+            List<Group> groups = groupSer.listByUser(userId);
+            return ActResult.initialize(groups);
         } catch (SerException e) {
             throw new ActException(e.getMessage());
         }
@@ -69,6 +71,7 @@ public class GroupAct {
 
     /**
      * 添加群
+     *
      * @param to 群信息
      * @throws ActException
      */
@@ -85,6 +88,7 @@ public class GroupAct {
 
     /**
      * 解散群
+     *
      * @param id 群id
      * @throws ActException
      */
@@ -100,6 +104,7 @@ public class GroupAct {
 
     /**
      * 编辑群信息
+     *
      * @param to 群信息
      * @return
      * @throws ActException

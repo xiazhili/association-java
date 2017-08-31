@@ -6,6 +6,8 @@ import com.bjike.to.BaseTO;
 import org.hibernate.validator.constraints.NotBlank;
 
 /**
+ * 店铺传输对象
+ *
  * @Author: [liguiqin]
  * @Date: [2017-06-27 16:34]
  * @Description: [ ]

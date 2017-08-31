@@ -54,6 +54,12 @@ public class ChatAct {
         return ActResult.initialize(chatClients);
     }
 
+    /**
+     *退出聊天
+     * @param userId 用户id
+     * @return
+     * @throws ActException
+     */
     @GetMapping("quit/{userId}")
     public Result quit(@PathVariable String userId) throws ActException {
         try {
@@ -71,6 +77,13 @@ public class ChatAct {
 
     }
 
+    /**
+     * 加入语音聊天
+     * @param sender 发送人
+     * @param reviver 接收人
+     * @return
+     * @throws ActException
+     */
     @GetMapping("join/audio/{sender}/{reviver}")
     public Result join(@PathVariable String sender, @PathVariable String reviver) throws ActException {
         AudioClient client = AudioClientSession.get(sender);
@@ -87,6 +100,12 @@ public class ChatAct {
         return new ActResult("audio is over");
     }
 
+    /**
+     * 退出语音聊天
+     * @param userId 用户id
+     * @return
+     * @throws ActException
+     */
     @GetMapping("quit/audio/{userId}")
     public Result quitAudio(@PathVariable String userId) throws ActException {
         AudioClientSession.remove(userId);

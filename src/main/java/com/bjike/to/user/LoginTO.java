@@ -6,6 +6,8 @@ import com.bjike.type.user.LoginType;
 import org.hibernate.validator.constraints.NotBlank;
 
 /**
+ * 登录传输对象
+ *
  * @Author: [liguiqin]
  * @Date: [2017-08-22 10:28]
  * @Description: [ ]

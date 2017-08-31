@@ -11,6 +11,7 @@ import com.bjike.ser.user.PwdSer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @Version: [1.0.0]
  * @Copy: [com.bjike]
  */
+@RequestMapping("pwd")
 @RestController
 public class PwdAct {
     @Autowired
@@ -33,7 +35,7 @@ public class PwdAct {
      * @param phone 手机
      * @throws ActException
      */
-    @PutMapping("findPwd/{phone}")
+    @PutMapping("find/{phone}")
     public ActResult findPwd(@PathVariable String phone, String password, String rePassword) throws ActException {
         try {
             if (password.equals(rePassword)) {
@@ -48,16 +50,16 @@ public class PwdAct {
     }
 
     /**
-     * 找回密码
+     * 更新密码
      *
-     * @param oldPassword
-     * @param password
-     * @param rePassword
+     * @param oldPassword 旧密码
+     * @param password 新密码
+     * @param rePassword 确认新密码
      * @return
      * @throws ActException
      */
     @LoginAuth
-    @PutMapping("editPwd")
+    @PutMapping("edit")
     public ActResult editPwd(String oldPassword, String password, String rePassword) throws ActException {
         try {
             if (password.equals(rePassword)) {

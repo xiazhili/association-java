@@ -53,7 +53,7 @@ public class SignAct {
      * @param startDate 开始日期
      * @param endDate   结束日期
      */
-    @GetMapping("signList")
+    @GetMapping("sign/list")
     public ActResult signList(String startDate, String endDate) throws ActException {
         try {
             List<Sign> signs = signSer.signList(startDate, endDate);

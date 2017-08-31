@@ -3,6 +3,8 @@ package com.bjike.vo.chat;
 import com.bjike.vo.BaseVO;
 
 /**
+ * 好友分组
+ *
  * @Author: [liguiqin]
  * @Date: [2017-07-21 13:56]
  * @Description: [ ]
@@ -11,7 +13,7 @@ import com.bjike.vo.BaseVO;
  */
 public class FriendGroupVO extends BaseVO {
     /**
-     * 朋友分组名
+     * 好友分组名
      */
     private String name;
     /**

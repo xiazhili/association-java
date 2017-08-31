@@ -30,7 +30,7 @@ public class AuthCodeAct {
     private RegisterSer registerSer;
 
     /**
-     * 进入注册页面,生成注册验证码
+     * 生成注册验证码
      *
      * @return {name:'testName',type:'string',defaultValue:'',description:'图片流.'}
      * @des 登录找回密码注册, 验证码图片流

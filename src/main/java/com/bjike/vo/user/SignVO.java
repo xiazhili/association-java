@@ -1,9 +1,10 @@
 package com.bjike.vo.user;
 
-import javax.persistence.Column;
 import java.time.LocalDate;
 
 /**
+ * 签到
+ *
  * @Author: [liguiqin]
  * @Date: [2017-08-29 18:08]
  * @Description: [ ]
@@ -15,7 +16,7 @@ public class SignVO {
     /**
      * 签到日期
      */
-    protected LocalDate signDate ;
+    protected LocalDate signDate;
 
     public LocalDate getSignDate() {
         return signDate;

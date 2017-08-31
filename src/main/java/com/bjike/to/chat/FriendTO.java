@@ -1,6 +1,8 @@
 package com.bjike.to.chat;
 
 /**
+ * 好友传输对象
+ *
  * @Author: [liguiqin]
  * @Date: [2017-07-21 11:47]
  * @Description: [ ]
@@ -20,6 +22,7 @@ public class FriendTO {
      * 备注
      */
     private String remark;
+
     public String getUserId() {
         return userId;
     }

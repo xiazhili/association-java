@@ -3,6 +3,8 @@ package com.bjike.vo.user;
 import com.bjike.type.user.SexType;
 
 /**
+ * 用户
+ *
  * @Author: [liguiqin]
  * @Date: [2017-08-22 15:52]
  * @Description: [ ]

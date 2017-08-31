@@ -4,13 +4,15 @@ import com.bjike.entity.BaseEntity;
 import com.bjike.type.chat.MsgType;
 
 /**
+ * 消息
+ *
  * @Author: [liguiqin]
  * @Date: [2017-07-19 14:31]
  * @Description: [ ]
  * @Version: [1.0.0]
  * @Copy: [com.bjike]
  */
-public class Msg extends BaseEntity{
+public class Msg extends BaseEntity {
     /**
      * 发送人
      */
@@ -30,7 +32,7 @@ public class Msg extends BaseEntity{
     /**
      * 消息类型
      */
-    private MsgType msgType ;
+    private MsgType msgType;
 
     /**
      * 接收组

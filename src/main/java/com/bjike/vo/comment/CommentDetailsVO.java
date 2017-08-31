@@ -2,9 +2,9 @@ package com.bjike.vo.comment;
 
 import com.bjike.type.comment.ScoreType;
 
-import java.time.LocalDateTime;
-
 /**
+ * 点评详情
+ *
  * @Author: [liguiqin]
  * @Date: [2017-06-29 09:04]
  * @Description: [ ]

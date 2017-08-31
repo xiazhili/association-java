@@ -4,6 +4,8 @@ import com.bjike.type.user.LoginType;
 import org.hibernate.validator.constraints.NotBlank;
 
 /**
+ * 注册传输对象
+ *
  * @Author: [liguiqin]
  * @Date: [2017-08-22 10:06]
  * @Description: [ ]
@@ -11,30 +13,61 @@ import org.hibernate.validator.constraints.NotBlank;
  * @Copy: [com.bjike]
  */
 public class RegisterTO {
-    public interface INVITE { //邀请注册
+    /**
+     * 邀请注册
+     */
+    public interface INVITE {
 
     }
 
-    public interface PHONE { //普通手机注册
+    /**
+     * 普通手机注册
+     */
+    public interface PHONE {
 
     }
 
+    /**
+     * 手机号
+     */
     @NotBlank(message = "手机号不能为空!", groups = {RegisterTO.INVITE.class, RegisterTO.PHONE.class})
     private String phone;
+    /**
+     * 验证码
+     */
     @NotBlank(message = "验证码不能为空!", groups = {RegisterTO.PHONE.class})
     private String authCode;
+    /**
+     * ip
+     */
     private String ip;
+    /**
+     * 昵称
+     */
     @NotBlank(message = "昵称不能为空!", groups = {RegisterTO.PHONE.class})
     private String nickname;
+    /**
+     * 确认密码
+     */
     @NotBlank(message = "确认密码不能为空!", groups = {RegisterTO.INVITE.class, RegisterTO.PHONE.class})
     private String rePassword;
+    /**
+     * 密码
+     */
     @NotBlank(message = "密码不能为空!", groups = {RegisterTO.INVITE.class, RegisterTO.PHONE.class})
     private String password;
+    /**
+     * 邀请码
+     */
     @NotBlank(message = "邀请码不能为空!", groups = {RegisterTO.INVITE.class})
     private String inviteCode;
-    //登录类型
+    /**
+     * 登录类型
+     */
     private LoginType loginType;
-    //会话id
+    /**
+     * 会话id
+     */
     private String sid;
 
     public String getPhone() {

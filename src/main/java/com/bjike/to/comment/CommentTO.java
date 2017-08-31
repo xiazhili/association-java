@@ -10,6 +10,8 @@ import org.hibernate.validator.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 /**
+ * 点评传输对象
+ *
  * @Author: [liguiqin]
  * @Date: [2017-06-28 14:44]
  * @Description: [ ]

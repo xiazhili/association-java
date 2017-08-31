@@ -50,7 +50,7 @@ public class MsgAct {
     /**
      * Group群聊天消息记录
      *
-     * @return
+     * @return class Msg
      * @throws ActException
      */
     @GetMapping("group/{groupId}")

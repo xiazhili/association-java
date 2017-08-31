@@ -73,6 +73,14 @@ public interface UserSer extends Ser<User, UserDTO> {
         return null;
     }
 
+    /**
+     * 上传头像
+     * @param path
+     * @throws SerException
+     */
+    default void  uploadHeadPath(String path) throws SerException {
+
+    }
 
 
 }

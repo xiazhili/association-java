@@ -23,7 +23,7 @@ import static org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload.i
  * @Copy: [com.bjike]
  */
 public class FileUtil {
-    private static final String ROOT_PATH = "/root/storage";
+    public static final String ROOT_PATH = "/root/storage";
 
 
     /**
@@ -76,14 +76,18 @@ public class FileUtil {
                         files.add(file);
                     }
                     return files;
+                }else {
+                    throw new SerException("没有检测到上传文件");
+
                 }
+            }else {
+                throw new SerException("不符合文件上传格式");
             }
 
         } else {
             throw new SerException("path存储路径不能为空");
         }
 
-        return new ArrayList<>(0);
     }
 
 

@@ -1,5 +1,7 @@
 package com.bjike.ser.user;
 
+import com.alibaba.fastjson.JSON;
+import com.bjike.common.constant.UserCommon;
 import com.bjike.common.exception.SerException;
 import com.bjike.common.util.UserUtil;
 import com.bjike.common.util.bean.BeanCopy;
@@ -9,10 +11,13 @@ import com.bjike.dto.user.UserDTO;
 import com.bjike.dto.user.UserInfoDTO;
 import com.bjike.entity.user.User;
 import com.bjike.entity.user.UserInfo;
+import com.bjike.redis.client.RedisClient;
 import com.bjike.ser.ServiceImpl;
+import com.bjike.session.UserSession;
 import com.bjike.vo.user.UserInfoVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -29,6 +34,17 @@ public class UserImpl extends ServiceImpl<User, UserDTO> implements UserSer {
     private UserRep userRep;
     @Autowired
     private UserInfoSer userInfoSer;
+    @Autowired
+    private RedisClient redis;
+
+    @Transactional
+    @Override
+    public void update(User entity) throws SerException {
+        String token = UserUtil.currentToken();
+        UserSession.put(token, entity); //同步更新缓存
+        redis.appendToMap(UserCommon.LOGIN_USER, token, JSON.toJSONString(entity), UserCommon.LOGIN_TIMEOUT);
+        super.update(entity);
+    }
 
     @Override
     public User findByUsername(String username) throws SerException {
@@ -66,6 +82,14 @@ public class UserImpl extends ServiceImpl<User, UserDTO> implements UserSer {
         dto.getConditions().add(Restrict.or("nickname", account));
         return super.findByCis(dto);
     }
+
+    @Override
+    public void uploadHeadPath(String path) throws SerException {
+        User user = super.findById(UserUtil.currentUserID());
+        user.setHeadPath(path);
+        this.update(user);
+    }
+
 }
 
 

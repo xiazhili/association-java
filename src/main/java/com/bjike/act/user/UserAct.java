@@ -4,18 +4,23 @@ import com.bjike.common.exception.ActException;
 import com.bjike.common.exception.SerException;
 import com.bjike.common.interceptor.login.LoginAuth;
 import com.bjike.common.restful.ActResult;
+import com.bjike.common.util.QRCodeUtil;
 import com.bjike.common.util.UserUtil;
 import com.bjike.common.util.bean.BeanCopy;
+import com.bjike.common.util.file.FileUtil;
 import com.bjike.entity.user.User;
 import com.bjike.ser.user.UserSer;
 import com.bjike.vo.user.UserInfoVO;
 import com.bjike.vo.user.UserVO;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.imageio.ImageIO;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.util.List;
 
 /**
@@ -53,11 +58,59 @@ public class UserAct {
     }
 
     /**
-     * 编辑用户信息
+     * 我的二维码名片
      *
      * @throws ActException
      * @version v1
-     * @return  class UserVO
+     */
+    @LoginAuth
+    @GetMapping("card")
+    public ActResult card(HttpServletResponse response) throws ActException {
+        try {
+            User user = UserUtil.currentUser();
+            if (StringUtils.isNotBlank(user.getHeadPath())) {
+                response.setContentType("image/jpeg");
+                response.setDateHeader("expries", -1);
+                response.setHeader("Cache-Control", "no-cache");
+                try {
+                    BufferedImage image = QRCodeUtil.encode(user.getId(), FileUtil.getRealPath(user.getHeadPath()), response.getOutputStream(), true);
+                    ImageIO.write(image, "JPEG", response.getOutputStream());
+                    image.flush();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    throw new ActException("生成二维码名片错误!");
+                }
+
+            } else {
+                throw new ActException("请先上传头像!");
+            }
+        } catch (SerException e) {
+            throw new ActException(e.getMessage());
+        }
+        return new ActResult("success");
+    }
+
+    @LoginAuth
+    @PostMapping("upload/headPath")
+    public ActResult uploadHeadPath(HttpServletRequest request) throws ActException {
+        try {
+            User user = UserUtil.currentUser();
+            List<File> files = FileUtil.save(request, "/" + user.getPhone() + "/head");
+            String path = StringUtils.substringAfter(files.get(0).getPath(),FileUtil.ROOT_PATH);
+            userSer.uploadHeadPath(path);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new ActException("上传头像错误!");
+        }
+        return new ActResult("success");
+    }
+
+    /**
+     * 编辑用户信息
+     *
+     * @return class UserVO
+     * @throws ActException
+     * @version v1
      */
     @LoginAuth
     @GetMapping("edit/info")
@@ -87,5 +140,6 @@ public class UserAct {
             throw new ActException(e.getMessage());
         }
     }
+
 
 }

@@ -48,6 +48,20 @@ public class UserUtil {
     }
 
     /**
+     * 获取当前用户token
+     *
+     * @return
+     * @throws SerException
+     */
+    public static String currentToken() throws SerException {
+        HttpServletRequest request = getRequest();
+        String token = request.getHeader(UserCommon.TOKEN);
+        return token;
+
+    }
+
+
+    /**
      * 获取当前用户id
      *
      * @return

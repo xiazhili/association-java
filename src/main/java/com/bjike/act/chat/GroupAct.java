@@ -24,7 +24,7 @@ import javax.servlet.http.HttpServletRequest;
  * @Version: [1.0.0]
  * @Copy: [com.bjike]
  */
-@LoginAuth //登录验证注解,header必须携带token
+@LoginAuth
 @RestController
 @RequestMapping("chat/group")
 public class GroupAct {
@@ -41,8 +41,7 @@ public class GroupAct {
      * @return class FriendVO
      * @throws ActException
      */
-    @RequestMapping(value = "member/{groupId}", method = RequestMethod.GET)
-    @ResponseBody
+    @GetMapping("member/{groupId}")
     public Result groupMember(@PathVariable String groupId) throws ActException {
         try {
             return ActResult.initialize(friendSer.groupMember(groupId));
@@ -56,8 +55,7 @@ public class GroupAct {
      * @return class Group
      * @throws ActException
      */
-    @RequestMapping(value = "user/list", method = RequestMethod.GET)
-    @ResponseBody
+    @GetMapping("user/list")
     public Result listByUser() throws ActException {
         try {
             String userId = UserUtil.currentUserID();
@@ -74,8 +72,7 @@ public class GroupAct {
      * @param to 群信息
      * @throws ActException
      */
-    @RequestMapping(value = "add", method = RequestMethod.POST)
-    @ResponseBody
+    @PostMapping("add")
     public Result add(GroupTO to) throws ActException {
         try {
             groupSer.add(to);
@@ -89,11 +86,9 @@ public class GroupAct {
     /**
      * 解散群
      * @param id 群id
-     * @return
      * @throws ActException
      */
-    @RequestMapping(value = "delete/{id}", method = RequestMethod.DELETE)
-    @ResponseBody
+    @DeleteMapping("delete/{id}")
     public Result delete(@PathVariable String id) throws ActException {
         try {
             groupSer.remove(id);
@@ -109,8 +104,7 @@ public class GroupAct {
      * @return
      * @throws ActException
      */
-    @RequestMapping(value = "edit", method = RequestMethod.PUT)
-    @ResponseBody
+    @PutMapping("edit")
     public Result edit(GroupTO to) throws ActException {
         try {
             groupSer.edit(to);

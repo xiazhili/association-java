@@ -12,8 +12,11 @@ import com.bjike.vo.user.UserInfoVO;
 import com.bjike.vo.user.UserVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 /**
  * 用户
@@ -24,7 +27,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @Version: [1.0.0]
  * @Copy: [com.bjike]
  */
-@LoginAuth
+
 @RestController
 @RequestMapping("user")
 public class UserAct {
@@ -35,10 +38,9 @@ public class UserAct {
      * 当前用户信息个人资料
      *
      * @return
-     * @throws ActException
      */
-
-    @GetMapping("/info")
+    @LoginAuth
+    @GetMapping("info")
     public ActResult userInfo() throws ActException {
         try {
             User user = UserUtil.currentUser();
@@ -49,8 +51,9 @@ public class UserAct {
         }
     }
 
+    @LoginAuth
     @GetMapping("edit/info")
-    public ActResult editInfo(UserVO userVO) throws ActException {
+    public ActResult editInfo() throws ActException {
         try {
             User user = UserUtil.currentUser();
             return ActResult.initialize(BeanCopy.copyProperties(user, UserVO.class));
@@ -59,5 +62,21 @@ public class UserAct {
         }
     }
 
+    /**
+     * 手机号昵称用户编号找人
+     *
+     * @param account 手机号昵称用户编号
+     * @return
+     * @throws ActException
+     */
+    @GetMapping("search/{account}")
+    public ActResult find(@PathVariable String account) throws ActException {
+        try {
+            List<User> users = userSer.findByAccount(account);
+            return ActResult.initialize(BeanCopy.copyProperties(users, UserVO.class));
+        } catch (SerException e) {
+            throw new ActException(e.getMessage());
+        }
+    }
 
 }

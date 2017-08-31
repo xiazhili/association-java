@@ -35,7 +35,7 @@ public class LoginAct {
     @Autowired
     private LoginSer loginSer;
 
-    @PostMapping("/login")
+    @PostMapping("login")
     public Result login(@Validated({ADD.class}) LoginTO to, BindingResult rs, HttpServletRequest request) throws ActException {
         try {
             String userAgent = request.getHeader("USER-AGENT").toLowerCase();
@@ -53,7 +53,7 @@ public class LoginAct {
     }
 
     @LoginAuth
-    @GetMapping("/logout")
+    @GetMapping("logout")
     public Result logout(HttpServletRequest request) throws ActException {
         try {
             String token = request.getHeader(UserCommon.TOKEN);

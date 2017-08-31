@@ -25,7 +25,7 @@ import java.util.List;
  * @Version: [1.0.0]
  * @Copy: [com.bjike]
  */
-@LoginAuth //登录验证注解,header必须携带token
+@LoginAuth
 @RestController
 @RequestMapping("chat/friend")
 public class FriendAct {
@@ -35,11 +35,9 @@ public class FriendAct {
     /**
      * 所有好友成员
      *
-     * @return
      * @throws ActException
      */
-    @RequestMapping(value = "list", method = RequestMethod.GET)
-    @ResponseBody
+    @GetMapping("list")
     public Result list() throws ActException {
         try {
             String userId = UserUtil.currentUserID();
@@ -54,11 +52,9 @@ public class FriendAct {
      * 好友类型查询列表
      *
      * @param type 申请类型
-     * @return
      * @throws ActException
      */
-    @RequestMapping(value = "/type/list", method = RequestMethod.GET)
-    @ResponseBody
+    @GetMapping("type/list")
     public Result findByApplyType(ApplyType type) throws ActException {
         try {
             String userId = UserUtil.currentUserID();
@@ -73,11 +69,8 @@ public class FriendAct {
      * 好友分组成员
      *
      * @param id 好友组id
-     * @return
-     * @throws ActException
      */
-    @RequestMapping(value = "/friendGroup/{id}", method = RequestMethod.GET)
-    @ResponseBody
+    @GetMapping("friendGroup/{id}")
     public Result friendGroup(@PathVariable String id) throws ActException {
         try {
             return ActResult.initialize(friendSer.friendGroup(id));
@@ -88,12 +81,8 @@ public class FriendAct {
 
     /**
      * 好友分组信息
-     *
-     * @return
-     * @throws ActException
      */
-    @RequestMapping(value = "friendGroup/info", method = RequestMethod.GET)
-    @ResponseBody
+    @GetMapping("friendGroup/info")
     public Result groupInfo() throws ActException {
         try {
             String userId = UserUtil.currentUserID();
@@ -111,8 +100,7 @@ public class FriendAct {
      * @param to 好友申请传输
      * @throws ActException
      */
-    @RequestMapping(value = "apply", method = RequestMethod.POST)
-    @ResponseBody
+    @PostMapping("apply")
     public Result apply(FriendTO to) throws ActException {
         try {
             friendSer.add(to);
@@ -130,9 +118,8 @@ public class FriendAct {
      * @return
      * @throws ActException
      */
-    @RequestMapping(value = "agree", method = RequestMethod.PUT)
-    @ResponseBody
-    public Result agree(String friendId, HttpServletRequest request) throws ActException {
+    @PutMapping("agree")
+    public Result agree(String friendId) throws ActException {
         try {
             friendSer.agree(friendId);
             return new ActResult("agree success");
@@ -146,11 +133,8 @@ public class FriendAct {
      * 拒绝好友申请
      *
      * @param friendId 好友id
-     * @return
-     * @throws ActException
      */
-    @RequestMapping(value = "refuse", method = RequestMethod.PUT)
-    @ResponseBody
+    @PutMapping("refuse")
     public Result refuse(String friendId) throws ActException {
         try {
             friendSer.refuse(friendId);
@@ -166,12 +150,9 @@ public class FriendAct {
      * 删除好友
      *
      * @param friendId 好友id
-     * @return
-     * @throws ActException
      */
-    @RequestMapping(value = "delete/{friendId}", method = RequestMethod.DELETE)
-    @ResponseBody
-    public Result delete(@PathVariable String friendId, HttpServletRequest request) throws ActException {
+    @DeleteMapping("delete/{friendId}")
+    public Result delete(@PathVariable String friendId) throws ActException {
         try {
             friendSer.delete(friendId);
             return new ActResult("delete success");
@@ -188,8 +169,7 @@ public class FriendAct {
      * @return
      * @throws ActException
      */
-    @RequestMapping(value = "remark", method = RequestMethod.PUT)
-    @ResponseBody
+    @PutMapping("remark")
     public Result editNickname(String nickname, String friendId, HttpServletRequest request) throws ActException {
         try {
             friendSer.editRemark(friendId, nickname);

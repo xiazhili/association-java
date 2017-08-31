@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @Version: [1.0.0]
  * @Copy: [com.bjike]
  */
-@LoginAuth //登录验证注解,header必须携带token
+@LoginAuth
 @RestController
 @RequestMapping("shop")
 public class ShopAct {

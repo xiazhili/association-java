@@ -35,13 +35,10 @@ public class RegisterAct {
      * 手机号注册
      * 注册,注册之前请先获取到注册验证码:AuthCodeAct
      *
-     * @param to
-     * @param rs
-     * @param request
-     * @return
+     * @param to 注册信息
      * @throws ActException
      */
-    @PostMapping("/register")
+    @PostMapping("register")
     public Result register(@Validated({RegisterTO.PHONE.class}) RegisterTO to, BindingResult rs, HttpServletRequest request) throws ActException {
         try {
             String userAgent = request.getHeader("USER-AGENT").toLowerCase();
@@ -68,7 +65,7 @@ public class RegisterAct {
      * @return
      * @throws ActException
      */
-    @PostMapping("/invite/register")
+    @PostMapping("invite/register")
     public Result inviteReg(@Validated({RegisterTO.INVITE.class}) RegisterTO to, BindingResult rs, HttpServletRequest request) throws ActException {
         try {
             to.setIp(IpUtil.getIp(request));

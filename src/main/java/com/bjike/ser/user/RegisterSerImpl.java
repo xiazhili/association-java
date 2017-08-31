@@ -3,7 +3,6 @@ package com.bjike.ser.user;
 import com.bjike.common.exception.SerException;
 import com.bjike.common.util.PasswordHash;
 import com.bjike.common.util.SeqUtil;
-import com.bjike.common.util.bean.BeanCopy;
 import com.bjike.common.util.regex.Validator;
 import com.bjike.entity.chat.Friend;
 import com.bjike.entity.user.Recommend;
@@ -44,12 +43,12 @@ public class RegisterSerImpl implements RegisterSer {
     @Override
     public String register(RegisterTO to) throws SerException {
         validRegister(to); //注册验证
-        Recommend recommend = initRecommend(to);//验证邀请码并获得推荐详情信息
-        String token = null;
+        Recommend recommend = initRecommend(to);//验证邀请码并获得推荐详情信息,如无邀请码,则为普通注册情况
+        String name = null != recommend ? recommend.getRealName() : to.getNickname();
         User user = new User();
+        user.setUsername(name);
+        user.setNickname(name);
         user.setPhone(to.getPhone());
-        user.setUsername(recommend.getRealName());
-        user.setNickname(recommend.getRealName());
         user.setNumber(SeqUtil.genNumber(userSer.findByMaxField("number", User.class)));
         try {
             user.setPassword(PasswordHash.createHash(to.getPassword()));
@@ -62,8 +61,12 @@ public class RegisterSerImpl implements RegisterSer {
             addFriend(recommend, user);//添加好友
             recommend.setRecommended(user); //设置被推荐人
             recommendSer.update(recommend);
+        }else { //简单的注册情况
+            UserInfo userInfo = new UserInfo();
+            userInfo.setUser(user);
+            userInfoSer.save(userInfo);
         }
-        token = loginUser(to);//登录用户
+        String token = loginUser(to);//登录用户
         return token;
     }
 

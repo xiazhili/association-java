@@ -22,7 +22,7 @@ import javax.servlet.http.HttpServletRequest;
  * @Version: [1.0.0]
  * @Copy: [com.bjike]
  */
-@LoginAuth //登录验证注解,header必须携带token
+@LoginAuth
 @RestController
 public class ShakeAct {
     /**
@@ -34,7 +34,7 @@ public class ShakeAct {
     @Autowired
     private ShakeSer shakeSer;
 
-    @GetMapping("/shake")
+    @GetMapping("shake")
     public Result list(String pointX, String pointY, HttpServletRequest request) throws ActException {
         try {
             User vos = shakeSer.shake(pointX, pointY);

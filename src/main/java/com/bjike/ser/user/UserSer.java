@@ -7,6 +7,8 @@ import com.bjike.entity.user.UserInfo;
 import com.bjike.ser.Ser;
 import com.bjike.vo.user.UserInfoVO;
 
+import java.util.List;
+
 /**
  * 用户业务
  *
@@ -58,6 +60,16 @@ public interface UserSer extends Ser<User, UserDTO> {
      * @throws SerException
      */
     default UserInfoVO userInfo(String userId) throws SerException {
+        return null;
+    }
+    /**
+     * 手机号,昵称,用户编号找人
+     *
+     * @param account
+     * @return
+     * @throws SerException
+     */
+    default List<User> findByAccount(String account) throws SerException {
         return null;
     }
 

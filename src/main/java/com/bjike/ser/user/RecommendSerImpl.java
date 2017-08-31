@@ -43,13 +43,12 @@ public class RecommendSerImpl extends ServiceImpl<Recommend, RecommendDTO> imple
     public List<RecommendVO> myRecommends(RecommendDTO dto) throws SerException {
         String userId = UserUtil.currentUserID();
         dto.getConditions().add(Restrict.eq("user.id", userId));
-        dto.getConditions().add(Restrict.isNotNull("user.id"));
         List<Recommend> recommends = super.findByCis(dto);
         List<RecommendVO> recommendVOS = new ArrayList<>();
         for (Recommend recommend : recommends) {
             RecommendVO vo = new RecommendVO();
             vo.setNickname(recommend.getRealName());
-            vo.setInviteCode(recommend.getRecommended().getHeadPath());
+            vo.setInviteCode(recommend.getInviteCode());
         }
         return recommendVOS;
     }
@@ -64,5 +63,17 @@ public class RecommendSerImpl extends ServiceImpl<Recommend, RecommendDTO> imple
         RecommendDTO dto = new RecommendDTO();
         dto.getConditions().add(Restrict.eq("inviteCode", code));
         return super.findOne(dto);
+    }
+
+    @Override
+    public Recommend findByUserId(String userId) throws SerException {
+        RecommendDTO dto = new RecommendDTO();
+        dto.getConditions().add(Restrict.eq("recommended.id", userId));
+        Recommend recommend = super.findOne(dto);
+        if (null != recommend) {
+            return recommend;
+        } else {
+            throw new SerException("找不到该用户推荐人!");
+        }
     }
 }

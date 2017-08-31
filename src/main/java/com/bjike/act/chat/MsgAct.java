@@ -23,7 +23,7 @@ import java.util.List;
  * @Version: [1.0.0]
  * @Copy: [com.bjike]
  */
-@LoginAuth //登录验证注解,header必须携带token
+@LoginAuth
 @RestController
 @RequestMapping("chat/msg")
 public class MsgAct {
@@ -36,8 +36,7 @@ public class MsgAct {
      * @return class Msg
      * @throws ActException
      */
-    @RequestMapping(value = "/point/{reviver}", method = RequestMethod.GET)
-    @ResponseBody
+    @GetMapping("point/{reviver}")
     public Result pointMsg(MsgDTO dto, @PathVariable String reviver, HttpServletRequest request) throws ActException {
         try {
             dto.setReviver(reviver);
@@ -54,8 +53,7 @@ public class MsgAct {
      * @return
      * @throws ActException
      */
-    @RequestMapping(value = "/group/{groupId}", method = RequestMethod.GET)
-    @ResponseBody
+    @GetMapping("group/{groupId}")
     public Result groupMsg(MsgDTO dto, @PathVariable String groupId) throws ActException {
         try {
             dto.setGroupId(groupId);

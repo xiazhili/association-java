@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
  * @Version: [1.0.0]
  * @Copy: [com.bjike]
  */
-@LoginAuth //登录验证注解,header必须携带token
+@LoginAuth
 @RestController
 @RequestMapping("chat/friend/group")
 public class FriendGroupAct {
@@ -33,8 +33,7 @@ public class FriendGroupAct {
      * @param to 好友分组数据传输
      * @throws ActException
      */
-    @RequestMapping(value = "add", method = RequestMethod.POST)
-    @ResponseBody
+    @PostMapping("add")
     public Result add(FriendGroupTO to) throws ActException {
         try {
             friendGroupSer.add(to);
@@ -51,8 +50,7 @@ public class FriendGroupAct {
      * @param id 分组id
      * @throws ActException
      */
-    @RequestMapping(value = "delete/{id}", method = RequestMethod.DELETE)
-    @ResponseBody
+    @DeleteMapping("delete")
     public Result delete(@PathVariable String id) throws ActException {
         try {
             friendGroupSer.remove(id);
@@ -68,8 +66,7 @@ public class FriendGroupAct {
      * @param to 好友分组数据传输
      * @throws ActException
      */
-    @RequestMapping(value = "edit", method = RequestMethod.PUT)
-    @ResponseBody
+    @PutMapping("edit")
     public Result edit(FriendGroupTO to) throws ActException {
         try {
             friendGroupSer.edit(to);

@@ -39,27 +39,27 @@ public class UserInfo extends BaseEntity {
     /**
      * 真实姓名
      */
-    @Column(columnDefinition = "VARCHAR(30) COMMENT '真实姓名' ", nullable = false)
+    @Column(columnDefinition = "VARCHAR(30) COMMENT '真实姓名' ")
     private String realName;
     /**
      * 联系号码
      */
-    @Column(columnDefinition = "VARCHAR(20) COMMENT '联系号码' ", nullable = false)
+    @Column(columnDefinition = "VARCHAR(20) COMMENT '联系号码' ")
     private String telephone;
     /**
      * 兴趣
      */
-    @Column(columnDefinition = "VARCHAR(256) COMMENT '兴趣' ", nullable = false)
+    @Column(columnDefinition = "VARCHAR(256) COMMENT '兴趣' ")
     private String interest;
     /**
      * 地址
      */
-    @Column(columnDefinition = "VARCHAR(256) COMMENT '地址' ", nullable = false)
+    @Column(columnDefinition = "VARCHAR(256) COMMENT '地址' ")
     private String address;
     /**
      * 关系
      */
-    @Column(columnDefinition = "TINYINT(1) DEFAULT 0 COMMENT '关系' ", nullable = false)
+    @Column(columnDefinition = "TINYINT(1) DEFAULT 0 COMMENT '关系' ")
     private RelationshipType relationshipType;
     /**
      * 生日
@@ -84,7 +84,7 @@ public class UserInfo extends BaseEntity {
     /**
      * 学历
      */
-    @Column(columnDefinition = "VARCHAR(50) COMMENT '学历' ", nullable = false)
+    @Column(columnDefinition = "VARCHAR(50) COMMENT '学历' ")
     private String education;
     /**
      * 公司

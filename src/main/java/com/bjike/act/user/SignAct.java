@@ -31,7 +31,13 @@ public class SignAct {
     @Autowired
     private SignSer signSer;
 
-    @PostMapping("/sign")
+    /**
+     * 签到
+     *
+     * @return
+     * @throws ActException
+     */
+    @PostMapping("sign")
     public ActResult sign() throws ActException {
         try {
             boolean rs = signSer.sign();
@@ -44,10 +50,10 @@ public class SignAct {
     /**
      * 签到列表
      *
-     * @return
-     * @throws ActException
+     * @param startDate 开始日期
+     * @param endDate   结束日期
      */
-    @GetMapping("/signList")
+    @GetMapping("signList")
     public ActResult signList(String startDate, String endDate) throws ActException {
         try {
             List<Sign> signs = signSer.signList(startDate, endDate);

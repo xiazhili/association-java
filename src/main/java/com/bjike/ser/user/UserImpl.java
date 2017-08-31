@@ -1,9 +1,6 @@
 package com.bjike.ser.user;
 
-import com.alibaba.fastjson.JSON;
-import com.bjike.common.constant.UserCommon;
 import com.bjike.common.exception.SerException;
-import com.bjike.common.util.PasswordHash;
 import com.bjike.common.util.UserUtil;
 import com.bjike.common.util.bean.BeanCopy;
 import com.bjike.dao.user.UserRep;
@@ -12,13 +9,12 @@ import com.bjike.dto.user.UserDTO;
 import com.bjike.dto.user.UserInfoDTO;
 import com.bjike.entity.user.User;
 import com.bjike.entity.user.UserInfo;
-import com.bjike.redis.client.RedisClient;
 import com.bjike.ser.ServiceImpl;
-import com.bjike.session.UserSession;
 import com.bjike.vo.user.UserInfoVO;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * @Author: [liguiqin]
@@ -54,12 +50,21 @@ public class UserImpl extends ServiceImpl<User, UserDTO> implements UserSer {
     public UserInfoVO userInfo(String userId) throws SerException {
         UserInfoVO userInfoVO = new UserInfoVO();
         UserInfoDTO dto = new UserInfoDTO();
-        dto.getConditions().add(Restrict.eq("user.id",userId));
-        UserInfo info =  userInfoSer.findOne(dto);
+        dto.getConditions().add(Restrict.eq("user.id", userId));
+        UserInfo info = userInfoSer.findOne(dto);
         User user = UserUtil.currentUser();
-        BeanCopy.copyProperties(user,userInfoVO);
-        BeanCopy.copyProperties(info,userInfoVO,"user");
+        BeanCopy.copyProperties(user, userInfoVO);
+        BeanCopy.copyProperties(info, userInfoVO, "user");
         return userInfoVO;
+    }
+
+    @Override
+    public List<User> findByAccount(String account) throws SerException {
+        UserDTO dto = new UserDTO();
+        dto.getConditions().add(Restrict.eq("phone", account));
+        dto.getConditions().add(Restrict.or("number", account));
+        dto.getConditions().add(Restrict.or("nickname", account));
+        return super.findByCis(dto);
     }
 }
 

@@ -4,6 +4,8 @@ buildscript {
     }
     repositories {
         mavenCentral()
+        mavenLocal()
+        jcenter()
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
@@ -11,12 +13,12 @@ buildscript {
 }
 
 apply plugin: 'java'
-apply plugin: 'eclipse'
 apply plugin: 'maven'
 apply plugin: 'org.springframework.boot'
-version = '0.0.1-SNAPSHOT'
+version = '1.0'
 apply from: 'config.gradle'
 sourceCompatibility = 1.8
+targetCompatibility = 1.8
 
 
 jar {
@@ -37,6 +39,7 @@ build.dependsOn copyJars
 
 repositories {
     mavenCentral()
+    mavenLocal()
 }
 
 ext {
@@ -44,6 +47,7 @@ ext {
 }
 
 dependencies {
+    testCompile('com.dounine.japi:client:1.0')
     testCompile('org.springframework.boot:spring-boot-starter-test')
     compile('org.springframework.boot:spring-boot-starter-web')
     compile('org.springframework.boot:spring-boot-starter-websocket')
@@ -62,6 +66,5 @@ dependencies {
     // poi
     compile group: 'org.apache.poi', name: 'poi', version: "$poi_version"
     compile group: 'org.apache.poi', name: 'poi-ooxml', version: "$poi_version"
-
 }
 

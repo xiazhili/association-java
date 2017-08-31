@@ -30,11 +30,10 @@ public class PwdAct {
     /**
      * 找回密码
      *
-     * @param phone
-     * @return
+     * @param phone 手机
      * @throws ActException
      */
-    @PutMapping("/findPwd/{phone}")
+    @PutMapping("findPwd/{phone}")
     public ActResult findPwd(@PathVariable String phone, String password, String rePassword) throws ActException {
         try {
             if (password.equals(rePassword)) {
@@ -58,7 +57,7 @@ public class PwdAct {
      * @throws ActException
      */
     @LoginAuth
-    @PutMapping("/editPwd")
+    @PutMapping("editPwd")
     public ActResult editPwd(String oldPassword, String password, String rePassword) throws ActException {
         try {
             if (password.equals(rePassword)) {

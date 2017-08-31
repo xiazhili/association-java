@@ -43,7 +43,7 @@ public class RecommendAct {
      * @throws ActException
      */
     @LoginAuth
-    @PostMapping("/add")
+    @PostMapping("add")
     public ActResult add(@Validated({ADD.class}) RecommendTO to, BindingResult result) throws ActException {
         try {
             String code = recommendSer.add(to);
@@ -60,7 +60,7 @@ public class RecommendAct {
      * @throws ActException
      */
     @LoginAuth
-    @GetMapping("/list")
+    @GetMapping("list")
     public ActResult list(RecommendDTO dto) throws ActException {
         try {
             List<RecommendVO> recommendList = recommendSer.myRecommends(dto);
@@ -78,7 +78,7 @@ public class RecommendAct {
      * @return
      * @throws ActException
      */
-    @GetMapping("/qr/{code}")
+    @GetMapping("qr/{code}")
     public ActResult QRCode(@PathVariable String code, HttpServletResponse response) throws ActException {
         try {
             response.setContentType("image/jpeg");
@@ -101,7 +101,7 @@ public class RecommendAct {
      * @return
      * @throws ActException
      */
-    @GetMapping("/validate/{code}")
+    @GetMapping("validate/{code}")
     public ActResult validate(@PathVariable String code) throws ActException {
         try {
             return ActResult.initialize(recommendSer.validate(code));

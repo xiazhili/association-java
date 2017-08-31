@@ -14,7 +14,10 @@ import com.bjike.session.AudioSession;
 import com.bjike.session.ChatSession;
 import com.bjike.type.chat.MsgType;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +32,7 @@ import java.util.Map;
  * @Version: [1.0.0]
  * @Copy: [com.bjike]
  */
-@LoginAuth //登录验证注解,header必须携带token
+@LoginAuth
 @RestController
 @RequestMapping("chat")
 public class ChatAct {
@@ -41,8 +44,7 @@ public class ChatAct {
      *
      * @return
      */
-    @RequestMapping(value = "online", method = RequestMethod.GET)
-    @ResponseBody
+    @GetMapping("online")
     public Result online() {
         List<Client> chatClients = new ArrayList<>();
         Client c = new Client();
@@ -52,8 +54,7 @@ public class ChatAct {
         return ActResult.initialize(chatClients);
     }
 
-    @RequestMapping(value = "quit/{userId}", method = RequestMethod.GET)
-    @ResponseBody
+    @GetMapping("quit/{userId}")
     public Result quit(@PathVariable String userId) throws ActException {
         try {
             Msg msg = new Msg();
@@ -70,8 +71,7 @@ public class ChatAct {
 
     }
 
-    @RequestMapping(value = "join/audio/{sender}/{reviver}", method = RequestMethod.GET)
-    @ResponseBody
+    @GetMapping("join/audio/{sender}/{reviver}")
     public Result join(@PathVariable String sender, @PathVariable String reviver) throws ActException {
         AudioClient client = AudioClientSession.get(sender);
         if (null != client) {
@@ -87,8 +87,7 @@ public class ChatAct {
         return new ActResult("audio is over");
     }
 
-    @RequestMapping(value = "quit/audio/{userId}", method = RequestMethod.GET)
-    @ResponseBody
+    @GetMapping("quit/audio/{userId}")
     public Result quitAudio(@PathVariable String userId) throws ActException {
         AudioClientSession.remove(userId);
         AudioSession.remove(userId);

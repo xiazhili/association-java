@@ -54,7 +54,8 @@ public class CommentAct {
     public Result add(@Validated(ADD.class) CommentTO to, BindingResult result, HttpServletRequest request) throws ActException {
         try {
             String userId = UserUtil.currentUserID();
-            List<File> files = FileUtil.save(request, getCommentPath(userId));
+            String path = "/" + userId + "/comment/" + DateUtil.dateToString(LocalDate.now()).replaceAll("-", "");
+            List<File> files = FileUtil.save(request,path);
             Comment comment = commentSer.add(to, files);
             CommentVO vo = BeanCopy.copyProperties(comment, CommentVO.class);
             return ActResult.initialize(vo);
@@ -184,7 +185,8 @@ public class CommentAct {
     public Result uploadImg(@PathVariable String commentId, HttpServletRequest request) throws ActException {
         try {
             String userId = UserUtil.currentUserID();
-            List<File> files = FileUtil.save(request, getCommentPath(userId));
+            String path = "/" + userId + "/comment/" + DateUtil.dateToString(LocalDate.now()).replaceAll("-", "");
+            List<File> files = FileUtil.save(request, path);
             commentSer.uploadImg(commentId, files);
             return new ActResult("success");
         } catch (SerException e) {
@@ -211,14 +213,6 @@ public class CommentAct {
 
     }
 
-    /**
-     * 评论图片保存路径
-     *
-     * @param userId 用户
-     */
-    private String getCommentPath(String userId) {
-        return "/" + userId + "/comment/" + DateUtil.dateToString(LocalDate.now()).replaceAll("-", "");
-    }
 
 
 }

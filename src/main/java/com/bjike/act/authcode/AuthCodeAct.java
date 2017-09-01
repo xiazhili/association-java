@@ -33,7 +33,7 @@ public class AuthCodeAct {
     /**
      * 生成注册验证码
      *
-     * @return {name:'testName',type:'string',defaultValue:'',description:'图片流.'}
+     * @return {name:'data',type:'string',defaultValue:'',description:'图片流.'}
      * @version v1
      * @des 登录找回密码注册, 验证码图片流
      */

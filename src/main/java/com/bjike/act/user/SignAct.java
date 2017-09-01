@@ -4,8 +4,10 @@ import com.bjike.common.exception.ActException;
 import com.bjike.common.exception.SerException;
 import com.bjike.common.interceptor.login.LoginAuth;
 import com.bjike.common.restful.ActResult;
+import com.bjike.common.util.bean.BeanCopy;
 import com.bjike.entity.user.Sign;
 import com.bjike.ser.user.SignSer;
+import com.bjike.vo.user.SignVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-
+//todo api 生成错误
 /**
  * 签到
  *
@@ -51,14 +53,15 @@ public class SignAct {
      *
      * @param startDate 开始日期
      * @param endDate   结束日期
-     * @return class Sign
+     * @return class SignVO
      * @version v1
      */
     @GetMapping("sign/list")
     public ActResult signList(String startDate, String endDate) throws ActException {
         try {
             List<Sign> signs = signSer.signList(startDate, endDate);
-            return ActResult.initialize(signs);
+            List<SignVO> signVOS = BeanCopy.copyProperties(signs, SignVO.class);
+            return ActResult.initialize(signVOS);
         } catch (SerException e) {
             throw new ActException(e.getMessage());
         }

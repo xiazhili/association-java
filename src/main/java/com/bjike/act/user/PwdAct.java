@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
+//todo api 生成错误
 /**
  * 密码
  *
@@ -33,6 +33,8 @@ public class PwdAct {
      * 找回密码
      *
      * @param phone 手机
+     * @param password 密码
+     * @param rePassword 重复密码
      * @throws ActException
      * @version v1
      */
@@ -56,7 +58,6 @@ public class PwdAct {
      * @param oldPassword 旧密码
      * @param password    新密码
      * @param rePassword  确认新密码
-     * @throws ActException
      * @version v1
      */
     @LoginAuth

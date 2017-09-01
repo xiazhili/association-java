@@ -32,7 +32,7 @@ import java.util.List;
  * @Version: [1.0.0]
  * @Copy: [com.bjike]
  */
-
+//todo api 生成错误
 @RestController
 @RequestMapping("user")
 public class UserAct {
@@ -145,7 +145,7 @@ public class UserAct {
      * 手机号昵称用户编号找人
      *
      * @param account 手机号昵称用户编号
-     * @return class User
+     * @return class UserVO
      * @throws ActException
      * @version v1
      */
@@ -153,7 +153,8 @@ public class UserAct {
     public ActResult find(@PathVariable String account) throws ActException {
         try {
             List<User> users = userSer.findByAccount(account);
-            return ActResult.initialize(BeanCopy.copyProperties(users, UserVO.class));
+            List<UserVO> userVOS = BeanCopy.copyProperties(users, UserVO.class);
+            return ActResult.initialize(userVOS);
         } catch (SerException e) {
             throw new ActException(e.getMessage());
         }

@@ -2,6 +2,7 @@ package com.bjike.vo.user;
 
 import com.bjike.vo.BaseVO;
 
+import javax.persistence.Column;
 import java.time.LocalDate;
 
 /**
@@ -20,11 +21,24 @@ public class SignVO extends BaseVO{
      */
     private String signDate;
 
+    /**
+     * 签到次数
+     */
+    private Integer signCount = 0;
+
     public String getSignDate() {
         return signDate;
     }
 
     public void setSignDate(String signDate) {
         this.signDate = signDate;
+    }
+
+    public Integer getSignCount() {
+        return signCount;
+    }
+
+    public void setSignCount(Integer signCount) {
+        this.signCount = signCount;
     }
 }

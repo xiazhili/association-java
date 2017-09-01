@@ -29,13 +29,13 @@ public class Sign extends BaseEntity {
      * 签到日期
      */
     @Column(name = "signDate", columnDefinition = "DATE COMMENT '签到日期' ", nullable = false)
-    protected LocalDate signDate = LocalDate.now();
+    private LocalDate signDate = LocalDate.now();
 
     /**
      * 签到次数
      */
     @Column(name = "signCount", columnDefinition = "int COMMENT '连续签到次数' ", nullable = false)
-    protected Integer signCount = 0;
+    private Integer signCount = 0;
 
 
     public User getUser() {

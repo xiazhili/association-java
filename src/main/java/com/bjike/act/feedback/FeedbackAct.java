@@ -37,7 +37,7 @@ public class FeedbackAct {
      * 添加反馈
      *
      * @param feedbackTO 反馈内容
-     * @return class ShopVO
+     * @return class FeedbackVO
      * @throws Exception
      * @version v1
      */

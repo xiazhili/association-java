@@ -32,7 +32,7 @@ public class SignSerImpl extends ServiceImpl<Sign, SignDTO> implements SignSer {
 
     @Transactional
     @Override
-    public Boolean sign() throws SerException {
+    public Integer sign() throws SerException {
         LocalDate today = LocalDate.now();
         String date = DateUtil.dateToString(today);
         SignDTO dto = new SignDTO();
@@ -60,7 +60,7 @@ public class SignSerImpl extends ServiceImpl<Sign, SignDTO> implements SignSer {
             sign.setUser(user);
             super.save(sign);
             setExperience(userId, signCount);
-            return true;
+            return signCount; //返回签到经验
         }
     }
 

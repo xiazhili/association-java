@@ -31,6 +31,7 @@ public class ConfigBean {
         LoginIntercept.userSer = userSer;
         ChatServer.chatSer = chatSer;
         UserUtil.redis = redis;
+        UserUtil.userSer =userSer;
         return new Object();
     }
 }

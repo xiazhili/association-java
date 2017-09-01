@@ -3,8 +3,8 @@ package com.bjike.ser.user;
 import com.bjike.common.exception.SerException;
 import com.bjike.dto.user.UserDTO;
 import com.bjike.entity.user.User;
-import com.bjike.entity.user.UserInfo;
 import com.bjike.ser.Ser;
+import com.bjike.to.user.VIPApplyTO;
 import com.bjike.vo.user.UserInfoVO;
 
 import java.util.List;
@@ -62,6 +62,7 @@ public interface UserSer extends Ser<User, UserDTO> {
     default UserInfoVO userInfo(String userId) throws SerException {
         return null;
     }
+
     /**
      * 手机号,昵称,用户编号找人
      *
@@ -75,12 +76,23 @@ public interface UserSer extends Ser<User, UserDTO> {
 
     /**
      * 上传头像
+     *
      * @param path
      * @throws SerException
      */
-    default void  uploadHeadPath(String path) throws SerException {
+    default void uploadHeadPath(String path) throws SerException {
 
     }
 
+    /**
+     * vip申请
+     *
+     * @param to
+     * @throws SerException
+     */
+    default Boolean vipApply(VIPApplyTO to) throws SerException {
+        return null;
+
+    }
 
 }

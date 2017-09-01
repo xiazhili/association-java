@@ -22,7 +22,7 @@ public interface SignSer  extends Ser<Sign, SignDTO> {
      * @return
      * @throws
      */
-    default Boolean sign( ) throws SerException {
+    default Integer sign( ) throws SerException {
         return null;
     }
     /**

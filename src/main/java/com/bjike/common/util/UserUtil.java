@@ -5,6 +5,7 @@ import com.bjike.common.constant.UserCommon;
 import com.bjike.common.exception.SerException;
 import com.bjike.entity.user.User;
 import com.bjike.redis.client.RedisClient;
+import com.bjike.ser.user.UserSer;
 import com.bjike.session.UserSession;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -23,15 +24,15 @@ import javax.servlet.http.HttpServletRequest;
 public class UserUtil {
 
     public static RedisClient redis;
-
+    public static UserSer userSer;
     /**
-     * 获取当前用户
+     * 获取当前用户,默认从缓存获取
      *
      * @return
      * @throws SerException
      */
     public static User currentUser(String token) throws SerException {
-        return getUser(token);
+        return getUser(token,true);
     }
 
     /**
@@ -40,10 +41,22 @@ public class UserUtil {
      * @return
      * @throws SerException
      */
+    public static User currentUser(boolean cache) throws SerException {
+        HttpServletRequest request = getRequest();
+        String token = request.getHeader(UserCommon.TOKEN);
+        return getUser(token,cache);
+
+    }
+    /**
+     * 获取当前用户,默认从缓存获取
+     *
+     * @return
+     * @throws SerException
+     */
     public static User currentUser() throws SerException {
         HttpServletRequest request = getRequest();
         String token = request.getHeader(UserCommon.TOKEN);
-        return getUser(token);
+        return getUser(token,true);
 
     }
 
@@ -71,17 +84,23 @@ public class UserUtil {
         return currentUser().getId();
     }
 
-    private static User getUser(String token) throws SerException {
+    private static User getUser(String token,boolean cache) throws SerException {
         if (null != token) {
             User loginUser = UserSession.get(token);
             if (null != loginUser) {
+                if(!cache){
+                    return userSer.findById(loginUser.getId());
+                }
                 return loginUser;
             } else { //redis 获取
                 String loginUser_str = redis.getMap(UserCommon.LOGIN_USER, token.toString());
                 if (StringUtils.isNotBlank(loginUser_str)) {
                     loginUser = JSON.parseObject(loginUser_str, User.class);
                     UserSession.put(token.toString(), loginUser); //设置到session
-                    return loginUser;
+                    if(!cache){
+                        return userSer.findById(loginUser.getId());
+                    }
+
                 }
             }
             throw new SerException("登录已失效!");

@@ -14,6 +14,8 @@ import com.bjike.entity.user.UserInfo;
 import com.bjike.redis.client.RedisClient;
 import com.bjike.ser.ServiceImpl;
 import com.bjike.session.UserSession;
+import com.bjike.to.user.VIPApplyTO;
+import com.bjike.type.user.UserType;
 import com.bjike.vo.user.UserInfoVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -85,11 +87,29 @@ public class UserImpl extends ServiceImpl<User, UserDTO> implements UserSer {
 
     @Override
     public void uploadHeadPath(String path) throws SerException {
-        User user = super.findById(UserUtil.currentUserID());
+        User user = UserUtil.currentUser(false);
         user.setHeadPath(path);
         this.update(user);
     }
 
+    @Override
+    public Boolean vipApply(VIPApplyTO to) throws SerException {
+        User user = UserUtil.currentUser(false);
+        if (user.getUserType().equals(UserType.ORDINARY)) {
+            if (user.getPhone().equals(to.getPhone())) {
+                UserInfo userInfo = userInfoSer.findByUserId(user.getId());
+                BeanCopy.copyProperties(to, userInfo);
+                userInfoSer.update(userInfo);
+                user.setUserType(UserType.PERSONAL_VIP);
+                super.update(user);
+            } else {
+                throw new SerException("注册手机填写错误");
+            }
+        } else {
+            throw new SerException("您已是vip用户");
+        }
+        return null;
+    }
 }
 
 

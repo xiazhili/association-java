@@ -41,8 +41,8 @@ public class SignAct {
     @PostMapping("sign")
     public ActResult sign() throws ActException {
         try {
-            boolean rs = signSer.sign();
-            return ActResult.initialize(rs);
+            int exp = signSer.sign();
+            return ActResult.initialize(exp);
         } catch (SerException e) {
             throw new ActException(e.getMessage());
         }

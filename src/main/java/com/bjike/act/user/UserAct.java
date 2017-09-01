@@ -150,7 +150,7 @@ public class UserAct {
      * @version v1
      */
     @GetMapping("search/{account}")
-    public ActResult find(@PathVariable String account) throws ActException {
+    public ActResult search(@PathVariable String account) throws ActException {
         try {
             List<User> users = userSer.findByAccount(account);
             List<UserVO> userVOS = BeanCopy.copyProperties(users, UserVO.class);

@@ -64,7 +64,7 @@ public class PwdAct {
     public ActResult editPwd(String oldPassword, String password, String rePassword) throws ActException {
         try {
             if (password.equals(rePassword)) {
-                boolean pass = false;
+                boolean pass ;
                 User user = UserUtil.currentUser();
                 try {
                     pass = PasswordHash.validatePassword(oldPassword, user.getPassword());

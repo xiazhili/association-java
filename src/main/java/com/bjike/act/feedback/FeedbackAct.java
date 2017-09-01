@@ -55,8 +55,8 @@ public class FeedbackAct {
     /**
      * 我的反馈
      *
-     * @return
-     * @throws ActException
+     * @return class FeedbackVO
+     * @version v1
      */
     @LoginAuth
     @GetMapping("list")

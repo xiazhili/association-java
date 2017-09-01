@@ -8,6 +8,8 @@ import javax.persistence.*;
 
 
 /**
+ * 点评
+ *
  * @Author: [liguiqin]
  * @Date: [2017-06-28 14:26]
  * @Description: [ ]
@@ -42,7 +44,7 @@ public class Comment extends BaseEntity {
     /**
      * 点赞量
      */
-    @Column(columnDefinition = "INT(8) default 0  COMMENT '点赞量' " ,insertable = false)
+    @Column(columnDefinition = "INT(8) default 0  COMMENT '点赞量' ", insertable = false)
     private Integer likes;
     /**
      * 可见范围

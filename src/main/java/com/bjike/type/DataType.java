@@ -2,9 +2,11 @@ package com.bjike.type;
 
 
 /**
+ * jpa数据类型映射
+ *
  * @Author: [liguiqin]
  * @Date: [2016-11-23 15:47]
- * @Description: [jpa数据类型映射]
+ * @Description: []
  * @Version: [1.0.0]
  * @Copy: [com.bjike]
  */

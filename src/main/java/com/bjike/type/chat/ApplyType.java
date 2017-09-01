@@ -1,6 +1,8 @@
 package com.bjike.type.chat;
 
 /**
+ * 申请类型
+ *
  * @Author: [liguiqin]
  * @Date: [2017-07-22 09:46]
  * @Description: [ ]

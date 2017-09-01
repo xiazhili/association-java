@@ -38,7 +38,8 @@ public class LoginAct {
     /**
      * 登录
      *
-     * @param to      登录信息
+     * @param to 登录信息
+     * @return {name:'data',type:'string',defaultValue:'',description:'token.'}
      * @throws ActException
      * @version v1
      */
@@ -62,6 +63,7 @@ public class LoginAct {
     /**
      * 退出登录
      *
+     * @return {name:'data',type:'string',defaultValue:'',description:'success.'}
      * @throws ActException
      * @version v1
      */

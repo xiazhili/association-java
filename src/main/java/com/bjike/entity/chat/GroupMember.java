@@ -6,6 +6,7 @@ import javax.persistence.*;
 
 /**
  * 群成员
+ *
  * @Author: [liguiqin]
  * @Date: [2017-07-19 15:11]
  * @Description: [ ]

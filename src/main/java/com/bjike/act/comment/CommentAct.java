@@ -46,6 +46,7 @@ public class CommentAct {
      * 添加点评
      *
      * @param to 点评内容
+     * @return class CommentVO
      * @throws Exception
      * @version v1
      */
@@ -68,7 +69,6 @@ public class CommentAct {
      * 店铺点评列表
      *
      * @return class CommentVO
-     * @throws Exception
      * @version v1
      */
     @GetMapping("list")
@@ -88,7 +88,7 @@ public class CommentAct {
      * 店铺点评量
      *
      * @param pointId 点评地址id
-     * @throws Exception
+     * @return {name:'data',type:'int',defaultValue:'',description:'点评量.'}
      * @version v1
      */
     @GetMapping("count")
@@ -105,7 +105,7 @@ public class CommentAct {
      * 点评点赞
      *
      * @param commentId 点评id
-     * @throws Exception
+     *                  {name:'data',type:'string',defaultValue:'',description:'success.'}
      * @version v1
      */
     @PutMapping("like/{commentId}")
@@ -121,6 +121,7 @@ public class CommentAct {
 
     /**
      * 点评取消点赞
+     * {name:'data',type:'string',defaultValue:'',description:'success.'}
      *
      * @param commentId 点评id
      * @version v1
@@ -139,6 +140,7 @@ public class CommentAct {
 
     /**
      * 删除点评
+     * {name:'data',type:'string',defaultValue:'',description:'success.'}
      *
      * @param commentId 点评id
      * @version v1
@@ -157,6 +159,7 @@ public class CommentAct {
 
     /**
      * 店铺总评分
+     * {name:'data',type:'ScoreType',defaultValue:'',description:'ScoreType.'}
      *
      * @param pointId 店铺地址id
      * @version v1
@@ -172,6 +175,7 @@ public class CommentAct {
 
     /**
      * 上传
+     * {name:'data',type:'string',defaultValue:'',description:'success.'}
      *
      * @param commentId 点评id
      * @version v1

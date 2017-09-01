@@ -59,6 +59,7 @@ public class RecommendAct {
      *
      * @param code 推荐码
      * @throws ActException
+     * @return {name:'data',type:'bytes',defaultValue:'',description:'图片流.'}
      * @version v1
      */
     @GetMapping("qr/{code}")
@@ -81,6 +82,7 @@ public class RecommendAct {
      * 通过推荐码获取二维码
      *
      * @param code 推荐码
+     * @return {name:'data',type:'int',defaultValue:'',description:'推荐码.'}
      * @throws ActException
      * @version v1
      */

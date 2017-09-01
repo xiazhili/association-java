@@ -7,9 +7,11 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 /**
+ * 店铺
+ *
  * @Author: [liguiqin]
  * @Date: [2017-06-28 14:01]
- * @Description: [ 店铺]
+ * @Description: [ ]
  * @Version: [1.0.0]
  * @Copy: [com.bjike]
  */

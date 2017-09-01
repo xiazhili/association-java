@@ -7,7 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 /**
- * 朋友分组
+ * 好友分组
  *
  * @Author: [liguiqin]
  * @Date: [2017-07-19 15:07]

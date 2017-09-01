@@ -33,8 +33,7 @@ public class SignAct {
 
     /**
      * 签到
-     *
-     * @throws ActException
+     * @return {name:'data',type:'boolean',defaultValue:'',description:'true/false.'}
      * @version v1
      */
     @PostMapping("sign")

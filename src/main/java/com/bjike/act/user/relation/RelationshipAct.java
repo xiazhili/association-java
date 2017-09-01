@@ -29,8 +29,9 @@ public class RelationshipAct {
 
     /**
      * 后台找人
-     * @version v1
+     *
      * @param name 昵称
+     * @version v1
      * @desc 五种途径可找到该人
      */
     @RequestMapping("search/{name}")
@@ -42,7 +43,6 @@ public class RelationshipAct {
             throw new ActException(e.getMessage());
         }
     }
-
 
 
 }

@@ -1,6 +1,8 @@
 package com.bjike.type.comment;
 
 /**
+ * 可见范围
+ *
  * @Author: [liguiqin]
  * @Date: [2017-06-29 11:38]
  * @Description: [ ]

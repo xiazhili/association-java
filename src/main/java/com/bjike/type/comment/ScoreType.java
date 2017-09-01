@@ -1,6 +1,8 @@
 package com.bjike.type.comment;
 
 /**
+ * 评分类型
+ *
  * @Author: [liguiqin]
  * @Date: [2017-06-28 14:31]
  * @Description: [ ]
@@ -39,16 +41,28 @@ public enum ScoreType {
         return this.code;
     }
 
-    public static ScoreType getCode(int code){
+    public static ScoreType getCode(int code) {
         ScoreType type = null;
-        switch (code){
-            case 0:type=ScoreType.FIFTH;break;
-            case 1:type=ScoreType.SECOND;break;
-            case 2:type=ScoreType.THIRD;break;
-            case 3:type=ScoreType.FOURTH;break;
-            case 4:type=ScoreType.FIFTH;break;
-            default: type=ScoreType.FIFTH;break;
+        switch (code) {
+            case 0:
+                type = ScoreType.FIFTH;
+                break;
+            case 1:
+                type = ScoreType.SECOND;
+                break;
+            case 2:
+                type = ScoreType.THIRD;
+                break;
+            case 3:
+                type = ScoreType.FOURTH;
+                break;
+            case 4:
+                type = ScoreType.FIFTH;
+                break;
+            default:
+                type = ScoreType.FIFTH;
+                break;
         }
-        return  type;
+        return type;
     }
 }

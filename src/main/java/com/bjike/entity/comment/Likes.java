@@ -5,6 +5,8 @@ import com.bjike.entity.BaseEntity;
 import javax.persistence.*;
 
 /**
+ * 点赞
+ *
  * @Author: [liguiqin]
  * @Date: [2017-07-01 16:25]
  * @Description: [ ]

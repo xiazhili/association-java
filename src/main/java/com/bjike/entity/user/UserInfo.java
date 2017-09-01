@@ -6,6 +6,8 @@ import com.bjike.type.user.RelationshipType;
 import javax.persistence.*;
 
 /**
+ * 用户详情
+ *
  * @Author: [liguiqin]
  * @Date: [2017-08-23 09:36]
  * @Description: [ ]

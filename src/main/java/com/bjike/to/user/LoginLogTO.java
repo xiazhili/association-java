@@ -5,7 +5,7 @@ import com.bjike.to.BaseTO;
 import com.bjike.type.user.LoginType;
 
 /**
- * 登录日志传输对象
+ * 登录日志
  *
  * @Author: [liguiqin]
  * @Date: [2017-03-11 17:08]

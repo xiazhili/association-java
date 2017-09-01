@@ -33,10 +33,10 @@ public class RegisterAct {
 
     /**
      * 手机号注册
-     * 注册之前请先获取到注册验证码:AuthCodeAct
      *
      * @param to 注册信息
-     * @throws ActException
+     * @return {name:'data',type:'string',defaultValue:'',description:'success.'}
+     * @des 注册之前请先获取到注册验证码:AuthCodeAct
      * @version v1
      */
     @PostMapping("register")
@@ -61,8 +61,8 @@ public class RegisterAct {
      * 邀请码注册
      *
      * @param to 注册信息
+     * @return {name:'data',type:'string',defaultValue:'',description:'success.'}
      * @version v1
-     * @throws ActException
      */
     @PostMapping("invite/register")
     public Result inviteReg(@Validated({RegisterTO.INVITE.class}) RegisterTO to, BindingResult rs, HttpServletRequest request) throws ActException {

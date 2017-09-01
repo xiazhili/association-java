@@ -5,6 +5,8 @@ import com.bjike.entity.BaseEntity;
 import javax.persistence.*;
 
 /**
+ * 点评图片
+ *
  * @Author: [liguiqin]
  * @Date: [2017-06-28 17:08]
  * @Description: [ ]
@@ -13,7 +15,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "comment_picture")
-public class Picture extends BaseEntity{
+public class Picture extends BaseEntity {
     /**
      * 点评
      */

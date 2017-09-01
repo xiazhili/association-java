@@ -7,6 +7,7 @@ import java.time.LocalDate;
 
 /**
  * 签到
+ *
  * @Author: [liguiqin]
  * @Date: [2017-08-29 17:26]
  * @Description: [ ]
@@ -34,7 +35,7 @@ public class Sign extends BaseEntity {
      * 签到次数
      */
     @Column(name = "signCount", columnDefinition = "int COMMENT '连续签到次数' ", nullable = false)
-    protected Integer signCount =0;
+    protected Integer signCount = 0;
 
 
     public User getUser() {

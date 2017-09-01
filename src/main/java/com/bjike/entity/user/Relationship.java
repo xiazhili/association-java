@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * 好友关系
+ *
  * @Author: [liguiqin]
  * @Date: [2017-07-10 14:43]
  * @Description: [ ]
@@ -39,7 +41,7 @@ public class Relationship extends BaseEntity {
      * 状态
      */
     @Column(columnDefinition = "TINYINT(1) DEFAULT 0 COMMENT '状态' ", nullable = false, insertable = false)
-    private Status status=Status.CONGEAL;
+    private Status status = Status.CONGEAL;
 
     /**
      * 关系链列表

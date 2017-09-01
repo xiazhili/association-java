@@ -3,6 +3,8 @@ package com.bjike.entity.chat;
 import javax.websocket.Session;
 
 /**
+ * 客户端
+ *
  * @Author: [liguiqin]
  * @Date: [2017-07-19 14:01]
  * @Description: [ ]

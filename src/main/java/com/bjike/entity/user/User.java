@@ -12,6 +12,8 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 /**
+ * 用户
+ *
  * @Author: [liguiqin]
  * @Date: [2017-06-28 15:13]
  * @Description: [ ]

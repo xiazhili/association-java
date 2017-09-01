@@ -15,12 +15,27 @@ import org.hibernate.validator.constraints.NotBlank;
  * @Copy: [com.bjike]
  */
 public class LoginTO {
+    /**
+     * 登录帐号
+     */
     @NotBlank(message = "登录帐号不能为空!", groups = {ADD.class, EDIT.class})
     private String account;
+    /**
+     * 验证码
+     */
     private String authCode;
     @NotBlank(message = "登录密码不能为空!", groups = {ADD.class, EDIT.class})
+    /**
+     * 密码
+     */
     private String password;
+    /**
+     * ip
+     */
     private String ip;
+    /**
+     * 登录类型
+     */
     private LoginType loginType;
 
     public String getAccount() {

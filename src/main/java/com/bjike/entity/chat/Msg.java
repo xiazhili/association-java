@@ -1,6 +1,7 @@
 package com.bjike.entity.chat;
 
 import com.bjike.entity.BaseEntity;
+import com.bjike.type.chat.MsgCategory;
 import com.bjike.type.chat.MsgType;
 
 /**
@@ -33,6 +34,10 @@ public class Msg extends BaseEntity {
      * 消息类型
      */
     private MsgType msgType;
+    /**
+     * 消息分类
+     */
+    private MsgCategory msgCategory;
 
     /**
      * 接收组
@@ -124,5 +129,13 @@ public class Msg extends BaseEntity {
 
     public void setRead(boolean read) {
         this.read = read;
+    }
+
+    public MsgCategory getMsgCategory() {
+        return msgCategory;
+    }
+
+    public void setMsgCategory(MsgCategory msgCategory) {
+        this.msgCategory = msgCategory;
     }
 }

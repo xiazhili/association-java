@@ -32,4 +32,32 @@ public class StringUtil {
     }
 
 
+    /**
+     * 首字母小写
+     * @param val
+     * @return
+     */
+    public static String lowerCaseFirst(String val){
+        if(!Character.isLowerCase(val.charAt(0))){
+            char[] cs=val.toCharArray();
+            cs[0]+=32;
+            return String.valueOf(cs);
+        }
+        return val;
+    }
+    /**
+     * 首字母大写
+     * @param val
+     * @return
+     */
+    public static String upperCaseFirst(String val){
+        if(!Character.isUpperCase(val.charAt(0))){
+            char[] cs=val.toCharArray();
+            cs[0]-=32;
+            return String.valueOf(cs);
+        }
+        return  val;
+    }
+
+
 }

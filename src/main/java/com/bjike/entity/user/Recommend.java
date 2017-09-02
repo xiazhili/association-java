@@ -15,7 +15,7 @@ import javax.persistence.*;
  * @Copy: [com.bjike]
  */
 @Entity
-@Table(name = "recommend")
+@Table(name = "user_recommend")
 public class Recommend extends BaseEntity {
     /**
      * 推荐人

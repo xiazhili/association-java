@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
  * @Copy: [com.bjike]
  */
 @Entity
-@Table(name = "login_log")
+@Table(name = "user_login_log")
 public class LoginLog extends BaseEntity {
 
     /**

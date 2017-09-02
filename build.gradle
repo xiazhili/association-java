@@ -47,8 +47,18 @@ ext {
 }
 
 dependencies {
-    testCompile('com.dounine.japi:client:1.0')
+    testCompile(group: 'com.dounine.japi', name: 'client', version: "$japi_version") {
+        exclude group: 'org.slf4j', module: 'slf4j-api'
+        exclude group: 'log4j', module: 'log4j'
+        exclude group: 'org.slf4j', module: 'slf4j-log4j12'
+    }
+    testCompile(group: 'com.ibeetl', name: 'beetl', version: "$beetl_version") {
+        exclude group: 'org.slf4j', module: 'slf4j-api'
+        exclude group: 'log4j', module: 'log4j'
+        exclude group: 'org.slf4j', module: 'slf4j-log4j12'
+    }
     testCompile('org.springframework.boot:spring-boot-starter-test')
+
     compile('org.springframework.boot:spring-boot-starter-web')
     compile('org.springframework.boot:spring-boot-starter-websocket')
     compile('org.springframework.boot:spring-boot-starter-data-jpa')

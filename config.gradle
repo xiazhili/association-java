@@ -11,6 +11,7 @@ allprojects {
         guava_version = '21.0'
         zxing_version = '3.3.0'
         japi_version = '1.0'
+        beetl_version = '2.2.13'
 
     }
 

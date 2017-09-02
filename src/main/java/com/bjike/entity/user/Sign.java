@@ -15,7 +15,7 @@ import java.time.LocalDate;
  * @Copy: [com.bjike]
  */
 @Entity
-@Table(name = "sign")
+@Table(name = "user_sign")
 public class Sign extends BaseEntity {
     /**
      * 签到用户

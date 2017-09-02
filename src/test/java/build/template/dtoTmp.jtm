@@ -6,10 +6,10 @@ import java.io.Serializable;
 /**
  * ${des}查询传输对象
  *
- * @Author:				[ ${author} ]
- * @Date:			    [  ${date(),dateFormat="yyyy-MM-dd HH:mm:ss"} ]
- * @Description:   		[ ${des} ]
- * @Version:			[ v1.0.0 ]
+ * @Author:	[ ${author} ]
+ * @Date: [  ${date(),dateFormat="yyyy-MM-dd HH:mm:ss"} ]
+ * @Description: [ ${des} ]
+ * @Version: [ v1.0.0 ]
  * @Copy: [com.bjike]
  */
 public class ${clazz}DTO extends BaseDTO {

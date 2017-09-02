@@ -38,24 +38,14 @@ public class Build {
 
     }
 
-    /**
-     * 构建文件
-     *
-     * @throws Exception
-     */
-    @Test
-    public void createFile() throws Exception {
-        create();
-        // delete();
-        System.out.println("构建生成文件成功！");
-    }
 
     /**
      * 创建文件
      *
      * @throws Exception
      */
-    private void create() throws Exception {
+    @Test
+    public void create() throws Exception {
 
         //获取输入文件路径
         String inputPath = System.getProperty("user.dir") + "/src/test/java/build/input.txt";
@@ -85,15 +75,20 @@ public class Build {
      *
      * @throws Exception
      */
-    private void delete() throws Exception {
+    @Test
+    public void delete() throws Exception {
         String root = System.getProperty("user.dir") + "/src/main/java/com/bjike/";
         String inputPath = System.getProperty("user.dir") + "/src/test/java/build/input.txt";
         List<String> lines = FileUtils.readLines(new File(inputPath), "utf-8");
         String packages = StringUtils.substringAfter(lines.get(0), ":");
-        String[] templates = new String[]{"ser", "dto", "to", "vo", "act", "rep"};
-        for (String m : templates)
-            FileUtils.deleteDirectory(new File(root + "/" + packages + "/" + m));
+        String[] templates = new String[]{"entity","ser", "dto", "to", "vo", "act", "dao"};
+        for (String m : templates){
+            FileUtils.deleteDirectory(new File(root + "/" + m + "/" +  packages ));
+
+        }
     }
+
+
 
     /**
      * 构建属性

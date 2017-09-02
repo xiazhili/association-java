@@ -7,9 +7,6 @@
 #parameter--------------
 
 (
-LocalDate while 时间;
-Boolean businessStatus 业务状态;
-BusinessWeekly week 周计划;
 String company 公司名;
 String content 计划工作内容;
 Double quantity 任务量;

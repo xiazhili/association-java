@@ -1,9 +1,26 @@
 package com.bjike.ser.taxi;
 
+import com.bjike.common.exception.SerException;
+import com.bjike.common.util.UserUtil;
+import com.bjike.common.util.bean.BeanCopy;
+import com.bjike.common.util.file.FileUtil;
+import com.bjike.dto.Restrict;
 import com.bjike.dto.taxi.DriverDTO;
+import com.bjike.dto.taxi.DrivingLicenceDTO;
 import com.bjike.entity.taxi.Driver;
+import com.bjike.entity.taxi.DrivingLicence;
+import com.bjike.entity.user.User;
 import com.bjike.ser.ServiceImpl;
+import com.bjike.to.taxi.DriverTO;
+import com.bjike.vo.taxi.DriverVO;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 司机信息操作
@@ -15,5 +32,70 @@ import org.springframework.stereotype.Service;
  * @Copy: [com.bjike]
  */
 @Service
-public class DriverSerImpl extends ServiceImpl<Driver, DriverDTO> {
+public class DriverSerImpl extends ServiceImpl<Driver, DriverDTO> implements DriverSer {
+    @Autowired
+    private DrivingLicenceSer drivingLicenceSer;
+
+    @Transactional
+    @Override
+    public Boolean apply(DriverTO to, List<File> files) throws SerException {
+        try {
+            DriverDTO dto = new DriverDTO();
+            User user = UserUtil.currentUser(false);
+            dto.getConditions().add(Restrict.eq("user.id", user.getId()));
+            if (null == super.findOne(dto)) {
+                Driver driver = BeanCopy.copyProperties(to, Driver.class);
+                driver.setUser(user);
+                super.update(driver);
+                List<DrivingLicence> drivingLicences = new ArrayList<>();
+                for (File file : files) {
+                    DrivingLicence drivingLicence = new DrivingLicence();
+                    String images = StringUtils.substringAfter(file.getPath(), FileUtil.ROOT_PATH);
+                    drivingLicence.setDriver(driver);
+                    drivingLicence.setImages(images);
+                    drivingLicences.add(drivingLicence);
+                }
+                drivingLicenceSer.save(drivingLicences);
+                return true;
+            } else {
+                throw new SerException("对不起,你已经申请过了");
+            }
+
+        } catch (Exception e) {
+            for (File file : files) {
+                file.delete();
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public Boolean agree(String id) throws SerException {
+        Driver driver = super.findById(id);
+        driver.setVerify(true);
+        super.update(driver);
+        return true;
+    }
+
+    @Override
+    public DriverVO findByUserId(String userId) throws SerException {
+        DriverDTO dto = new DriverDTO();
+        dto.getConditions().add(Restrict.eq("user.id", userId));
+        Driver driver = super.findOne(dto);
+        if(null!=driver){
+            DriverVO driverVO = BeanCopy.copyProperties(driver, DriverVO.class);
+            DrivingLicenceDTO licenceDTO = new DrivingLicenceDTO();
+            licenceDTO.getConditions().add(Restrict.eq("driver.id", driver.getId()));
+            List<DrivingLicence> licences = drivingLicenceSer.findByCis(licenceDTO);
+            String[] images = new String[licences.size()];
+            int i=0;
+            for(DrivingLicence licence: licences){
+                images[i++] = licence.getImages();
+            }
+            driverVO.setImages(images);
+            return driverVO;
+        }
+        throw  new SerException("没有查询到司机申请信息");
+
+    }
 }

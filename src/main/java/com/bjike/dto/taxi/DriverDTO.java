@@ -10,4 +10,5 @@ import com.bjike.dto.BaseDTO;
  * @Copy: [com.bjike]
  */
 public class DriverDTO extends BaseDTO {
+
 }

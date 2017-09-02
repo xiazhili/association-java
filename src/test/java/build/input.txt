@@ -1,5 +1,5 @@
-包名:test
-类名:User
+包名:taxi
+类名:DrivingLicence
 作者:liguiqin
 描述:测试实体
 
@@ -7,7 +7,6 @@
 #parameter--------------
 
 (
-String company 公司名;
-String content 计划工作内容;
-Double quantity 任务量;
+Driver driver 所属人;
+String[] images 驾驶证照片;
 )

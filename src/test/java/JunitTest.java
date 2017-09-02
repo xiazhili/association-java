@@ -2,6 +2,7 @@ import com.alibaba.fastjson.JSON;
 import com.bjike.Application;
 import com.bjike.common.exception.SerException;
 import com.bjike.entity.comment.Shop;
+import com.bjike.entity.user.User;
 import com.bjike.ser.comment.ShopSer;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -10,7 +11,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @Author: [liguiqin]

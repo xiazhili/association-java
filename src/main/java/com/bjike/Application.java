@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.servlet.MultipartConfigElement;
 import java.io.IOException;
+import java.util.Random;
 
 @EnableAutoConfiguration
 @ComponentScan

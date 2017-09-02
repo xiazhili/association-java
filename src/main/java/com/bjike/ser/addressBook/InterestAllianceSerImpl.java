@@ -54,7 +54,7 @@ public class InterestAllianceSerImpl extends ServiceImpl<InterestAlliance, Inter
     @Transactional(rollbackFor = SerException.class)
     public void add(InterestAllianceTO to) throws SerException {
         User user = UserUtil.currentUser();
-        if (!UserType.VIP.equals(user.getUserType())) {
+        if (!UserType.PERSONAL_VIP.equals(user.getUserType())) {
             throw new SerException("您不是vip，不能创建联盟");
         }
         UserInfoDTO userInfoDTO = new UserInfoDTO();

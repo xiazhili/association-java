@@ -1,0 +1,42 @@
+package com.bjike.entity.${package};
+
+import com.bjike.entity.BaseEntity;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+/**
+ * ${des}
+ *
+ * @Author:				[ ${author} ]
+ * @Date:			    [  ${date(),dateFormat="yyyy-MM-dd HH:mm:ss"} ]
+ * @Description:   		[ ${des} ]
+ * @Version:			[ v1.0.0 ]
+ * @Copy: [com.bjike]
+ */
+public class ${clazz} extends BaseEntity{
+
+<%
+	for(m in list){
+%>
+    /**
+     * ${m.annotation}
+     */
+    @Column(columnDefinition = "VARCHAR(255) COMMENT '${m.annotation}' ")
+ 	private ${m.type} ${m.fieldName};
+<%}%>
+
+<%
+	for(m in list){
+%>
+ 	public ${m.type} get${m.swapCaseName} () {
+		return ${m.fieldName};
+	}
+	public void set${m.swapCaseName} (${m.type} ${m.fieldName}) {
+		this.${m.fieldName} =${m.fieldName};
+	}
+ 	
+<%}%>
+
+
+}

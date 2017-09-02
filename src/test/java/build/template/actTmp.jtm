@@ -1,0 +1,19 @@
+package com.bjike.act.${package};
+
+import org.springframework.web.bind.annotation.RestController;
+
+/**
+ * ${des}控制器
+ *
+ * @Author:				[ ${author} ]
+ * @Date:			    [  ${date(),dateFormat="yyyy-MM-dd HH:mm:ss"} ]
+ * @Description:   		[ ${des} ]
+ * @Version:			[ v1.0.0 ]
+ * @Copy: [com.bjike]
+ */
+
+@RestController
+public class ${clazz}Act {
+
+
+}

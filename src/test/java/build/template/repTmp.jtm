@@ -1,0 +1,19 @@
+package com.bjike.dao.${package};
+
+import com.bjike.dao.JpaRep;
+import com.bjike.dto.${package}.${clazz}DTO;
+import com.bjike.entity.${package}.${clazz};
+
+/**
+ * ${des}
+ *
+ * @Author:				[ ${author} ]
+ * @Date:			    [  ${date(),dateFormat="yyyy-MM-dd HH:mm:ss"} ]
+ * @Description:   		[ ${des} ]
+ * @Version:			[ v1.0.0 ]
+ * @Copy: [com.bjike]
+ */
+public interface ${clazz}Rep extends JpaRep<${clazz}, ${clazz}DTO>{
+
+}
+

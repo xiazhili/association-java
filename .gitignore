@@ -1,4 +1,5 @@
 **/target/
+**/*.log
 **/build/
 **/.gradle/
 **/classes/
@@ -7,6 +8,7 @@
 **/.sass-cache/
 **/.idea/
 **/*.iml
+settings.gradle
 **/*.ipr
 **/*.iws
 **/gradlew

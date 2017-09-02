@@ -1,0 +1,39 @@
+package com.bjike.to.${package};
+
+import com.bjike.to.BaseTO;
+
+
+/**
+ * ${des} 添加更新操作对象
+ *
+ * @Author:				[ ${author} ]
+ * @Date:			    [  ${date(),dateFormat="yyyy-MM-dd HH:mm:ss"} ]
+ * @Description:   		[ ${des} ]
+ * @Version:			[ v1.0.0 ]
+ * @Copy: [com.bjike]
+ */
+public class ${clazz}TO extends BaseTO{
+
+<%
+	for(m in list){
+%>
+    /**
+     * ${m.annotation}
+     */
+ 	private ${m.type} ${m.fieldName};
+<%}%>
+
+<%
+	for(m in list){
+%>
+ 	public ${m.type} get${m.swapCaseName} () {
+		return ${m.fieldName};
+	}
+	public void set${m.swapCaseName} (${m.type} ${m.fieldName}) {
+		this.${m.fieldName} =${m.fieldName};
+	}
+
+<%}%>
+
+
+}

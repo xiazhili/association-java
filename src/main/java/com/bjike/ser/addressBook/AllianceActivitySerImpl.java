@@ -1,6 +1,7 @@
 package com.bjike.ser.addressBook;
 
 import com.bjike.common.exception.SerException;
+import com.bjike.common.util.UserUtil;
 import com.bjike.common.util.bean.BeanCopy;
 import com.bjike.dto.Restrict;
 import com.bjike.dto.addressBook.ActivityMemberDTO;
@@ -8,6 +9,7 @@ import com.bjike.dto.addressBook.AllianceActivityDTO;
 import com.bjike.entity.addressBook.ActivityMember;
 import com.bjike.entity.addressBook.AllianceActivity;
 import com.bjike.entity.addressBook.InterestAlliance;
+import com.bjike.entity.user.User;
 import com.bjike.ser.ServiceImpl;
 import com.bjike.to.addressBook.ActivityMemberTO;
 import com.bjike.to.addressBook.AllianceActivityTO;
@@ -15,6 +17,7 @@ import com.bjike.vo.addressBook.ActivityMemberVO;
 import com.bjike.vo.addressBook.AllianceActivityVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,22 +37,27 @@ public class AllianceActivitySerImpl extends ServiceImpl<AllianceActivity, Allia
     private InterestAllianceSer interestAllianceSer;
 
     @Override
+    @Transactional(rollbackFor = SerException.class)
     public void pulbish(String interestAllianceId, AllianceActivityTO to) throws SerException {
+        String name= UserUtil.currentUser().getUsername();
         InterestAlliance interestAlliance = interestAllianceSer.findById(interestAllianceId);
         AllianceActivity entity = BeanCopy.copyProperties(to, AllianceActivity.class, true);
         entity.setInterestAlliance(interestAlliance);
+        entity.setRelease(name);
         super.save(entity);
     }
 
     @Override
+    @Transactional(rollbackFor = SerException.class)
     public void edit(AllianceActivityTO to) throws SerException {
         AllianceActivity entity = super.findById(to.getId());
         AllianceActivity allianceActivity = BeanCopy.copyProperties(to, AllianceActivity.class, true);
-        BeanCopy.copyProperties(allianceActivity, entity, "interestAlliance.id", "id", "createTime","modifyTime");
+        BeanCopy.copyProperties(allianceActivity, entity, "interestAlliance.id", "id", "createTime","modifyTime","release");
         super.update(entity);
     }
 
     @Override
+    @Transactional(rollbackFor = SerException.class)
     public void delete(String id) throws SerException {
         ActivityMemberDTO dto = new ActivityMemberDTO();
         dto.getConditions().add(Restrict.eq("allianceActivityId", id));
@@ -80,9 +88,25 @@ public class AllianceActivitySerImpl extends ServiceImpl<AllianceActivity, Allia
     }
 
     @Override
+    @Transactional(rollbackFor = SerException.class)
     public void attend(String id, ActivityMemberTO activityMemberTO) throws SerException {
+        User user=UserUtil.currentUser();
+        Integer num=super.findById(id).getNum();
+        ActivityMemberDTO dto=new ActivityMemberDTO();
+        dto.getConditions().add(Restrict.eq("allianceActivityId",id));
+        String count=activityMemberSer.count(dto)+"";
+        if (num-Integer.valueOf(count)<=0){
+            throw new SerException("该活动参与人数已满，下次请早");
+        }
+        dto.getConditions().add(Restrict.eq("userId",user.getId()));
+        ActivityMember member=activityMemberSer.findOne(dto);
+        if (null!=member){
+            throw new SerException("您已参与该活动了");
+        }
         ActivityMember activityMember = BeanCopy.copyProperties(activityMemberTO, ActivityMember.class, true);
         activityMember.setAllianceActivityId(id);
+        activityMember.setUserId(user.getId());
+        activityMember.setName(user.getUsername());
         activityMemberSer.save(activityMember);
     }
 

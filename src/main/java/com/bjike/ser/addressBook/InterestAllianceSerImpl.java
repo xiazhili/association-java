@@ -175,6 +175,7 @@ public class InterestAllianceSerImpl extends ServiceImpl<InterestAlliance, Inter
     }
 
     @Override
+    @Transactional(rollbackFor = SerException.class)
     public void agree(String id, String userId) throws SerException {
         InterestAlliance entity = super.findById(id);
         AllianceMember allianceMember = new AllianceMember();

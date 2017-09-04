@@ -24,6 +24,12 @@ public class AllianceActivity extends BaseEntity {
     private InterestAlliance interestAlliance;
 
     /**
+     * 发起人
+     */
+    @Column(columnDefinition = "VARCHAR(255) COMMENT '发起人' ", nullable = false)
+    private String release;
+
+    /**
      * 活动主题
      */
     @Column(columnDefinition = "VARCHAR(255) COMMENT '活动主题' ", nullable = false)
@@ -70,6 +76,14 @@ public class AllianceActivity extends BaseEntity {
      */
     @Column(columnDefinition = "TEXT COMMENT '注意事项' ")
     private String notice;
+
+    public String getRelease() {
+        return release;
+    }
+
+    public void setRelease(String release) {
+        this.release = release;
+    }
 
     public InterestAlliance getInterestAlliance() {
         return interestAlliance;

@@ -1,6 +1,5 @@
 package com.bjike.vo.addressBook;
 
-import com.bjike.to.BaseTO;
 import com.bjike.vo.BaseVO;
 
 /**
@@ -13,6 +12,10 @@ import com.bjike.vo.BaseVO;
  * @Copy: [com.bjike]
  */
 public class AllianceActivityVO extends BaseVO {
+    /**
+     * 发起人
+     */
+    private String release;
     /**
      * 活动主题
      */
@@ -55,6 +58,14 @@ public class AllianceActivityVO extends BaseVO {
      * 注意事项
      */
     private String notice;
+
+    public String getRelease() {
+        return release;
+    }
+
+    public void setRelease(String release) {
+        this.release = release;
+    }
 
     public Integer getAttend() {
         return attend;

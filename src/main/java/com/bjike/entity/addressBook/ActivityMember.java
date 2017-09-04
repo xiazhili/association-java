@@ -26,6 +26,12 @@ public class ActivityMember extends BaseEntity {
     private String allianceActivityId;
 
     /**
+     * 参与人id
+     */
+    @Column(name = "user_id", columnDefinition = "VARCHAR(36) COMMENT '参与人id' ", nullable = false)
+    private String userId;
+
+    /**
      * 姓名
      */
     @Column(columnDefinition = "VARCHAR(255) COMMENT '姓名' ", nullable = false)
@@ -58,8 +64,16 @@ public class ActivityMember extends BaseEntity {
     /**
      * 是否愿意拼车
      */
-    @Column(name = "is_together",columnDefinition = "TINYINT(1) COMMENT '是否愿意拼车' ")
+    @Column(name = "is_together", columnDefinition = "TINYINT(1) COMMENT '是否愿意拼车' ")
     private Boolean together;
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
 
     public String getAllianceActivityId() {
         return allianceActivityId;

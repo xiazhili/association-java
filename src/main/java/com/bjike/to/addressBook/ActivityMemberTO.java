@@ -13,11 +13,6 @@ import org.hibernate.validator.constraints.NotBlank;
  * @Copy: [com.bjike]
  */
 public class ActivityMemberTO extends BaseTO {
-    /**
-     * 姓名
-     */
-    @NotBlank(groups = ADD.class,message = "姓名不能为空")
-    private String name;
 
     /**
      * 电话
@@ -46,14 +41,6 @@ public class ActivityMemberTO extends BaseTO {
      * 是否愿意拼车
      */
     private Boolean together;
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public String getTel() {
         return tel;

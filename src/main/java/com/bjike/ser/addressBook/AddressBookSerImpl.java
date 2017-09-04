@@ -22,6 +22,7 @@ import com.bjike.vo.addressBook.SearchVO;
 import com.bjike.vo.user.UserVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -225,6 +226,7 @@ public class AddressBookSerImpl extends ServiceImpl<AddressBook, AddressBookDTO>
     }
 
     @Override
+    @Transactional(rollbackFor = SerException.class)
     public void add(AddressBookTO to) throws SerException {
         String userId = UserUtil.currentUserID();
         AddressBookDTO dto = new AddressBookDTO();
@@ -240,6 +242,7 @@ public class AddressBookSerImpl extends ServiceImpl<AddressBook, AddressBookDTO>
     }
 
     @Override
+    @Transactional(rollbackFor = SerException.class)
     public void edit(String bookId, String remark) throws SerException {
         String userId = UserUtil.currentUserID();
         AddressBookDTO dto = new AddressBookDTO();
@@ -255,6 +258,7 @@ public class AddressBookSerImpl extends ServiceImpl<AddressBook, AddressBookDTO>
     }
 
     @Override
+    @Transactional(rollbackFor = SerException.class)
     public void delete(String id) throws SerException {
         super.remove(id);
     }

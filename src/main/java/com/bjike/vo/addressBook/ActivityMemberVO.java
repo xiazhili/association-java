@@ -14,6 +14,11 @@ import com.bjike.vo.BaseVO;
  */
 public class ActivityMemberVO extends BaseVO {
     /**
+     * 参与人id
+     */
+    private String userId;
+
+    /**
      * 姓名
      */
     private String name;
@@ -42,6 +47,14 @@ public class ActivityMemberVO extends BaseVO {
      * 是否愿意拼车
      */
     private Boolean together;
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
 
     public String getName() {
         return name;

@@ -49,6 +49,13 @@ public class RecommendTO extends BaseTO {
     @NotNull(message = "地址不能关系!", groups = {ADD.class, EDIT.class})
     private RelationshipType relationshipType;
 
+    /**
+     * 被推荐人id
+     */
+    @NotBlank(message = "被推荐人id不能为空!", groups = {ADD.class, EDIT.class})
+
+    private String userId;
+
 
     /**
      * 生日
@@ -258,5 +265,13 @@ public class RecommendTO extends BaseTO {
 
     public void setMarriage(Boolean marriage) {
         this.marriage = marriage;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 }

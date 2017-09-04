@@ -30,13 +30,13 @@ public enum MsgType {
      * 下线通知
      */
     OFFLINE(4),;
-    private int value;
+    private int code;
 
-    MsgType(int value) {
-        this.value = value;
+    MsgType(int code) {
+        this.code = code;
     }
 
-    public int getValue() {
-        return value;
+    public int getCode() {
+        return code;
     }
 }

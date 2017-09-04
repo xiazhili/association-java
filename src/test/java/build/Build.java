@@ -28,14 +28,12 @@ public class Build {
     private static Map<String, String> CUS = new HashMap<>(4);
     private String className = null;
     private String packageName = null;
-    private List<Model> models = new ArrayList<>(); //保存类属性列表
 
     static {
         CUS.put("包名", "");
         CUS.put("类名", "");
         CUS.put("作者", "");
         CUS.put("描述", "");
-
     }
 
 
@@ -56,14 +54,14 @@ public class Build {
         //创建entity java 文件
         fieldsString = createDetails(lines, entityTmp);
         String details[] = fieldsString.split(";");
-        createField(details, entityTmp);
+        createField(details, entityTmp);//创建entity属性
         ParseTmpUtil.CreatePackageAndClass(entityTmp.render(), packageName, className, "entityTmp");
         String[] templates = new String[]{"serTmp", "serImplTmp", "dtoTmp", "toTmp", "voTmp", "actTmp", "repTmp"};
         //创建java 文件
         for (String tmp : templates) {
             Template template = loadTmp(tmp + ".jtm");
             createDetails(lines, template);
-            if (tmp.equals("toTmp") || tmp.equals("voTmp")) {
+            if (tmp.equals("toTmp") || tmp.equals("voTmp")) {//创建to,vo属性
                 createField(details, template);
             }
             ParseTmpUtil.CreatePackageAndClass(template.render(), packageName, className, tmp);
@@ -82,9 +80,8 @@ public class Build {
         List<String> lines = FileUtils.readLines(new File(inputPath), "utf-8");
         String packages = StringUtils.substringAfter(lines.get(0), ":");
         String[] templates = new String[]{"entity","ser", "dto", "to", "vo", "act", "dao"};
-        for (String m : templates){
-            FileUtils.deleteDirectory(new File(root + "/" + m + "/" +  packages ));
-
+        for (String tls : templates){
+            FileUtils.deleteDirectory(new File(root + "/" + tls + "/" +  packages ));
         }
     }
 
@@ -95,7 +92,7 @@ public class Build {
      */
     private void createField(String[] details, Template modelTmp) {
         Model m = null;
-        models.removeAll(models);
+        List<Model> models = new ArrayList<>(); //保存类属性列表
         for (String str : details) {
             m = new Model();
             String type = str.split(" ")[0];

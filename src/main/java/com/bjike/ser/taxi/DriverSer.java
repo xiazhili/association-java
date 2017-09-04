@@ -5,6 +5,7 @@ import com.bjike.dto.taxi.DriverDTO;
 import com.bjike.entity.taxi.Driver;
 import com.bjike.ser.Ser;
 import com.bjike.to.taxi.DriverTO;
+import com.bjike.type.taxi.VerifyType;
 import com.bjike.vo.taxi.DriverVO;
 
 import java.io.File;
@@ -48,6 +49,17 @@ public interface DriverSer extends Ser<Driver, DriverDTO> {
      * @throws SerException
      */
     default DriverVO findByUserId(String userId) throws SerException {
+        return null;
+    }
+
+
+    /**
+     * 查找用户申请信息
+     * @param verifyType 审核状态
+     * @return
+     * @throws SerException
+     */
+    default List<DriverVO> list(VerifyType verifyType,  DriverDTO dto) throws SerException {
         return null;
     }
 }

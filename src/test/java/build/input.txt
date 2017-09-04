@@ -1,12 +1,19 @@
 包名:taxi
-类名:DrivingLicence
+类名:TaxiOrder
 作者:liguiqin
-描述:测试实体
+描述:叫车订单
 
 #参数[变量类型  变量名 ]
 #parameter--------------
 
 (
-Driver driver 所属人;
-String[] images 驾驶证照片;
+User user 发布人;
+String longitude 经度;
+String latitude 纬度;
+Boolean received 已接单;
+Driver driver 司机;
+Double cost 估计费用;
+Double unitPrice 每公里单价;
+String startPoint 起始地;
+String destination 目的地;
 )

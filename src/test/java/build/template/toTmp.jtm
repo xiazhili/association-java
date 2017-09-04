@@ -4,7 +4,7 @@ import com.bjike.to.BaseTO;
 
 
 /**
- * ${des} 添加更新操作对象
+ * ${des}添加更新操作对象
  *
  * @Author:	[ ${author} ]
  * @Date: [  ${date(),dateFormat="yyyy-MM-dd HH:mm:ss"} ]

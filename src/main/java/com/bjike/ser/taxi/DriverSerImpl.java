@@ -12,6 +12,7 @@ import com.bjike.entity.taxi.DrivingLicence;
 import com.bjike.entity.user.User;
 import com.bjike.ser.ServiceImpl;
 import com.bjike.to.taxi.DriverTO;
+import com.bjike.type.taxi.VerifyType;
 import com.bjike.vo.taxi.DriverVO;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,6 +46,7 @@ public class DriverSerImpl extends ServiceImpl<Driver, DriverDTO> implements Dri
             dto.getConditions().add(Restrict.eq("user.id", user.getId()));
             if (null == super.findOne(dto)) {
                 Driver driver = BeanCopy.copyProperties(to, Driver.class);
+                driver.setVerifyType(VerifyType.PENDING);
                 driver.setUser(user);
                 super.update(driver);
                 List<DrivingLicence> drivingLicences = new ArrayList<>();
@@ -72,7 +74,7 @@ public class DriverSerImpl extends ServiceImpl<Driver, DriverDTO> implements Dri
     @Override
     public Boolean agree(String id) throws SerException {
         Driver driver = super.findById(id);
-        driver.setVerify(true);
+        driver.setVerifyType(VerifyType.PASS);
         super.update(driver);
         return true;
     }
@@ -82,20 +84,43 @@ public class DriverSerImpl extends ServiceImpl<Driver, DriverDTO> implements Dri
         DriverDTO dto = new DriverDTO();
         dto.getConditions().add(Restrict.eq("user.id", userId));
         Driver driver = super.findOne(dto);
-        if(null!=driver){
+        if (null != driver) {
+            return getDriverVO(driver);
+
+        } else {
+            throw new SerException("没有查询到司机申请信息");
+        }
+
+    }
+
+    @Override
+    public List<DriverVO> list(VerifyType verifyType, DriverDTO dto) throws SerException {
+        if (null != verifyType) {
+            dto.getConditions().add(Restrict.eq("applyType", verifyType));
+        }
+        List<Driver> drivers = super.findByCis(dto);
+        List<DriverVO> driverVOS = new ArrayList<>();
+        for (Driver driver : drivers) {
+            DriverVO driverVO = getDriverVO(driver);
+            driverVOS.add(driverVO);
+        }
+        return driverVOS;
+    }
+
+    private DriverVO getDriverVO(Driver driver) throws SerException {
+        if (null != driver) {
             DriverVO driverVO = BeanCopy.copyProperties(driver, DriverVO.class);
             DrivingLicenceDTO licenceDTO = new DrivingLicenceDTO();
             licenceDTO.getConditions().add(Restrict.eq("driver.id", driver.getId()));
             List<DrivingLicence> licences = drivingLicenceSer.findByCis(licenceDTO);
             String[] images = new String[licences.size()];
-            int i=0;
-            for(DrivingLicence licence: licences){
+            int i = 0;
+            for (DrivingLicence licence : licences) {
                 images[i++] = licence.getImages();
             }
             driverVO.setImages(images);
             return driverVO;
         }
-        throw  new SerException("没有查询到司机申请信息");
-
+        return null;
     }
 }

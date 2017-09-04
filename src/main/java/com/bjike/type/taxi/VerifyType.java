@@ -1,34 +1,38 @@
-package com.bjike.type.chat;
+package com.bjike.type.taxi;
 
 /**
- * 申请类型
+ * 司机申请状态
  *
  * @Author: [liguiqin]
- * @Date: [2017-07-22 09:46]
+ * @Date: [2017-09-04 09:22]
  * @Description: [ ]
  * @Version: [1.0.0]
  * @Copy: [com.bjike]
  */
-public enum ApplyType {
+public enum VerifyType {
     /**
-     * 申请状态
+     * 审核中
      */
-    APPLY(0),
+    PENDING(0),
     /**
      * 通过
      */
     PASS(1),
     /**
+     * 取消
+     */
+    CANCEL(2),
+    /**
      * 拒绝
      */
-    REFUSE(2),;
+    REFUSE(3),;
     private int code;
 
-    ApplyType(int code) {
+    VerifyType(int code) {
         this.code = code;
     }
 
     public int getCode() {
-        return code;
+        return this.code;
     }
 }

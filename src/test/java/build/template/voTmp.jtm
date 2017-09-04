@@ -4,7 +4,7 @@ import com.bjike.vo.BaseVO;
 
 
 /**
- * ${des}
+ * ${des}值对象
  *
  * @Author:	[ ${author} ]
  * @Date: [  ${date(),dateFormat="yyyy-MM-dd HH:mm:ss"} ]

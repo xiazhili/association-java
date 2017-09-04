@@ -30,6 +30,17 @@ public interface DriverSer extends Ser<Driver, DriverDTO> {
      */
     default Boolean apply(DriverTO to, List<File> files) throws SerException {
         return null;
+
+    }
+
+    /**
+     * 上传司机图片
+     * @param files
+     * @return
+     * @throws SerException
+     */
+    default Boolean imgUpload( List<File> files) throws SerException {
+        return null;
     }
 
     /**
@@ -62,4 +73,5 @@ public interface DriverSer extends Ser<Driver, DriverDTO> {
     default List<DriverVO> list(VerifyType verifyType,  DriverDTO dto) throws SerException {
         return null;
     }
+
 }

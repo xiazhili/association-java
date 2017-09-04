@@ -79,12 +79,19 @@ public class Build {
         String inputPath = System.getProperty("user.dir") + "/src/test/java/build/input.txt";
         List<String> lines = FileUtils.readLines(new File(inputPath), "utf-8");
         String packages = StringUtils.substringAfter(lines.get(0), ":");
-        String[] templates = new String[]{"entity","ser", "dto", "to", "vo", "act", "dao"};
-        for (String tls : templates){
-            FileUtils.deleteDirectory(new File(root + "/" + tls + "/" +  packages ));
+        String className = StringUtils.substringAfter(lines.get(1), ":");
+        String[][] templates = {{"entity", ""}, {"ser", "Ser"}, {"ser", "SerImpl"}, {"dto", "DTO"}, {"to", "TO"}, {"vo", "VO"}, {"act", "Act"}, {"dao", "Rep"}};
+        for (String[] suffix : templates) {
+            String modelPackage = root + suffix[0] + "/" + packages;
+            String path = modelPackage + "/" + className + suffix[1] + ".java";
+            File file = new File(path);
+            file.delete();
+            File folder = new File(modelPackage);
+            if (null == folder.listFiles()) {
+                FileUtils.deleteDirectory(file);
+            }
         }
     }
-
 
 
     /**

@@ -41,7 +41,7 @@ public class DriverAct {
     private DriverSer driverSer;
 
     /**
-     * 申请
+     * 申请司机
      *
      * @param to      申请信息
      * @param request
@@ -55,6 +55,28 @@ public class DriverAct {
             String path = "/" + userId + "/driver/" + DateUtil.dateToString(LocalDate.now()).replaceAll("-", "");
             List<File> files = FileUtil.save(request, path);
             Boolean rs = driverSer.apply(to, files);
+            return ActResult.initialize(rs);
+
+        } catch (SerException e) {
+            throw new ActException(e.getMessage());
+        }
+    }
+
+
+    /**
+     * 上传申请图片
+     *
+     * @param request
+     * @throws ActException
+     * @version v1
+     */
+    @GetMapping("img/upload")
+    public Result imgUpload(HttpServletRequest request) throws ActException {
+        try {
+            String userId = UserUtil.currentUserID();
+            String path = "/" + userId + "/driver/" + DateUtil.dateToString(LocalDate.now()).replaceAll("-", "");
+            List<File> files = FileUtil.save(request, path);
+            Boolean rs = driverSer.imgUpload(files);
             return ActResult.initialize(rs);
 
         } catch (SerException e) {

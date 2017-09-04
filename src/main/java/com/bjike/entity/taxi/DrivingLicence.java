@@ -27,7 +27,7 @@ public class DrivingLicence extends BaseEntity{
      * 驾驶证照片
      */
     @Column(columnDefinition = "VARCHAR(255) COMMENT '驾驶证照片' ")
- 	private String images;
+ 	private String image;
 
  	public Driver getDriver () {
 		return driver;
@@ -36,11 +36,11 @@ public class DrivingLicence extends BaseEntity{
 		this.driver =driver;
 	}
 
-	public String getImages() {
-		return images;
+	public String getImage() {
+		return image;
 	}
 
-	public void setImages(String images) {
-		this.images = images;
+	public void setImage(String image) {
+		this.image = image;
 	}
 }

@@ -54,7 +54,7 @@ public class DriverSerImpl extends ServiceImpl<Driver, DriverDTO> implements Dri
                     DrivingLicence drivingLicence = new DrivingLicence();
                     String images = StringUtils.substringAfter(file.getPath(), FileUtil.ROOT_PATH);
                     drivingLicence.setDriver(driver);
-                    drivingLicence.setImages(images);
+                    drivingLicence.setImage(images);
                     drivingLicences.add(drivingLicence);
                 }
                 drivingLicenceSer.save(drivingLicences);
@@ -69,6 +69,45 @@ public class DriverSerImpl extends ServiceImpl<Driver, DriverDTO> implements Dri
             }
         }
         return false;
+    }
+
+    @Transactional
+    @Override
+    public Boolean imgUpload(List<File> files) throws SerException {
+        DriverDTO dto = new DriverDTO();
+        User user = UserUtil.currentUser(false);
+        dto.getConditions().add(Restrict.eq("user.id", user.getId()));
+        Driver driver = super.findOne(dto);
+        if (null !=driver) {
+            DrivingLicenceDTO licenceDTO = new DrivingLicenceDTO();
+            licenceDTO.getConditions().add(Restrict.eq("driver.id",driver.getId()));
+            List<DrivingLicence> drivingLicences = drivingLicenceSer.findByCis(licenceDTO);
+            if(null!=drivingLicences && drivingLicences.size()>0){ //删除之前上传的照片,如果存在
+                for (File file : files) {
+                    file.delete();
+                }
+                for(DrivingLicence licence: drivingLicences){
+                    File f = new File(FileUtil.ROOT_PATH+licence.getImage());
+                    if(f.exists()){
+                        f.delete();
+                    }
+                }
+                drivingLicenceSer.remove(drivingLicences);
+            }
+            for (File file : files) {//上传照片
+                DrivingLicence drivingLicence = new DrivingLicence();
+                String images = StringUtils.substringAfter(file.getPath(), FileUtil.ROOT_PATH);
+                drivingLicence.setImage(images);
+                drivingLicence.setDriver(driver);
+                drivingLicences.add(drivingLicence);
+            }
+            drivingLicenceSer.save(drivingLicences);
+
+        } else {
+            throw new SerException("找不到该用户司机申请单");
+
+        }
+        return true;
     }
 
     @Override
@@ -116,7 +155,7 @@ public class DriverSerImpl extends ServiceImpl<Driver, DriverDTO> implements Dri
             String[] images = new String[licences.size()];
             int i = 0;
             for (DrivingLicence licence : licences) {
-                images[i++] = licence.getImages();
+                images[i++] = licence.getImage();
             }
             driverVO.setImages(images);
             return driverVO;

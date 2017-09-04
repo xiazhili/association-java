@@ -36,9 +36,10 @@ public class RecommendAct {
     private RecommendSer recommendSer;
 
     /**
-     * 添加推荐并生成推荐码(通过推荐码生存二维码)
+     * 我要推荐
      *
-     * @throws ActException
+     * @return {name:'data',type:'string',defaultValue:'',description:'推荐码.'}
+     * @version v1
      */
     @LoginAuth
     @PostMapping("add")
@@ -71,11 +72,11 @@ public class RecommendAct {
 
 
     /**
-     * 通过推荐码获取二维码
+     * 获取二维码
      *
      * @param code 推荐码
-     * @throws ActException
      * @return {name:'data',type:'bytes',defaultValue:'',description:'图片流.'}
+     * @throws ActException
      * @version v1
      */
     @GetMapping("qr/{code}")
@@ -95,7 +96,7 @@ public class RecommendAct {
     }
 
     /**
-     * 通过推荐码获取二维码
+     * 验证二维码
      *
      * @param code 推荐码
      * @return {name:'data',type:'int',defaultValue:'',description:'推荐码.'}

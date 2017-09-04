@@ -1,6 +1,9 @@
 package com.bjike.to.taxi;
 
+import com.bjike.common.aspect.ADD;
+import com.bjike.common.aspect.EDIT;
 import com.bjike.to.BaseTO;
+import org.hibernate.validator.constraints.NotBlank;
 
 
 /**
@@ -14,14 +17,19 @@ import com.bjike.to.BaseTO;
  */
 public class TaxiOrderTO extends BaseTO {
 
+    public interface PUBLISH{
+
+    }
 
     /**
      * 经度
      */
+    @NotBlank(message = "请填写经度", groups = {TaxiOrderTO.PUBLISH.class})
     private String longitude;
     /**
      * 纬度
      */
+    @NotBlank(message = "请填写纬度", groups = {TaxiOrderTO.PUBLISH.class})
     private String latitude;
     /**
      * 已接单
@@ -39,10 +47,12 @@ public class TaxiOrderTO extends BaseTO {
     /**
      * 起始地
      */
+    @NotBlank(message = "请填写起始地", groups = {TaxiOrderTO.PUBLISH.class})
     private String startPoint;
     /**
      * 目的地
      */
+    @NotBlank(message = "请填写目的地", groups = {TaxiOrderTO.PUBLISH.class})
     private String destination;
 
 

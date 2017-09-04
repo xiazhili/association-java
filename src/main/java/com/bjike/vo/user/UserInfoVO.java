@@ -18,40 +18,46 @@ public class UserInfoVO extends BaseVO {
      * 用户名
      */
     private String username;
+
     /**
      * 昵称
      */
     private String nickname;
+
     /**
      * 头像
      */
     private String headPath;
+
     /**
      * 性别
      */
     private SexType sexType;
+
     /**
      * 邮箱
      */
     private String email;
+
     /**
      * 手机
      */
     private String phone;
+
     /**
      * 经验值
      */
-    private Double experience = 0.0;
+    private Double experience ;
 
     /**
      * 贡献值
      */
-    private Double contribute = 0.0;
+    private Double contribute ;
 
     /**
      * 信誉值
      */
-    private Double reputation = 0.0;
+    private Double reputation ;
 
 
     public String getUsername() {

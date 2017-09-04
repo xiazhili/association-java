@@ -67,7 +67,7 @@ public class CommentAct {
     }
 
     /**
-     * 店铺点评列表
+     * 点评列表
      *
      * @return class CommentVO
      * @version v1
@@ -121,7 +121,7 @@ public class CommentAct {
     }
 
     /**
-     * 点评取消点赞
+     * 取消点赞
      * {name:'data',type:'string',defaultValue:'',description:'success.'}
      *
      * @param commentId 点评id

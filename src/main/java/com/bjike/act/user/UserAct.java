@@ -32,7 +32,6 @@ import java.util.List;
  * @Version: [1.0.0]
  * @Copy: [com.bjike]
  */
-//todo api 生成错误
 @RestController
 @RequestMapping("user")
 public class UserAct {
@@ -40,7 +39,7 @@ public class UserAct {
     private UserSer userSer;
 
     /**
-     * 当前用户详细个人资料
+     * 当前用户信息
      *
      * @return class UserInfoVO
      * @version v1
@@ -58,7 +57,7 @@ public class UserAct {
     }
 
     /**
-     * 通过用户id查询详细个人资料
+     * id查询个人信息
      *
      * @param userId 用户id
      * @return class UserInfoVO
@@ -76,7 +75,7 @@ public class UserAct {
     }
 
     /**
-     * 我的二维码名片
+     * 二维码名片
      *
      * @throws ActException
      * @version v1
@@ -108,6 +107,12 @@ public class UserAct {
         return new ActResult("success");
     }
 
+    /**
+     * 头像上传
+     *
+     * @throws ActException
+     * @version v1
+     */
     @LoginAuth
     @PostMapping("upload/headPath")
     public ActResult uploadHeadPath(HttpServletRequest request) throws ActException {
@@ -124,7 +129,7 @@ public class UserAct {
     }
 
     /**
-     * 编辑用户信息
+     * 编辑
      *
      * @return class UserVO
      * @throws ActException
@@ -142,7 +147,7 @@ public class UserAct {
     }
 
     /**
-     * 手机号昵称用户编号找人
+     * 查找用户
      *
      * @param account 手机号昵称用户编号
      * @return class UserVO

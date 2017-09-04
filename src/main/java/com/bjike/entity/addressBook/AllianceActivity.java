@@ -27,7 +27,7 @@ public class AllianceActivity extends BaseEntity {
      * 发起人
      */
     @Column(columnDefinition = "VARCHAR(255) COMMENT '发起人' ", nullable = false)
-    private String release;
+    private String pulbisher;
 
     /**
      * 活动主题
@@ -77,12 +77,12 @@ public class AllianceActivity extends BaseEntity {
     @Column(columnDefinition = "TEXT COMMENT '注意事项' ")
     private String notice;
 
-    public String getRelease() {
-        return release;
+    public String getPulbisher() {
+        return pulbisher;
     }
 
-    public void setRelease(String release) {
-        this.release = release;
+    public void setPulbisher(String pulbisher) {
+        this.pulbisher = pulbisher;
     }
 
     public InterestAlliance getInterestAlliance() {

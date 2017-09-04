@@ -1,17 +1,20 @@
-package com.bjike.vo.addressBook;
+package com.bjike.vo.activity;
 
 import com.bjike.vo.BaseVO;
+import com.bjike.vo.addressBook.ActivityMemberVO;
+
+import java.util.List;
 
 /**
- * 联盟活动
+ * 活动详情
  *
  * @Author: [chenjunhao]
- * @Date: [2017-08-31 10:05]
+ * @Date: [2017-09-04 15:17]
  * @Description: [ ]
  * @Version: [1.0.0]
  * @Copy: [com.bjike]
  */
-public class AllianceActivityVO extends BaseVO {
+public class ActivityDetailVO extends BaseVO {
     /**
      * 发起人
      */
@@ -59,28 +62,27 @@ public class AllianceActivityVO extends BaseVO {
      */
     private String notice;
 
+    /**
+     * 已报名成员
+     */
+    private List<ActivityMemberVO> memberVOS;
+
+    /**
+     * 评论
+     */
+    private List<ActivityCommentVO> commentVOS;
+
+    /**
+     * 评论数
+     */
+    private Long commentNum;
+
     public String getPulbisher() {
         return pulbisher;
     }
 
     public void setPulbisher(String pulbisher) {
         this.pulbisher = pulbisher;
-    }
-
-    public Integer getAttend() {
-        return attend;
-    }
-
-    public void setAttend(Integer attend) {
-        this.attend = attend;
-    }
-
-    public Integer getRemain() {
-        return remain;
-    }
-
-    public void setRemain(Integer remain) {
-        this.remain = remain;
     }
 
     public String getTopic() {
@@ -115,6 +117,22 @@ public class AllianceActivityVO extends BaseVO {
         this.fee = fee;
     }
 
+    public Integer getAttend() {
+        return attend;
+    }
+
+    public void setAttend(Integer attend) {
+        this.attend = attend;
+    }
+
+    public Integer getRemain() {
+        return remain;
+    }
+
+    public void setRemain(Integer remain) {
+        this.remain = remain;
+    }
+
     public String getTel() {
         return tel;
     }
@@ -137,5 +155,29 @@ public class AllianceActivityVO extends BaseVO {
 
     public void setNotice(String notice) {
         this.notice = notice;
+    }
+
+    public List<ActivityMemberVO> getMemberVOS() {
+        return memberVOS;
+    }
+
+    public void setMemberVOS(List<ActivityMemberVO> memberVOS) {
+        this.memberVOS = memberVOS;
+    }
+
+    public List<ActivityCommentVO> getCommentVOS() {
+        return commentVOS;
+    }
+
+    public void setCommentVOS(List<ActivityCommentVO> commentVOS) {
+        this.commentVOS = commentVOS;
+    }
+
+    public Long getCommentNum() {
+        return commentNum;
+    }
+
+    public void setCommentNum(Long commentNum) {
+        this.commentNum = commentNum;
     }
 }

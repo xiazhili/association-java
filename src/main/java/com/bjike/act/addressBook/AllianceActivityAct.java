@@ -10,6 +10,7 @@ import com.bjike.common.restful.Result;
 import com.bjike.ser.addressBook.AllianceActivitySer;
 import com.bjike.to.addressBook.ActivityMemberTO;
 import com.bjike.to.addressBook.AllianceActivityTO;
+import com.bjike.vo.activity.ActivityDetailVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
@@ -55,7 +56,7 @@ public class AllianceActivityAct {
      * @throws ActException
      */
     @PutMapping("/edit")
-    public Result edit(@Validated(EDIT.class) AllianceActivityTO to,BindingResult result) throws ActException {
+    public Result edit(@Validated(EDIT.class) AllianceActivityTO to, BindingResult result) throws ActException {
         try {
             allianceActivitySer.edit(to);
             return new ActResult("编辑活动成功");
@@ -104,7 +105,7 @@ public class AllianceActivityAct {
      * @throws ActException
      */
     @PostMapping("/attend/{id}")
-    public Result attend(@PathVariable String id,@Validated(ADD.class) ActivityMemberTO activityMemberTO,BindingResult result) throws ActException {
+    public Result attend(@PathVariable String id, @Validated(ADD.class) ActivityMemberTO activityMemberTO, BindingResult result) throws ActException {
         try {
             allianceActivitySer.attend(id, activityMemberTO);
             return new ActResult("报名成功");
@@ -124,6 +125,23 @@ public class AllianceActivityAct {
     public Result findMembers(@PathVariable String id) throws ActException {
         try {
             return ActResult.initialize(allianceActivitySer.findMembers(id));
+        } catch (SerException e) {
+            throw new ActException(e.getMessage());
+        }
+    }
+
+    /**
+     * 活动详情
+     *
+     * @param id id
+     * @return class ActivityDetailVO
+     * @throws ActException
+     */
+    @GetMapping("/detail/{id}")
+    public Result detail(@PathVariable String id) throws ActException {
+        try {
+            ActivityDetailVO vo = allianceActivitySer.detail(id);
+            return ActResult.initialize(vo);
         } catch (SerException e) {
             throw new ActException(e.getMessage());
         }

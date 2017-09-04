@@ -6,6 +6,7 @@ import com.bjike.entity.addressBook.AllianceActivity;
 import com.bjike.ser.Ser;
 import com.bjike.to.addressBook.ActivityMemberTO;
 import com.bjike.to.addressBook.AllianceActivityTO;
+import com.bjike.vo.activity.ActivityDetailVO;
 import com.bjike.vo.addressBook.ActivityMemberVO;
 import com.bjike.vo.addressBook.AllianceActivityVO;
 
@@ -69,4 +70,12 @@ public interface AllianceActivitySer extends Ser<AllianceActivity, AllianceActiv
      * @throws SerException
      */
     List<ActivityMemberVO> findMembers(String id) throws SerException;
+
+    /**
+     * 活动详情
+     * @param id
+     * @return
+     * @throws SerException
+     */
+    ActivityDetailVO detail(String id) throws SerException;
 }

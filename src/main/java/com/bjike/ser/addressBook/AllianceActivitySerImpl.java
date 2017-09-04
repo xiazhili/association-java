@@ -11,8 +11,11 @@ import com.bjike.entity.addressBook.AllianceActivity;
 import com.bjike.entity.addressBook.InterestAlliance;
 import com.bjike.entity.user.User;
 import com.bjike.ser.ServiceImpl;
+import com.bjike.ser.activity.ActivityCommentSer;
 import com.bjike.to.addressBook.ActivityMemberTO;
 import com.bjike.to.addressBook.AllianceActivityTO;
+import com.bjike.vo.activity.ActivityCommentVO;
+import com.bjike.vo.activity.ActivityDetailVO;
 import com.bjike.vo.addressBook.ActivityMemberVO;
 import com.bjike.vo.addressBook.AllianceActivityVO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +38,8 @@ public class AllianceActivitySerImpl extends ServiceImpl<AllianceActivity, Allia
     private ActivityMemberSer activityMemberSer;
     @Autowired
     private InterestAllianceSer interestAllianceSer;
+    @Autowired
+    private ActivityCommentSer activityCommentSer;
 
     @Override
     @Transactional(rollbackFor = SerException.class)
@@ -43,7 +48,7 @@ public class AllianceActivitySerImpl extends ServiceImpl<AllianceActivity, Allia
         InterestAlliance interestAlliance = interestAllianceSer.findById(interestAllianceId);
         AllianceActivity entity = BeanCopy.copyProperties(to, AllianceActivity.class, true);
         entity.setInterestAlliance(interestAlliance);
-        entity.setRelease(name);
+        entity.setPulbisher(name);
         super.save(entity);
     }
 
@@ -115,5 +120,25 @@ public class AllianceActivitySerImpl extends ServiceImpl<AllianceActivity, Allia
         ActivityMemberDTO dto=new ActivityMemberDTO();
         dto.getConditions().add(Restrict.eq("allianceActivityId",id));
         return BeanCopy.copyProperties(activityMemberSer.findByCis(dto),ActivityMemberVO.class);
+    }
+
+    @Override
+    public ActivityDetailVO detail(String id) throws SerException {
+        AllianceActivity activity=super.findById(id);
+        ActivityDetailVO vo=BeanCopy.copyProperties(activity,ActivityDetailVO.class);
+        int num=activity.getNum();
+        ActivityMemberDTO activityMemberDTO=new ActivityMemberDTO();
+        activityMemberDTO.getConditions().add(Restrict.eq("allianceActivityId",id));
+        String count=activityMemberSer.count(activityMemberDTO)+"";
+        int attend=Integer.valueOf(count);
+        int remain=num-attend;
+        vo.setAttend(attend);
+        vo.setRemain(remain);
+        List<ActivityMemberVO> memberVOS=findMembers(id);
+        vo.setMemberVOS(memberVOS);
+        List<ActivityCommentVO> commentVOS=activityCommentSer.comments(id);
+        vo.setCommentVOS(commentVOS);
+        vo.setCommentNum(activityCommentSer.commentNum(id));
+        return vo;
     }
 }

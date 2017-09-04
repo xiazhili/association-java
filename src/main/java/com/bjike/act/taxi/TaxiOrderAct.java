@@ -34,8 +34,8 @@ public class TaxiOrderAct {
      * 发布用车
      *
      * @param to 发布用车信息
-     * @return
      * @throws ActException
+     * @version v1
      */
     @PostMapping("publish")
     public Result publish(@Validated({TaxiOrderTO.PUBLISH.class}) TaxiOrderTO to, BindingResult result) throws ActException {
@@ -50,8 +50,9 @@ public class TaxiOrderAct {
 
     /**
      * 接单
-     * @return
+     *
      * @throws ActException
+     * @version v1
      */
     @PutMapping("taking/{orderId}")
     public Result taking(@PathVariable String orderId) throws ActException {
@@ -63,6 +64,23 @@ public class TaxiOrderAct {
         }
     }
 
+    /**
+     * 预测费用
+     *
+     * @param city     城市
+     * @param distance 距离公里
+     * @throws ActException
+     * @version v1
+     */
+    @PutMapping("cost/{city}/{distance}")
+    public Result cost(@PathVariable String city, @PathVariable Double distance) throws ActException {
+        try {
+            Double rs = taxiOrderSer.cost(city, distance);
+            return ActResult.initialize(rs);
+        } catch (SerException e) {
+            throw new ActException(e.getMessage());
+        }
+    }
 
 
 }

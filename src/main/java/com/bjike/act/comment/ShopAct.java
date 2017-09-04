@@ -54,7 +54,6 @@ public class ShopAct {
 
     /**
      * 店铺删除
-     * {name:'data',type:'string',defaultValue:'',description:'success.'}
      *
      * @param pointId 店铺坐标id
      * @version v1

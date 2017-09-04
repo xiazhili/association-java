@@ -48,6 +48,11 @@ public class TaxiOrderSerImpl extends ServiceImpl<TaxiOrder, TaxiOrderDTO> imple
         }
         return true;
     }
+
+    @Override
+    public Double cost(String city,Double distance) throws SerException {
+        return null;
+    }
 }
 
 

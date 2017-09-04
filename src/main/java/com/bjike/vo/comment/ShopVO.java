@@ -11,22 +11,21 @@ import com.bjike.vo.BaseVO;
  * @Version: [1.0.0]
  * @Copy: [com.bjike]
  */
-
 public class ShopVO extends BaseVO {
+
     /**
      * 地址
      */
-
     private String address;
+
     /**
      * x坐标
      */
-
     private String pointX;
+
     /**
      * y坐标
      */
-
     private String pointY;
 
     /**

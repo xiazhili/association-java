@@ -3,9 +3,22 @@ package com.bjike.common.restful;
 import com.alibaba.fastjson.JSON;
 
 
+/**
+ * aaa
+ */
 public class ActResult implements Result {
+
+    /**
+     * code
+     */
     private int code = 0;
+    /**
+     * msg
+     */
     private String msg;
+    /**
+     * data
+     */
     private Object data;
 
     public ActResult() {

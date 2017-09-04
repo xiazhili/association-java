@@ -32,6 +32,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 @RestController
 public class LoginAct {
+
     @Autowired
     private LoginSer loginSer;
 

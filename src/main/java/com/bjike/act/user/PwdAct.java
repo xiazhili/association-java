@@ -13,7 +13,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-//todo api 生成错误
+
+
 /**
  * 密码
  *
@@ -26,14 +27,16 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("pwd")
 @RestController
 public class PwdAct {
+
+
     @Autowired
     private PwdSer pwdSer;
 
     /**
      * 找回密码
      *
-     * @param phone 手机
-     * @param password 密码
+     * @param phone      手机
+     * @param password   密码
      * @param rePassword 重复密码
      * @throws ActException
      * @version v1
@@ -65,7 +68,7 @@ public class PwdAct {
     public ActResult editPwd(String oldPassword, String password, String rePassword) throws ActException {
         try {
             if (password.equals(rePassword)) {
-                boolean pass ;
+                boolean pass;
                 User user = UserUtil.currentUser();
                 try {
                     pass = PasswordHash.validatePassword(oldPassword, user.getPassword());

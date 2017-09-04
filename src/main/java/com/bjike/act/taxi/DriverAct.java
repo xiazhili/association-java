@@ -41,7 +41,6 @@ public class DriverAct {
      * 申请司机
      *
      * @param to      申请信息
-     * @param request
      * @throws ActException
      * @version v1
      */
@@ -63,7 +62,6 @@ public class DriverAct {
     /**
      * 上传申请图片
      *
-     * @param request
      * @throws ActException
      * @version v1
      */

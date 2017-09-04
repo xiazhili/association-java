@@ -30,13 +30,25 @@ public interface TaxiOrderSer extends Ser<TaxiOrder, TaxiOrderDTO> {
 
     /**
      * 司机接单
+     *
      * @return
      * @throws SerException
      */
-    default Boolean taking(String orderId ) throws SerException {
+    default Boolean taking(String orderId) throws SerException {
         return null;
 
     }
 
+    /**
+     * 预测费用
+     *
+     * @param  city 城市
+     * @param distance 里程
+     * @throws SerException
+     */
+    default Double cost(String city,Double distance) throws SerException {
+        return null;
+
+    }
 
 }

@@ -87,8 +87,9 @@ public class Build {
             File file = new File(path);
             file.delete();
             File folder = new File(modelPackage);
-            if (null == folder.listFiles()) {
-                FileUtils.deleteDirectory(file);
+            File[] files =folder.listFiles();
+            if (null == files || files.length==0) {
+                folder.delete();
             }
         }
     }

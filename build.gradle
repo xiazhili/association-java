@@ -52,11 +52,7 @@ dependencies {
         exclude group: 'log4j', module: 'log4j'
         exclude group: 'org.slf4j', module: 'slf4j-log4j12'
     }
-    testCompile(group: 'com.ibeetl', name: 'beetl', version: "$beetl_version") {
-        exclude group: 'org.slf4j', module: 'slf4j-api'
-        exclude group: 'log4j', module: 'log4j'
-        exclude group: 'org.slf4j', module: 'slf4j-log4j12'
-    }
+    testCompile(group: 'com.ibeetl', name: 'beetl', version: "$beetl_version")
     testCompile('org.springframework.boot:spring-boot-starter-test')
 
     compile('org.springframework.boot:spring-boot-starter-web')

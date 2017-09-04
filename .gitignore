@@ -16,6 +16,6 @@ settings.gradle
 **/bower_components
 **/node_modules
 **/rebel.xml
-**/test/java/build/**
+**/src/test/**
 **/src/main/webapp/public/js/lib/**
 **/*.xml.bak

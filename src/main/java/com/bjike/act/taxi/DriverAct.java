@@ -14,10 +14,7 @@ import com.bjike.to.taxi.DriverTO;
 import com.bjike.type.taxi.VerifyType;
 import com.bjike.vo.taxi.DriverVO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
@@ -48,7 +45,7 @@ public class DriverAct {
      * @throws ActException
      * @version v1
      */
-    @GetMapping("apply")
+    @PostMapping("apply")
     public Result apply(DriverTO to, HttpServletRequest request) throws ActException {
         try {
             String userId = UserUtil.currentUserID();
@@ -70,7 +67,7 @@ public class DriverAct {
      * @throws ActException
      * @version v1
      */
-    @GetMapping("img/upload")
+    @PostMapping("img/upload")
     public Result imgUpload(HttpServletRequest request) throws ActException {
         try {
             String userId = UserUtil.currentUserID();

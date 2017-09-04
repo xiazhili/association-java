@@ -1,6 +1,9 @@
 package com.bjike.to.taxi;
 
+import com.bjike.common.aspect.ADD;
+import com.bjike.common.aspect.EDIT;
 import com.bjike.to.BaseTO;
+import org.hibernate.validator.constraints.NotBlank;
 
 /**
  * 司机传输实体
@@ -15,19 +18,22 @@ public class DriverTO extends BaseTO {
     /**
      * 城市
      */
-
+    @NotBlank(message = "请填写城市", groups = {ADD.class, EDIT.class})
     private String address;
     /**
      * 身份证
      */
+    @NotBlank(message = "请填写身份证", groups = {ADD.class, EDIT.class})
     private String idCard;
     /**
      * 车型
      */
+    @NotBlank(message = "请填写车型", groups = {ADD.class, EDIT.class})
     private String motorcycleType;
     /**
      * 车牌
      */
+    @NotBlank(message = "请填写车牌", groups = {ADD.class, EDIT.class})
     private String plateNumber;
 
     public String getAddress() {

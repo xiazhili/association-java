@@ -52,7 +52,7 @@ public class FriendAct {
     }
 
     /**
-     * 好友类型查询列表
+     * 好友列表
      *
      * @param type 申请类型
      * @return class FriendVO

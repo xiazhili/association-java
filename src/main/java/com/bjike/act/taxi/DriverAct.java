@@ -97,7 +97,7 @@ public class DriverAct {
     }
 
     /**
-     * 查找用户申请信息
+     * 我的申请信息
      *
      * @return class DriverVO
      * @throws ActException
@@ -114,7 +114,7 @@ public class DriverAct {
     }
 
     /**
-     * 查找列表
+     * 司机申请列表
      *
      * @param verifyType 审核状态
      * @return class DriverVO

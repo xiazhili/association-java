@@ -34,7 +34,7 @@ public class MsgAct {
     private MsgSer msgSer;
 
     /**
-     * Point单独聊天消息记录
+     * 个人消息记录
      *
      * @return class Msg
      * @throws ActException
@@ -52,7 +52,7 @@ public class MsgAct {
     }
 
     /**
-     * Group群聊天消息记录
+     * 群聊消息记录
      *
      * @return class Msg
      * @throws ActException

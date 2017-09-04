@@ -55,7 +55,7 @@ public class GroupAct {
     }
 
     /**
-     * 用户所拥有的群
+     * 我的群列表
      *
      * @return class Group
      * @throws ActException

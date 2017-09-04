@@ -31,7 +31,7 @@ public class AuthCodeAct {
     private RegisterSer registerSer;
 
     /**
-     * 生成注册验证码
+     * 注册验证码
      *
      * @return {name:'data',type:'string',defaultValue:'',description:'图片流.'}
      * @version v1

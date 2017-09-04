@@ -146,7 +146,7 @@ public class FriendSerImpl extends ServiceImpl<Friend, FriendDTO> implements Fri
     public List<FriendVO> findByApplyType(ApplyType type, String userId) throws SerException {
         String coin = "";
         if (null != type) {
-            coin = " and a.apply_type =" + type.getValue();
+            coin = " and a.apply_type =" + type.getCode();
         } else {
             coin = " and a.apply_type in(0,2)";
         }

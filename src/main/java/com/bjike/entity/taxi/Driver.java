@@ -2,6 +2,7 @@ package com.bjike.entity.taxi;
 
 import com.bjike.entity.BaseEntity;
 import com.bjike.entity.user.User;
+import com.bjike.type.taxi.VerifyType;
 
 import javax.persistence.*;
 
@@ -48,8 +49,8 @@ public class Driver extends BaseEntity {
     /**
      * 审核
      */
-    @Column(name = "is_verify", columnDefinition = "TINYINT(1) COMMENT '是否已审核'", nullable = false)
-    private Boolean verify=false;
+    @Column(columnDefinition = "TINYINT(2) COMMENT '审核状态'",nullable = false)
+    private VerifyType verifyType;
 
     public User getUser() {
         return user;
@@ -91,11 +92,11 @@ public class Driver extends BaseEntity {
         this.plateNumber = plateNumber;
     }
 
-    public Boolean getVerify() {
-        return verify;
+    public VerifyType getVerifyType() {
+        return verifyType;
     }
 
-    public void setVerify(Boolean verify) {
-        this.verify = verify;
+    public void setVerifyType(VerifyType verifyType) {
+        this.verifyType = verifyType;
     }
 }

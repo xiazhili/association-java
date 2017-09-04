@@ -22,13 +22,13 @@ public enum MemberType {
      * 普通的
      */
     ORDINARY(2),;
-    private int value;
+    private int code;
 
-    MemberType(int value) {
-        this.value = value;
+    MemberType(int code) {
+        this.code = code;
     }
 
-    public int getValue() {
-        return value;
+    public int getCode() {
+        return code;
     }
 }

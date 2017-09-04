@@ -10,6 +10,7 @@ import com.bjike.entity.user.User;
 import com.bjike.ser.ServiceImpl;
 import com.bjike.to.user.RecommendTO;
 import com.bjike.vo.recommend.RecommendVO;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -26,16 +27,33 @@ import java.util.UUID;
 @Service
 public class RecommendSerImpl extends ServiceImpl<Recommend, RecommendDTO> implements RecommendSer {
 
+    @Autowired
+    private UserSer userSer;
 
     @Override
     public String add(RecommendTO to) throws SerException {
-        Recommend recommend = BeanCopy.copyProperties(to, Recommend.class);
-        User user = UserUtil.currentUser();
-        recommend.setUser(user);
-        String code = "IKE-" + UUID.randomUUID().toString().substring(0, 8).toUpperCase();
-        recommend.setInviteCode(code);
-        super.save(recommend);
-        return code;
+        User recommended = userSer.findById(to.getUserId());
+        if(null!=recommended){
+            RecommendDTO dto = new RecommendDTO();
+            dto.getConditions().add(Restrict.eq("recommended_id",to.getUserId()));
+            dto.getConditions().add(Restrict.eq("succeed",true));
+            if(null == super.findOne(dto)){
+                Recommend recommend = BeanCopy.copyProperties(to, Recommend.class);
+                User currentUser = UserUtil.currentUser();
+                recommend.setUser(currentUser);
+                recommend.setRecommended(recommended);
+                String code = "QR-" + UUID.randomUUID().toString().substring(0, 8).toUpperCase();
+                recommend.setInviteCode(code);
+                super.save(recommend);
+                return code;
+            }else {
+                throw  new SerException("该用户已经被推荐过了");
+            }
+        }else {
+            throw  new SerException("该推荐用户不存在");
+        }
+
+
 
     }
 

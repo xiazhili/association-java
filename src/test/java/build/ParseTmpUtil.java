@@ -21,26 +21,26 @@ public class ParseTmpUtil {
         String folderPath = null;
         String filePath = null;
         try {
-            for(String tmp:tmps){
-                if(tmp.equals(type)){
-                    String packages = StringUtils.substringBefore(tmp,"Tmp");
-                    if(packages.equalsIgnoreCase("rep")){
-                        packages="dao";
+            for (String tmp : tmps) {
+                if (tmp.equals(type)) {
+                    String packages = StringUtils.substringBefore(tmp, "Tmp");
+                    if (packages.equalsIgnoreCase("rep")) {
+                        packages = "dao";
                     }
-                    if(packages.equalsIgnoreCase("serImpl")){
-                        packages="ser";
+                    if (packages.equalsIgnoreCase("serImpl")) {
+                        packages = "ser";
                     }
-                    folderPath = proPath +packages+"/" + packageName;
-                    String clazz = StringUtils.substringBefore(tmp,"Tmp");
-                    clazz = StringUtil.upperCaseFirst(clazz);;
-                    if(clazz.equalsIgnoreCase("to")||clazz.equalsIgnoreCase("vo")
-                            || clazz.equalsIgnoreCase("dto")){
+                    folderPath = proPath + packages + "/" + packageName;
+                    String clazz = StringUtils.substringBefore(tmp, "Tmp");
+                    clazz = StringUtil.upperCaseFirst(clazz);
+                    if (clazz.equalsIgnoreCase("to") || clazz.equalsIgnoreCase("vo")
+                            || clazz.equalsIgnoreCase("dto")) {
                         clazz = clazz.toUpperCase();
-                    }else if(clazz.equalsIgnoreCase("entity")){
-                        clazz="";
+                    } else if (clazz.equalsIgnoreCase("entity")) {
+                        clazz = "";
                     }
 
-                    filePath = folderPath + "/" + className + clazz+".java";
+                    filePath = folderPath + "/" + className + clazz + ".java";
                     break;
                 }
             }
@@ -66,8 +66,6 @@ public class ParseTmpUtil {
         if (!folder.exists() && !folder.isDirectory()) {
             folder.mkdirs();
         }
-
-
         file = new File(filePath);
         if (folder.exists() && !file.exists()) {
             file.createNewFile();

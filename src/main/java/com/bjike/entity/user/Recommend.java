@@ -27,8 +27,15 @@ public class Recommend extends BaseEntity {
      * 被推荐人
      */
     @ManyToOne(cascade = {CascadeType.REFRESH}, fetch = FetchType.EAGER)
-    @JoinColumn(name = "recommended_id", columnDefinition = "VARCHAR(36) COMMENT '被推荐人id' ")
+    @JoinColumn(name = "recommended_id", columnDefinition = "VARCHAR(36) COMMENT '被推荐人id' ",nullable = false)
     private User recommended;
+
+    /**
+     * 推荐是否成功
+     */
+    @Column(name = "is_succeed", columnDefinition = "TINYINT(1) DEFAULT 0 COMMENT '推荐是否成功'",nullable = false)
+    private Boolean succeed;
+
     /**
      * 邀请码
      */
@@ -291,5 +298,13 @@ public class Recommend extends BaseEntity {
 
     public void setInviteCode(String inviteCode) {
         this.inviteCode = inviteCode;
+    }
+
+    public Boolean getSucceed() {
+        return succeed;
+    }
+
+    public void setSucceed(Boolean succeed) {
+        this.succeed = succeed;
     }
 }

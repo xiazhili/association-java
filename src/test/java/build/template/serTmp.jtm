@@ -5,7 +5,7 @@ import com.bjike.dto.${package}.${clazz}DTO;
 import com.bjike.entity.${package}.${clazz};
 
 /**
- * ${des} 业务操作接口
+ * ${des}业务操作接口
  *
  * @Author:	[ ${author} ]
  * @Date: [  ${date(),dateFormat="yyyy-MM-dd HH:mm:ss"} ]

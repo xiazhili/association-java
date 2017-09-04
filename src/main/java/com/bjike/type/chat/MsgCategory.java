@@ -26,13 +26,13 @@ public enum MsgCategory {
      * 文件
      */
     FILE(3);
-    private int value;
+    private int code;
 
-    MsgCategory(int value) {
-        this.value = value;
+    MsgCategory(int code) {
+        this.code = code;
     }
 
-    public int getValue() {
-        return value;
+    public int getCode() {
+        return code;
     }
 }

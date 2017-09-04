@@ -8,8 +8,10 @@ import com.bjike.common.restful.Result;
 import com.bjike.common.util.UserUtil;
 import com.bjike.common.util.date.DateUtil;
 import com.bjike.common.util.file.FileUtil;
+import com.bjike.dto.taxi.DriverDTO;
 import com.bjike.ser.taxi.DriverSer;
 import com.bjike.to.taxi.DriverTO;
+import com.bjike.type.taxi.VerifyType;
 import com.bjike.vo.taxi.DriverVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -39,7 +41,7 @@ public class DriverAct {
     private DriverSer driverSer;
 
     /**
-     * 申请
+     * 申请司机
      *
      * @param to      申请信息
      * @param request
@@ -53,6 +55,28 @@ public class DriverAct {
             String path = "/" + userId + "/driver/" + DateUtil.dateToString(LocalDate.now()).replaceAll("-", "");
             List<File> files = FileUtil.save(request, path);
             Boolean rs = driverSer.apply(to, files);
+            return ActResult.initialize(rs);
+
+        } catch (SerException e) {
+            throw new ActException(e.getMessage());
+        }
+    }
+
+
+    /**
+     * 上传申请图片
+     *
+     * @param request
+     * @throws ActException
+     * @version v1
+     */
+    @GetMapping("img/upload")
+    public Result imgUpload(HttpServletRequest request) throws ActException {
+        try {
+            String userId = UserUtil.currentUserID();
+            String path = "/" + userId + "/driver/" + DateUtil.dateToString(LocalDate.now()).replaceAll("-", "");
+            List<File> files = FileUtil.save(request, path);
+            Boolean rs = driverSer.imgUpload(files);
             return ActResult.initialize(rs);
 
         } catch (SerException e) {
@@ -83,13 +107,31 @@ public class DriverAct {
      * @return class DriverVO
      * @throws ActException
      * @version v1
-     * @des verify为空时查询所有
      */
-    @GetMapping("list")
-    public Result list() throws ActException {
+    @GetMapping("myApply")
+    public Result myApply() throws ActException {
         try {
             DriverVO vo = driverSer.findByUserId(UserUtil.currentUserID());
             return ActResult.initialize(vo);
+        } catch (SerException e) {
+            throw new ActException(e.getMessage());
+        }
+    }
+
+    /**
+     * 查找列表
+     *
+     * @return class DriverVO
+     * @throws ActException
+     * @param  verifyType 审核状态
+     * @des verify为空时查询所有
+     * @version v1
+     */
+    @GetMapping("list")
+    public Result list(VerifyType verifyType, DriverDTO dto) throws ActException {
+        try {
+            List<DriverVO> vos = driverSer.list(verifyType,dto);
+            return ActResult.initialize(vos);
         } catch (SerException e) {
             throw new ActException(e.getMessage());
         }

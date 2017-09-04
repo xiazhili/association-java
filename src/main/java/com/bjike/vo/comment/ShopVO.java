@@ -37,7 +37,7 @@ public class ShopVO extends BaseVO {
     /**
      * 店铺用户评价top3
      */
-    private String images[];
+    private String[] images;
 
     /**
      * 店铺坐标

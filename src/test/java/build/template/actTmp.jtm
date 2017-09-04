@@ -3,7 +3,7 @@ package com.bjike.act.${package};
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * ${des}控制器
+ * ${des}
  *
  * @Author:	[ ${author} ]
  * @Date: [  ${date(),dateFormat="yyyy-MM-dd HH:mm:ss"} ]

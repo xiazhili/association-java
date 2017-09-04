@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * 叫车订单控制器
+ * 叫车订单
  *
  * @Author: [ liguiqin ]
  * @Date: [  2017-09-02 17:50:09 ]
@@ -34,7 +34,7 @@ public class TaxiOrderAct {
      * 发布用车
      *
      * @param to 发布用车信息
-     * @throws ActException
+     * @return {name:'data',type:'boolean',defaultValue:'',description:'true/false.'}
      * @version v1
      */
     @PostMapping("publish")
@@ -51,7 +51,7 @@ public class TaxiOrderAct {
     /**
      * 接单
      *
-     * @throws ActException
+     * @return {name:'data',type:'boolean',defaultValue:'',description:'true/false.'}
      * @version v1
      */
     @PutMapping("taking/{orderId}")
@@ -69,7 +69,7 @@ public class TaxiOrderAct {
      *
      * @param city     城市
      * @param distance 距离公里
-     * @throws ActException
+     * @return {name:'data',type:'double',defaultValue:'',description:'费用.'}
      * @version v1
      */
     @PutMapping("cost/{city}/{distance}")

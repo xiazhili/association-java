@@ -37,13 +37,13 @@ public class ShopAct {
     /**
      * 附近店铺
      *
+     * @return class ShopVO
      * @throws Exception
      * @version v1
      */
     @GetMapping("nearby")
     public Result nearby() throws ActException {
         try {
-            //todo jpi 生成由问题
             ShopDTO dto = new ShopDTO();
             List<ShopVO> shopVOs = shopSer.nearby(dto);
             return ActResult.initialize(shopVOs);
@@ -56,6 +56,7 @@ public class ShopAct {
      * 店铺删除
      *
      * @param pointId 店铺坐标id
+     * @return {name:'data',type:'string',defaultValue:'',description:'delete success.'}
      * @version v1
      */
     @DeleteMapping("del")

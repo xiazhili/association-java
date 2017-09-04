@@ -32,7 +32,6 @@ import java.util.List;
  * @Version: [1.0.0]
  * @Copy: [com.bjike]
  */
-//todo api 生成错误
 @RestController
 @RequestMapping("user")
 public class UserAct {

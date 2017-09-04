@@ -38,7 +38,7 @@ public class RecommendAct {
     /**
      * 添加推荐并生成推荐码(通过推荐码生存二维码)
      *
-     * @throws ActException
+     * @return {name:'data',type:'string',defaultValue:'',description:'推荐码.'}
      * @version v1
      */
     @LoginAuth

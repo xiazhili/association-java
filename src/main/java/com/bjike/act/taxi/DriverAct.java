@@ -22,7 +22,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 /**
- * 司机信息控制器
+ * 司机信息
  *
  * @Author: [liguiqin]
  * @Date: [2017-09-02 14:53]
@@ -40,8 +40,8 @@ public class DriverAct {
     /**
      * 申请司机
      *
-     * @param to      申请信息
-     * @throws ActException
+     * @param to 申请信息
+     * @return {name:'data',type:'boolean',defaultValue:'',description:'true/false.'}
      * @version v1
      */
     @PostMapping("apply")
@@ -52,7 +52,6 @@ public class DriverAct {
             List<File> files = FileUtil.save(request, path);
             Boolean rs = driverSer.apply(to, files);
             return ActResult.initialize(rs);
-
         } catch (SerException e) {
             throw new ActException(e.getMessage());
         }
@@ -62,6 +61,7 @@ public class DriverAct {
     /**
      * 上传申请图片
      *
+     * @return {name:'data',type:'boolean',defaultValue:'',description:'true/false.'}
      * @throws ActException
      * @version v1
      */
@@ -83,7 +83,7 @@ public class DriverAct {
      * 同意
      *
      * @param id 申请id
-     * @throws ActException
+     * @return {name:'data',type:'boolean',defaultValue:'',description:'true/false.'}
      * @version v1
      */
     @PutMapping("agree/{id}")
@@ -116,16 +116,16 @@ public class DriverAct {
     /**
      * 查找列表
      *
+     * @param verifyType 审核状态
      * @return class DriverVO
      * @throws ActException
-     * @param  verifyType 审核状态
      * @des verify为空时查询所有
      * @version v1
      */
     @GetMapping("list")
     public Result list(VerifyType verifyType, DriverDTO dto) throws ActException {
         try {
-            List<DriverVO> vos = driverSer.list(verifyType,dto);
+            List<DriverVO> vos = driverSer.list(verifyType, dto);
             return ActResult.initialize(vos);
         } catch (SerException e) {
             throw new ActException(e.getMessage());

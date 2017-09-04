@@ -38,7 +38,7 @@ public class PwdAct {
      * @param phone      手机
      * @param password   密码
      * @param rePassword 重复密码
-     * @throws ActException
+     * @return {name:'data',type:'string',defaultValue:'',description:'success'}
      * @version v1
      */
     @PutMapping("find/{phone}")
@@ -61,6 +61,7 @@ public class PwdAct {
      * @param oldPassword 旧密码
      * @param password    新密码
      * @param rePassword  确认新密码
+     * @return {name:'data',type:'string',defaultValue:'',description:'success.'}
      * @version v1
      */
     @LoginAuth

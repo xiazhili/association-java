@@ -36,7 +36,7 @@ public class ShakeAct {
     private ShakeSer shakeSer;
 
     @GetMapping("shake")
-    public Result list(String pointX, String pointY, HttpServletRequest request) throws ActException {
+    public Result list(String pointX, String pointY) throws ActException {
         try {
             User vos = shakeSer.shake(pointX, pointY);
             return ActResult.initialize(vos);

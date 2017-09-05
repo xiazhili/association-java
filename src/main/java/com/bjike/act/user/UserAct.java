@@ -10,6 +10,7 @@ import com.bjike.common.util.bean.BeanCopy;
 import com.bjike.common.util.file.FileUtil;
 import com.bjike.entity.user.User;
 import com.bjike.ser.user.UserSer;
+import com.bjike.to.user.UserInfoTO;
 import com.bjike.vo.user.UserInfoVO;
 import com.bjike.vo.user.UserVO;
 import org.apache.commons.lang3.StringUtils;
@@ -51,6 +52,23 @@ public class UserAct {
             User user = UserUtil.currentUser();
             UserInfoVO vo = userSer.userInfo(user.getId());
             return ActResult.initialize(vo);
+        } catch (SerException e) {
+            throw new ActException(e.getMessage());
+        }
+    }
+
+    /**
+     * 编辑
+     *
+     * @param to 用户信息
+     * @version v1
+     */
+    @LoginAuth
+    @GetMapping("edit/info")
+    public ActResult editInfo(UserInfoTO to) throws ActException {
+        try {
+            String userId = UserUtil.currentUserID();
+            return ActResult.initialize(userSer.editInfo(userId, to));
         } catch (SerException e) {
             throw new ActException(e.getMessage());
         }
@@ -128,23 +146,6 @@ public class UserAct {
         return new ActResult("success");
     }
 
-    /**
-     * 编辑
-     *
-     * @return class UserVO
-     * @throws ActException
-     * @version v1
-     */
-    @LoginAuth
-    @GetMapping("edit/info")
-    public ActResult editInfo() throws ActException {
-        try {
-            User user = UserUtil.currentUser();
-            return ActResult.initialize(BeanCopy.copyProperties(user, UserVO.class));
-        } catch (SerException e) {
-            throw new ActException(e.getMessage());
-        }
-    }
 
     /**
      * 查找用户

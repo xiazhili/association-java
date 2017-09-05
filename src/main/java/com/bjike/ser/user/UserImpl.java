@@ -14,6 +14,7 @@ import com.bjike.entity.user.UserInfo;
 import com.bjike.redis.client.RedisClient;
 import com.bjike.ser.ServiceImpl;
 import com.bjike.session.UserSession;
+import com.bjike.to.user.UserInfoTO;
 import com.bjike.to.user.VIPApplyTO;
 import com.bjike.type.user.UserType;
 import com.bjike.vo.user.UserInfoVO;
@@ -74,6 +75,20 @@ public class UserImpl extends ServiceImpl<User, UserDTO> implements UserSer {
         BeanCopy.copyProperties(user, userInfoVO);
         BeanCopy.copyProperties(info, userInfoVO, "user");
         return userInfoVO;
+    }
+
+    @Transactional
+    @Override
+    public Boolean editInfo(String userId, UserInfoTO to) throws SerException {
+        User user = super.findById(userId);
+        BeanCopy.copyProperties(to, user);
+        super.update(user);
+        UserInfoDTO dto = new UserInfoDTO();
+        dto.getConditions().add(Restrict.eq("user.id", userId));
+        UserInfo info = userInfoSer.findOne(dto);
+        BeanCopy.copyProperties(to, info);
+        userInfoSer.update(info);
+        return true;
     }
 
     @Override

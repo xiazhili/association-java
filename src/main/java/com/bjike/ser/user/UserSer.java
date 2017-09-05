@@ -4,6 +4,7 @@ import com.bjike.common.exception.SerException;
 import com.bjike.dto.user.UserDTO;
 import com.bjike.entity.user.User;
 import com.bjike.ser.Ser;
+import com.bjike.to.user.UserInfoTO;
 import com.bjike.to.user.VIPApplyTO;
 import com.bjike.vo.user.UserInfoVO;
 
@@ -62,6 +63,18 @@ public interface UserSer extends Ser<User, UserDTO> {
     default UserInfoVO userInfo(String userId) throws SerException {
         return null;
     }
+
+    /**
+     *
+     * @param userId 用户id
+     * @param to 用户信息
+     * @return
+     * @throws SerException
+     */
+    default Boolean editInfo(String userId, UserInfoTO to) throws SerException {
+        return null;
+    }
+
 
     /**
      * 手机号,昵称,用户编号找人

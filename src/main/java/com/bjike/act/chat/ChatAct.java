@@ -6,7 +6,6 @@ import com.bjike.common.interceptor.login.LoginAuth;
 import com.bjike.common.restful.ActResult;
 import com.bjike.common.restful.Result;
 import com.bjike.entity.chat.AudioClient;
-import com.bjike.entity.chat.Client;
 import com.bjike.entity.chat.Msg;
 import com.bjike.ser.chat.ChatSer;
 import com.bjike.session.AudioClientSession;
@@ -19,8 +18,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -89,6 +86,7 @@ public class ChatAct {
 
     /**
      * 退出语音聊天
+     *
      * @param userId 用户id
      * @throws ActException
      * @version v1

@@ -1,18 +1,16 @@
-package com.bjike.vo.user;
+package com.bjike.to.user;
 
+import com.bjike.to.BaseTO;
 import com.bjike.type.user.SexType;
-import com.bjike.vo.BaseVO;
 
 /**
- * 用户
- *
  * @Author: [liguiqin]
- * @Date: [2017-08-22 15:52]
+ * @Date: [2017-09-04 16:59]
  * @Description: [ ]
  * @Version: [1.0.0]
  * @Copy: [com.bjike]
  */
-public class UserVO extends BaseVO {
+public class UserInfoTO extends BaseTO{
 
     /**
      * 用户名
@@ -106,7 +104,6 @@ public class UserVO extends BaseVO {
      */
     private String weChat;
 
-
     public String getUsername() {
         return username;
     }
@@ -137,14 +134,6 @@ public class UserVO extends BaseVO {
 
     public void setSexType(SexType sexType) {
         this.sexType = sexType;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     public String getPhone() {
@@ -273,6 +262,14 @@ public class UserVO extends BaseVO {
 
     public void setQq(String qq) {
         this.qq = qq;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getWeChat() {

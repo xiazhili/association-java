@@ -35,12 +35,13 @@ public class RecommendSerImpl extends ServiceImpl<Recommend, RecommendDTO> imple
         User recommended = userSer.findById(to.getUserId());
         if(null!=recommended){
             RecommendDTO dto = new RecommendDTO();
-            dto.getConditions().add(Restrict.eq("recommended_id",to.getUserId()));
+            dto.getConditions().add(Restrict.eq("recommended.id",to.getUserId()));
             dto.getConditions().add(Restrict.eq("succeed",true));
             if(null == super.findOne(dto)){
                 Recommend recommend = BeanCopy.copyProperties(to, Recommend.class);
                 User currentUser = UserUtil.currentUser();
                 recommend.setUser(currentUser);
+                recommend.setSucceed(false);
                 recommend.setRecommended(recommended);
                 String code = "QR-" + UUID.randomUUID().toString().substring(0, 8).toUpperCase();
                 recommend.setInviteCode(code);

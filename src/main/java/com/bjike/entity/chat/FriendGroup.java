@@ -1,10 +1,9 @@
 package com.bjike.entity.chat;
 
 import com.bjike.entity.BaseEntity;
+import com.bjike.entity.user.User;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * 好友分组
@@ -26,8 +25,9 @@ public class FriendGroup extends BaseEntity {
     /**
      * 归属人
      */
-    @Column(columnDefinition = "VARCHAR(36) COMMENT '归属人' ", nullable = false)
-    private String userId;
+    @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "user_id", unique = true, columnDefinition = "VARCHAR(36) COMMENT '用户id' ", nullable = false)
+    private User user;
 
     public String getName() {
         return name;
@@ -37,11 +37,11 @@ public class FriendGroup extends BaseEntity {
         this.name = name;
     }
 
-    public String getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setUser(User user) {
+        this.user = user;
     }
 }

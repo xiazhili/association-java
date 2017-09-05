@@ -1,10 +1,12 @@
 package com.bjike.ser.chat;
 
 import com.bjike.common.exception.SerException;
+import com.bjike.common.util.UserUtil;
 import com.bjike.common.util.bean.BeanCopy;
 import com.bjike.dto.Restrict;
 import com.bjike.dto.chat.FriendGroupDTO;
 import com.bjike.entity.chat.FriendGroup;
+import com.bjike.entity.user.User;
 import com.bjike.ser.ServiceImpl;
 import com.bjike.to.chat.FriendGroupTO;
 import org.springframework.stereotype.Service;
@@ -22,12 +24,13 @@ public class FriendGroupSerImpl extends ServiceImpl<FriendGroup, FriendGroupDTO>
     @Override
     public void add(FriendGroupTO to) throws SerException {
         FriendGroupDTO dto = new FriendGroupDTO();
-        dto.getConditions().add(Restrict.eq("userId", to.getUserId()));
+        User user = UserUtil.currentUser(false);
+        dto.getConditions().add(Restrict.eq("user.id", user.getId()));
         dto.getConditions().add(Restrict.eq("name", to.getName()));
         if (null == super.findOne(dto)) {
             FriendGroup group = new FriendGroup();
             group.setName(to.getName());
-            group.setUserId(to.getUserId());
+            group.setUser(user);
             super.save(group);
         } else {
             throw new SerException("该分组名已存在");

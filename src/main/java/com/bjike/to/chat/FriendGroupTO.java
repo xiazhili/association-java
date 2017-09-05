@@ -16,10 +16,7 @@ public class FriendGroupTO extends BaseTO {
      * 分组名
      */
     private String name;
-    /**
-     * 归属人
-     */
-    private String userId;
+
 
     public String getName() {
         return name;
@@ -29,11 +26,4 @@ public class FriendGroupTO extends BaseTO {
         this.name = name;
     }
 
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
 }

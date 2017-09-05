@@ -7,6 +7,7 @@ import com.bjike.dto.Restrict;
 import com.bjike.dto.chat.FriendDTO;
 import com.bjike.entity.chat.Client;
 import com.bjike.entity.chat.Friend;
+import com.bjike.entity.user.User;
 import com.bjike.ser.ServiceImpl;
 import com.bjike.ser.user.UserSer;
 import com.bjike.session.ChatSession;
@@ -39,8 +40,8 @@ public class FriendSerImpl extends ServiceImpl<Friend, FriendDTO> implements Fri
         String userId = UserUtil.currentUserID();
         if (null != userSer.findById(to.getFriendId())) {
             FriendDTO dto = new FriendDTO();
-            dto.getConditions().add(Restrict.eq("userId", userId));
-            dto.getConditions().add(Restrict.eq("friendId", to.getFriendId()));
+            dto.getConditions().add(Restrict.eq("user.id", userId));
+            dto.getConditions().add(Restrict.eq("friend.id", to.getFriendId()));
             Friend friend = super.findOne(dto);
             if (null == friend) {
                 friend = BeanCopy.copyProperties(to, Friend.class);
@@ -59,7 +60,7 @@ public class FriendSerImpl extends ServiceImpl<Friend, FriendDTO> implements Fri
     public void delete(String friendId) throws SerException {
         String userId = UserUtil.currentUserID();
         FriendDTO dto = new FriendDTO();
-        dto.getConditions().add(Restrict.eq("friendId", friendId));
+        dto.getConditions().add(Restrict.eq("friend.id", friendId));
         Friend friend = super.findOne(dto);
         if (null != friend) {
             super.remove(friend);
@@ -68,8 +69,8 @@ public class FriendSerImpl extends ServiceImpl<Friend, FriendDTO> implements Fri
          * 对方好友列表把自己移除
          */
         dto = new FriendDTO();
-        dto.getConditions().add(Restrict.eq("userId", friendId));
-        dto.getConditions().add(Restrict.eq("friendId", userId));
+        dto.getConditions().add(Restrict.eq("user.id", friendId));
+        dto.getConditions().add(Restrict.eq("friend.id", userId));
         friend = super.findOne(dto);
         if (null != friend) {
             super.remove(friend);
@@ -107,8 +108,8 @@ public class FriendSerImpl extends ServiceImpl<Friend, FriendDTO> implements Fri
     public void editRemark(String friendId, String remark) throws SerException {
         String userId = UserUtil.currentUserID();
         FriendDTO dto = new FriendDTO();
-        dto.getConditions().add(Restrict.eq("userId", userId));
-        dto.getConditions().add(Restrict.eq("friendId", friendId));
+        dto.getConditions().add(Restrict.eq("user.id", userId));
+        dto.getConditions().add(Restrict.eq("friend.id", friendId));
         Friend friend = super.findOne(dto);
         if (null != friend) {
             friend.setRemark(remark);
@@ -116,16 +117,24 @@ public class FriendSerImpl extends ServiceImpl<Friend, FriendDTO> implements Fri
         }
     }
 
+    @Transactional
     @Override
     public void agree(String friendId) throws SerException {
-        String userId = UserUtil.currentUserID();
+        User me= UserUtil.currentUser();
         FriendDTO dto = new FriendDTO();
-        dto.getConditions().add(Restrict.eq("userId", userId));
-        dto.getConditions().add(Restrict.eq("friendId", friendId));
+        dto.getConditions().add(Restrict.eq("user.id", me.getId()));
+        dto.getConditions().add(Restrict.eq("friend.id", friendId));
         Friend friend = super.findOne(dto);
         if (null != friend) {
             friend.setApplyType(ApplyType.PASS);
             super.update(friend);
+            User _friend = userSer.findById(friendId);
+            Friend fd = new Friend(); //好友添加到好友的朋友列表
+            fd.setUser(_friend);
+            fd.setFriend(me);
+            fd.setApplyType(ApplyType.PASS);
+            super.save(friend);
+
         }
     }
 
@@ -133,8 +142,8 @@ public class FriendSerImpl extends ServiceImpl<Friend, FriendDTO> implements Fri
     public void refuse(String friendId) throws SerException {
         String userId = UserUtil.currentUserID();
         FriendDTO dto = new FriendDTO();
-        dto.getConditions().add(Restrict.eq("userId", userId));
-        dto.getConditions().add(Restrict.eq("friendId", friendId));
+        dto.getConditions().add(Restrict.eq("user.id", userId));
+        dto.getConditions().add(Restrict.eq("friend.id", friendId));
         Friend friend = super.findOne(dto);
         if (null != friend) {
             friend.setApplyType(ApplyType.REFUSE);

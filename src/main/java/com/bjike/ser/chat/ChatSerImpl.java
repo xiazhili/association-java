@@ -87,8 +87,8 @@ public class ChatSerImpl implements ChatSer {
                     dto.getConditions().add(Restrict.eq("id", msg.getGroup()));
                     List<GroupMember> groupMembers = groupMember.findByCis(dto);
                     for (GroupMember member : groupMembers) {
-                        msg.setReceiver(member.getUserId());
-                        sendMsg(msg, member.getUserId());
+                        msg.setReceiver(member.getUser().getId());
+                        sendMsg(msg, member.getUser().getId());
                     }
                     break;
                 case ONLINE:

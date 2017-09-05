@@ -1,6 +1,7 @@
 package com.bjike.entity.chat;
 
 import com.bjike.entity.BaseEntity;
+import com.bjike.entity.user.User;
 
 import javax.persistence.*;
 
@@ -25,8 +26,10 @@ public class GroupMember extends BaseEntity {
     /**
      * 群成员id
      */
-    @Column(columnDefinition = "VARCHAR(36) COMMENT '群成员id' ", nullable = false)
-    private String userId;
+    @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "user_id", unique = true, columnDefinition = "VARCHAR(36) COMMENT 群成员id' ", nullable = false)
+    private User user;
+
 
     public Group getGroup() {
         return group;
@@ -36,11 +39,11 @@ public class GroupMember extends BaseEntity {
         this.group = group;
     }
 
-    public String getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setUser(User user) {
+        this.user = user;
     }
 }

@@ -4,13 +4,15 @@ import com.bjike.to.BaseTO;
 import com.bjike.type.user.SexType;
 
 /**
+ * 用户详情
+ *
  * @Author: [liguiqin]
  * @Date: [2017-09-04 16:59]
  * @Description: [ ]
  * @Version: [1.0.0]
  * @Copy: [com.bjike]
  */
-public class UserInfoTO extends BaseTO{
+public class UserInfoTO extends BaseTO {
 
     /**
      * 用户名

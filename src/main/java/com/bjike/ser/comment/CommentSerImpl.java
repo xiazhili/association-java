@@ -2,8 +2,9 @@ package com.bjike.ser.comment;
 
 import com.bjike.common.exception.SerException;
 import com.bjike.common.util.UserUtil;
-import com.bjike.common.util.clazz.NumberUtil;
 import com.bjike.common.util.bean.BeanCopy;
+import com.bjike.common.util.clazz.NumberUtil;
+import com.bjike.common.util.file.FileUtil;
 import com.bjike.dto.Restrict;
 import com.bjike.dto.comment.CommentDTO;
 import com.bjike.dto.comment.LikesDTO;
@@ -51,8 +52,8 @@ public class CommentSerImpl extends ServiceImpl<Comment, CommentDTO> implements 
     public Comment add(CommentTO to, List<File> files) throws SerException {
         try {
             Comment comment = BeanCopy.copyProperties(to, Comment.class);
-            User user = userSer.findById(to.getUserId());
-            comment.setUserId(user.getId());
+            User user = UserUtil.currentUser(false);;
+            comment.setUser(user);
             ShopDTO shopDTO = new ShopDTO();
             shopDTO.getConditions().add(Restrict.eq("pointId", to.getPointId()));
             Shop shop = shopSer.findOne(shopDTO);
@@ -116,17 +117,17 @@ public class CommentSerImpl extends ServiceImpl<Comment, CommentDTO> implements 
     @Transactional
     @Override
     public void like(String commentId) throws SerException {
-        String userId= UserUtil.currentUserID();
+        User user = UserUtil.currentUser(false);
         Comment comment = super.findById(commentId);
         if (null != comment) {
             comment.setLikes(comment.getLikes() != null ? (comment.getLikes() + 1) : 1);
             super.update(comment);
             LikesDTO dto = new LikesDTO();
-            dto.getConditions().add(Restrict.eq("userId", userId));
+            dto.getConditions().add(Restrict.eq("user.id", user.getId()));
             if (likesSer.findByCis(dto).size() == 0) {
                 Likes likes = new Likes();
                 likes.setComment(comment);
-                likes.setUserId(userId);
+                likes.setUser(user);
                 likesSer.save(likes);
             }
         } else {
@@ -135,11 +136,11 @@ public class CommentSerImpl extends ServiceImpl<Comment, CommentDTO> implements 
     }
 
     @Override
-    public void cancelLike(String commentId ) throws SerException {
+    public void cancelLike(String commentId) throws SerException {
         String userId = UserUtil.currentUserID();
         Comment comment = super.findById(commentId);
         LikesDTO dto = new LikesDTO();
-        dto.getConditions().add(Restrict.eq("userId", userId));
+        dto.getConditions().add(Restrict.eq("user.id", userId));
         List<Likes> likes = likesSer.findByCis(dto);
         likesSer.remove(likes);
         if (null != comment && null != likes && likes.size() > 0) {
@@ -165,7 +166,7 @@ public class CommentSerImpl extends ServiceImpl<Comment, CommentDTO> implements 
         Comment comment = super.findById(commentId);
         List<Picture> pictures = new ArrayList<>(files.size());
         for (File file : files) {
-            String path = StringUtils.substringAfter(file.getPath(), "/root/storage");
+            String path = StringUtils.substringAfter(file.getPath(), FileUtil.ROOT_PATH);
             Picture picture = new Picture();
             picture.setComment(comment);
             picture.setPath(path);
@@ -174,9 +175,25 @@ public class CommentSerImpl extends ServiceImpl<Comment, CommentDTO> implements 
         pictureSer.save(pictures);
     }
 
+
     @Override
-    public CommentDetailsVO details(String commentId  ) throws SerException {
-        User user= UserUtil.currentUser();
+    public void remove(String id) throws SerException {
+        PictureDTO dto = new PictureDTO();
+        dto.getConditions().add(Restrict.eq("comment.id", id));
+        List<Picture> pictures = pictureSer.findByCis(dto);
+        for (Picture picture : pictures) {
+            File file = new File(FileUtil.getRealPath(picture.getPath()));
+            if (file.exists()) {
+                file.delete();
+            }
+        }
+        pictureSer.remove(pictures);
+        super.remove(id);
+    }
+
+    @Override
+    public CommentDetailsVO details(String commentId) throws SerException {
+        User user = UserUtil.currentUser();
         Comment comment = super.findById(commentId);
         if (null != comment) {
             CommentDetailsVO vo = BeanCopy.copyProperties(comment, CommentDetailsVO.class);
@@ -191,7 +208,7 @@ public class CommentSerImpl extends ServiceImpl<Comment, CommentDTO> implements 
 
     private Boolean alreadyLike(String userId) throws SerException {
         LikesDTO likesDTO = new LikesDTO();
-        likesDTO.getConditions().add(Restrict.eq("userId", userId));
+        likesDTO.getConditions().add(Restrict.eq("user.id", userId));
         List<Likes> likes = likesSer.findByCis(likesDTO);
         return likes.size() > 0;
     }

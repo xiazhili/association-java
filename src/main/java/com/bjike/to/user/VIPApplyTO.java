@@ -5,6 +5,8 @@ import com.bjike.type.user.SexType;
 import org.hibernate.validator.constraints.NotBlank;
 
 /**
+ * vip
+ *
  * @Author: [liguiqin]
  * @Date: [2017-09-01 14:11]
  * @Description: [ ]

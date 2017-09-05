@@ -1,6 +1,7 @@
 package com.bjike.entity.comment;
 
 import com.bjike.entity.BaseEntity;
+import com.bjike.entity.user.User;
 
 import javax.persistence.*;
 
@@ -23,10 +24,12 @@ public class Likes extends BaseEntity {
     @JoinColumn(name = "comment_id", columnDefinition = "VARCHAR(36) COMMENT '点评id' ", nullable = false)
     private Comment comment;
     /**
-     * 点评人
+     * 点赞人
      */
-    @Column(columnDefinition = "VARCHAR(150) COMMENT 'userId' ", nullable = false)
-    private String userId;
+
+    @ManyToOne(cascade = {CascadeType.REFRESH}, fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", columnDefinition = "VARCHAR(36) COMMENT '点评人' ", nullable = false)
+    private User user;
 
     public Comment getComment() {
         return comment;
@@ -36,11 +39,11 @@ public class Likes extends BaseEntity {
         this.comment = comment;
     }
 
-    public String getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setUser(User user) {
+        this.user = user;
     }
 }

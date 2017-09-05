@@ -83,9 +83,7 @@ public class DriverSerImpl extends ServiceImpl<Driver, DriverDTO> implements Dri
             licenceDTO.getConditions().add(Restrict.eq("driver.id",driver.getId()));
             List<DrivingLicence> drivingLicences = drivingLicenceSer.findByCis(licenceDTO);
             if(null!=drivingLicences && drivingLicences.size()>0){ //删除之前上传的照片,如果存在
-                for (File file : files) {
-                    file.delete();
-                }
+
                 for(DrivingLicence licence: drivingLicences){
                     File f = new File(FileUtil.ROOT_PATH+licence.getImage());
                     if(f.exists()){
@@ -104,6 +102,9 @@ public class DriverSerImpl extends ServiceImpl<Driver, DriverDTO> implements Dri
             drivingLicenceSer.save(drivingLicences);
 
         } else {
+            for (File file : files) {
+                file.delete();
+            }
             throw new SerException("找不到该用户司机申请单");
 
         }

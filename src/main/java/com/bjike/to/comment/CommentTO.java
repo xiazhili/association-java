@@ -19,10 +19,7 @@ import javax.validation.constraints.NotNull;
  * @Copy: [com.bjike]
  */
 public class CommentTO extends BaseTO {
-    /**
-     * 点评人
-     */
-    private String userId;
+
 
     /**
      * 点评内容
@@ -65,13 +62,6 @@ public class CommentTO extends BaseTO {
     @NotNull(message = "请填写可见范围", groups = {ADD.class, EDIT.class})
     private VisibleType visibleType;
 
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
 
     public String getContent() {
         return content;

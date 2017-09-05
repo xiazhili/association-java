@@ -1,6 +1,7 @@
 package com.bjike.entity.comment;
 
 import com.bjike.entity.BaseEntity;
+import com.bjike.entity.user.User;
 import com.bjike.type.comment.ScoreType;
 import com.bjike.type.comment.VisibleType;
 
@@ -22,8 +23,9 @@ public class Comment extends BaseEntity {
     /**
      * 点评人
      */
-    @Column(columnDefinition = "VARCHAR(36) COMMENT '点评人' ", nullable = false)
-    private String userId;
+    @ManyToOne(cascade = {CascadeType.REFRESH}, fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", columnDefinition = "VARCHAR(36) COMMENT '点评人' ", nullable = false)
+    private User user;
     /**
      * 店铺
      */
@@ -52,13 +54,6 @@ public class Comment extends BaseEntity {
     @Column(columnDefinition = "TINYINT(2) COMMENT '可见范围'")
     private VisibleType visibleType;
 
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
 
     public Shop getShop() {
         return shop;
@@ -98,5 +93,13 @@ public class Comment extends BaseEntity {
 
     public void setVisibleType(VisibleType visibleType) {
         this.visibleType = visibleType;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

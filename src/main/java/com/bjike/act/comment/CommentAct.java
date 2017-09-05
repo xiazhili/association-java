@@ -75,8 +75,6 @@ public class CommentAct {
     @GetMapping("list")
     public Result list(CommentDTO dto) throws ActException {
         try {
-            String userId = UserUtil.currentUserID();
-            dto.setUserId(userId);
             List<CommentVO> vos = commentSer.list(dto);
             return ActResult.initialize(vos);
 

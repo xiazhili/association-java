@@ -13,7 +13,7 @@ import com.bjike.entity.${package}.${clazz};
  * @Version: [ v1.0.0 ]
  * @Copy: [com.bjike]
  */
-public interface ${clazz}Rep extends JpaRep<${clazz}, ${clazz}DTO>{
+public interface ${clazz}Rep extends JpaRep<${clazz}, ${clazz}DTO> {
 
 }
 

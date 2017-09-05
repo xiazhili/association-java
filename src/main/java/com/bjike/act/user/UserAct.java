@@ -51,6 +51,7 @@ public class UserAct {
         try {
             User user = UserUtil.currentUser();
             UserInfoVO vo = userSer.userInfo(user.getId());
+            System.out.println(vo.getId());
             return ActResult.initialize(vo);
         } catch (SerException e) {
             throw new ActException(e.getMessage());

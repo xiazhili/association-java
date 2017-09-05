@@ -2,6 +2,7 @@ package com.bjike.chat;
 
 import com.alibaba.fastjson.JSON;
 import com.bjike.common.exception.SerException;
+import com.bjike.common.util.IpUtil;
 import com.bjike.entity.chat.Client;
 import com.bjike.entity.chat.Msg;
 import com.bjike.ser.chat.ChatSer;
@@ -10,6 +11,7 @@ import com.bjike.type.chat.MsgType;
 import jdk.nashorn.internal.objects.annotations.Constructor;
 import org.springframework.stereotype.Component;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.websocket.*;
 import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
@@ -36,6 +38,7 @@ public class ChatServer {
     @OnOpen
     public void join(@PathParam("userId") String userId, Session session)  throws SerException{
         try {
+            System.out.println(session.getUserProperties().get("javax.websocket.endpoint.remoteAddress"));
             boolean exists = chatSer.initClient(userId, session);
             if (exists) {
                 //读取离线时未接收到的消息
@@ -75,6 +78,7 @@ public class ChatServer {
     // OnMessage，传输信息过程中调用的方法
     @OnMessage
     public void incoming(@PathParam("userId") String userId, String content, Session session) throws SerException {
+        System.out.println("-----------msg:"+content);
         session.setMaxTextMessageBufferSize(MAX_SIZE); //调大导致内存溢出
         Msg msg = JSON.parseObject(content, Msg.class);
         Client client = ChatSession.get(userId);

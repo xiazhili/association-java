@@ -14,9 +14,9 @@ import javax.persistence.Table;
  * @Version: [ v1.0.0 ]
  * @Copy: [com.bjike]
  */
- @Entity
- @Table(name = "${package}_${lowClazz}")
-public class ${clazz} extends BaseEntity{
+@Entity
+@Table(name = "${package}_${lowClazz}")
+public class ${clazz} extends BaseEntity {
 
 <%
 	for(m in list){

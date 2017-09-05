@@ -37,7 +37,7 @@ public class TaxiOrder extends BaseEntity {
     /**
      * 已接单
      */
-    @Column(columnDefinition = "VARCHAR(255) COMMENT '已接单' ")
+    @Column(name = "is_received", columnDefinition = "TINYINT(1) DEFAULT 0 COMMENT '已接单'",nullable = false)
     private Boolean received;
     /**
      * 司机
@@ -48,12 +48,12 @@ public class TaxiOrder extends BaseEntity {
     /**
      * 估计费用
      */
-    @Column(columnDefinition = "VARCHAR(255) COMMENT '估计费用' ")
+    @Column(columnDefinition = "DECIMAL(5,2) COMMENT '估计费用' ")
     private Double cost;
     /**
      * 每公里单价
      */
-    @Column(columnDefinition = "VARCHAR(255) COMMENT '每公里单价' ")
+    @Column(columnDefinition = "DECIMAL(5,2) COMMENT '每公里单价' ")
     private Double unitPrice;
     /**
      * 起始地

@@ -13,6 +13,6 @@ import com.bjike.entity.${package}.${clazz};
  * @Version: [ v1.0.0 ]
  * @Copy: [com.bjike]
  */
-public interface ${clazz}Ser extends Ser<${clazz}, ${clazz}DTO>{
+public interface ${clazz}Ser extends Ser<${clazz}, ${clazz}DTO> {
 
 }

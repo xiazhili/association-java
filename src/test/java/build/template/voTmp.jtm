@@ -12,7 +12,7 @@ import com.bjike.vo.BaseVO;
  * @Version: [ v1.0.0 ]
  * @Copy: [com.bjike]
  */
-public class ${clazz}VO extends BaseVO{
+public class ${clazz}VO extends BaseVO {
 
 <%
 	for(m in list){

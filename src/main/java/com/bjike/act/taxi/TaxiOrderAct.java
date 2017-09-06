@@ -4,15 +4,20 @@ import com.bjike.common.exception.ActException;
 import com.bjike.common.exception.SerException;
 import com.bjike.common.restful.ActResult;
 import com.bjike.common.restful.Result;
+import com.bjike.entity.taxi.TaxiOrder;
 import com.bjike.ser.taxi.TaxiOrderSer;
 import com.bjike.to.taxi.TaxiOrderTO;
+import com.bjike.vo.taxi.NearbyVO;
+import com.bjike.vo.taxi.TaxiOrderVO;
+import org.hibernate.annotations.Parameter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.constraints.NotNull;
+import javax.websocket.server.PathParam;
+import java.util.List;
 
 /**
  * 叫车订单
@@ -23,8 +28,8 @@ import org.springframework.web.bind.annotation.RestController;
  * @Version: [ v1.0.0 ]
  * @Copy: [com.bjike]
  */
-
-@RestController("order")
+@RequestMapping("order")
+@RestController
 public class TaxiOrderAct {
 
     @Autowired
@@ -48,6 +53,7 @@ public class TaxiOrderAct {
         }
     }
 
+
     /**
      * 接单
      *
@@ -64,18 +70,40 @@ public class TaxiOrderAct {
         }
     }
 
+
+
+    /**
+     * 附近的訂單
+     * @param longitude 经度
+     * @param latitude 纬度
+     * @param range 范围(米)默认200米
+     * @return
+     * @throws ActException
+     */
+    @GetMapping("nearby")
+    public Result taking(@RequestParam Double longitude,@RequestParam Double latitude,Integer range) throws ActException {
+        try {
+            List<NearbyVO> nearbyVOS = taxiOrderSer.nearby(longitude,latitude, range);
+            return ActResult.initialize(nearbyVOS);
+        } catch (SerException e) {
+            throw new ActException(e.getMessage());
+        }
+    }
+
+    ;
+
     /**
      * 预测费用
      *
-     * @param city     城市
+     * @param area     地区
      * @param distance 距离公里
      * @return {name:'data',type:'double',defaultValue:'',description:'费用.'}
      * @version v1
      */
-    @PutMapping("cost/{city}/{distance}")
-    public Result cost(@PathVariable String city, @PathVariable Double distance) throws ActException {
+    @GetMapping("cost/{area}")
+    public Result cost(@PathVariable String area,@RequestParam  Double distance, @RequestParam Integer minutes) throws ActException {
         try {
-            Double rs = taxiOrderSer.cost(city, distance);
+            Double rs = taxiOrderSer.cost(area, distance,minutes);
             return ActResult.initialize(rs);
         } catch (SerException e) {
             throw new ActException(e.getMessage());

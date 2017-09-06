@@ -5,6 +5,10 @@ import com.bjike.dto.taxi.TaxiOrderDTO;
 import com.bjike.entity.taxi.TaxiOrder;
 import com.bjike.ser.Ser;
 import com.bjike.to.taxi.TaxiOrderTO;
+import com.bjike.vo.taxi.NearbyVO;
+import com.bjike.vo.taxi.TaxiOrderVO;
+
+import java.util.List;
 
 /**
  * 叫车订单 业务操作接口
@@ -40,13 +44,28 @@ public interface TaxiOrderSer extends Ser<TaxiOrder, TaxiOrderDTO> {
     }
 
     /**
-     * 预测费用
+     * 附近的訂單
      *
-     * @param  city 城市
-     * @param distance 里程
+     * @param longitude 经度
+     * @param latitude  纬度
+     * @param range  范围
+     * @return
      * @throws SerException
      */
-    default Double cost(String city,Double distance) throws SerException {
+    default List<NearbyVO> nearby(Double longitude, Double latitude, Integer range) throws SerException {
+        return null;
+
+    }
+
+    /**
+     * 预测费用
+     *
+     * @param area     地区
+     * @param distance 距离/公里
+     * @param minutes  所需时间/分钟
+     * @throws SerException
+     */
+    default Double cost(String area, Double distance, Integer minutes) throws SerException {
         return null;
 
     }

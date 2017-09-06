@@ -5,6 +5,8 @@ import com.bjike.common.aspect.EDIT;
 import com.bjike.to.BaseTO;
 import org.hibernate.validator.constraints.NotBlank;
 
+import java.time.LocalDate;
+
 /**
  * 司机传输实体
  *
@@ -36,6 +38,29 @@ public class DriverTO extends BaseTO {
     @NotBlank(message = "请填写车牌", groups = {ADD.class, EDIT.class})
     private String plateNumber;
 
+    /**
+     * 车主姓名
+     */
+    @NotBlank(message = "请填写车主姓名", groups = {ADD.class, EDIT.class})
+    private String carUsername;
+    /**
+     * 司机姓名
+     */
+    @NotBlank(message = "请填写司机姓名", groups = {ADD.class, EDIT.class})
+    private String driverUsername;
+    /**
+     * 第一次获得驾照日期
+     */
+    @NotBlank(message = "请填写第一次获得驾照日期", groups = {ADD.class, EDIT.class})
+    private String gainDate ;
+
+
+    /**
+     * 车辆注册日期
+     */
+    @NotBlank(message = "请填写车辆注册日期", groups = {ADD.class, EDIT.class})
+    private String registerDate ;
+
     public String getAddress() {
         return address;
     }
@@ -66,5 +91,37 @@ public class DriverTO extends BaseTO {
 
     public void setPlateNumber(String plateNumber) {
         this.plateNumber = plateNumber;
+    }
+
+    public String getCarUsername() {
+        return carUsername;
+    }
+
+    public void setCarUsername(String carUsername) {
+        this.carUsername = carUsername;
+    }
+
+    public String getDriverUsername() {
+        return driverUsername;
+    }
+
+    public void setDriverUsername(String driverUsername) {
+        this.driverUsername = driverUsername;
+    }
+
+    public String getGainDate() {
+        return gainDate;
+    }
+
+    public void setGainDate(String gainDate) {
+        this.gainDate = gainDate;
+    }
+
+    public String getRegisterDate() {
+        return registerDate;
+    }
+
+    public void setRegisterDate(String registerDate) {
+        this.registerDate = registerDate;
     }
 }

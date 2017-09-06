@@ -52,9 +52,8 @@ public class DriverSerImpl extends ServiceImpl<Driver, DriverDTO> implements Dri
                 List<DrivingLicence> drivingLicences = new ArrayList<>();
                 for (File file : files) {
                     DrivingLicence drivingLicence = new DrivingLicence();
-                    String images = StringUtils.substringAfter(file.getPath(), FileUtil.ROOT_PATH);
                     drivingLicence.setDriver(driver);
-                    drivingLicence.setImage(images);
+                    drivingLicence.setImage(FileUtil.getDbPath(file.getPath()));
                     drivingLicences.add(drivingLicence);
                 }
                 drivingLicenceSer.save(drivingLicences);
@@ -85,7 +84,7 @@ public class DriverSerImpl extends ServiceImpl<Driver, DriverDTO> implements Dri
             if(null!=drivingLicences && drivingLicences.size()>0){ //删除之前上传的照片,如果存在
 
                 for(DrivingLicence licence: drivingLicences){
-                    File f = new File(FileUtil.ROOT_PATH+licence.getImage());
+                    File f = new File(FileUtil.getRealPath(licence.getImage()));
                     if(f.exists()){
                         f.delete();
                     }
@@ -94,8 +93,7 @@ public class DriverSerImpl extends ServiceImpl<Driver, DriverDTO> implements Dri
             }
             for (File file : files) {//上传照片
                 DrivingLicence drivingLicence = new DrivingLicence();
-                String images = StringUtils.substringAfter(file.getPath(), FileUtil.ROOT_PATH);
-                drivingLicence.setImage(images);
+                drivingLicence.setImage(FileUtil.getDbPath(file.getPath()));
                 drivingLicence.setDriver(driver);
                 drivingLicences.add(drivingLicence);
             }

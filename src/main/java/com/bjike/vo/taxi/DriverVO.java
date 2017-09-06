@@ -32,6 +32,25 @@ public class DriverVO extends BaseVO {
     private String plateNumber;
 
     /**
+     * 车主姓名
+     */
+    private String carUsername;
+    /**
+     * 司机姓名
+     */
+    private String driverUsername;
+    /**
+     * 第一次获得驾照日期
+     */
+    private String gainDate ;
+
+
+    /**
+     * 车辆注册日期
+     */
+    private String registerDate ;
+
+    /**
      * 驾驶证照片
      */
     private String[] images;
@@ -75,5 +94,37 @@ public class DriverVO extends BaseVO {
 
     public void setPlateNumber(String plateNumber) {
         this.plateNumber = plateNumber;
+    }
+
+    public String getCarUsername() {
+        return carUsername;
+    }
+
+    public void setCarUsername(String carUsername) {
+        this.carUsername = carUsername;
+    }
+
+    public String getDriverUsername() {
+        return driverUsername;
+    }
+
+    public void setDriverUsername(String driverUsername) {
+        this.driverUsername = driverUsername;
+    }
+
+    public String getGainDate() {
+        return gainDate;
+    }
+
+    public void setGainDate(String gainDate) {
+        this.gainDate = gainDate;
+    }
+
+    public String getRegisterDate() {
+        return registerDate;
+    }
+
+    public void setRegisterDate(String registerDate) {
+        this.registerDate = registerDate;
     }
 }

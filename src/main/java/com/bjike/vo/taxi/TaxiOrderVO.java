@@ -44,6 +44,7 @@ public class TaxiOrderVO extends BaseVO {
      */
     private String destination;
 
+
     public String getLongitude() {
         return longitude;
     }

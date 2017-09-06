@@ -5,6 +5,8 @@ import com.bjike.common.exception.SerException;
 import com.bjike.common.interceptor.login.LoginAuth;
 import com.bjike.common.restful.ActResult;
 import com.bjike.common.restful.Result;
+import com.bjike.common.util.UserUtil;
+import com.bjike.common.util.file.FileUtil;
 import com.bjike.entity.chat.AudioClient;
 import com.bjike.entity.chat.Msg;
 import com.bjike.ser.chat.ChatSer;
@@ -13,11 +15,11 @@ import com.bjike.session.AudioSession;
 import com.bjike.session.ChatSession;
 import com.bjike.type.chat.MsgType;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import java.io.File;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -96,6 +98,29 @@ public class ChatAct {
         AudioClientSession.remove(userId);
         AudioSession.remove(userId);
         return new ActResult("audio is over");
+    }
+
+    /**
+     * 文件发送
+     *
+     * @throws ActException
+     * @version v1
+     */
+    @PostMapping("file/upload")
+    public Result quitAudio(HttpServletRequest request) throws ActException {
+        try {
+            String userId = UserUtil.currentUserID();
+            List<File> files = FileUtil.save(request, "/" + userId + "/chat/file");
+            String[] paths = new String[files.size()];
+            int i = 0;
+            for (File file : files) {
+                paths[i++] = FileUtil.getDbPath(file.getPath());
+            }
+            return ActResult.initialize(paths);
+        } catch (SerException e) {
+            throw new ActException(e.getMessage());
+        }
+
     }
 
 }

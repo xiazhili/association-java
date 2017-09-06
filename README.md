@@ -14,4 +14,4 @@
  
  **运行步骤**
  1. gradle build -xtest 打jar包
- 2. 项目下/build/libs 下jar包 java -jar community.jar & 即可运行
+ 2. 项目下/build/libs 下jar包 java -jar association.jar & 即可运行

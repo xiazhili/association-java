@@ -51,7 +51,6 @@ public class UserAct {
         try {
             User user = UserUtil.currentUser();
             UserInfoVO vo = userSer.userInfo(user.getId());
-            System.out.println(vo.getId());
             return ActResult.initialize(vo);
         } catch (SerException e) {
             throw new ActException(e.getMessage());
@@ -137,8 +136,8 @@ public class UserAct {
     public ActResult uploadHeadPath(HttpServletRequest request) throws ActException {
         try {
             User user = UserUtil.currentUser();
-            List<File> files = FileUtil.save(request, "/" + user.getPhone() + "/head");
-            String path = StringUtils.substringAfter(files.get(0).getPath(), FileUtil.ROOT_PATH);
+            List<File> files = FileUtil.save(request, "/" + user.getId() + "/head");
+            String path = FileUtil.getRealPath(files.get(0).getPath());
             userSer.uploadHeadPath(path);
         } catch (Exception e) {
             e.printStackTrace();

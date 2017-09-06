@@ -5,8 +5,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import javax.servlet.Servlet;
-import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
@@ -47,7 +45,6 @@ public class FileUtil {
     }
 
 
-
     /**
      * 文件保存
      *
@@ -76,11 +73,11 @@ public class FileUtil {
                         files.add(file);
                     }
                     return files;
-                }else {
+                } else {
                     throw new SerException("没有检测到上传文件");
 
                 }
-            }else {
+            } else {
                 throw new SerException("不符合文件上传格式");
             }
 
@@ -186,6 +183,13 @@ public class FileUtil {
 
     }
 
+    /**
+     * 获取实际保存路径
+     *
+     * @param path
+     * @return
+     * @throws SerException
+     */
     public static String getRealPath(String path) throws SerException {
         if (!path.startsWith("/")) {
             throw new SerException("存储路径从[ / ]开始");
@@ -195,6 +199,25 @@ public class FileUtil {
         } else {
             throw new SerException("存储路径不能为空");
         }
+    }
+
+    /**
+     * 获取返回给用户的,保存在数据库的路径
+     *
+     * @param realPath
+     * @return
+     * @throws SerException
+     */
+    public static String getDbPath(String realPath) throws SerException {
+        if (!realPath.startsWith("/")) {
+            throw new SerException("存储路径从[ / ]开始");
+        }
+        if (StringUtils.isNotBlank(realPath)) {
+            return StringUtils.substringAfter(realPath, FileUtil.ROOT_PATH);
+        } else {
+            throw new SerException("存储路径不能为空");
+        }
+
     }
 
 }

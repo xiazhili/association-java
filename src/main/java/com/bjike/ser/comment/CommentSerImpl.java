@@ -166,7 +166,7 @@ public class CommentSerImpl extends ServiceImpl<Comment, CommentDTO> implements 
         Comment comment = super.findById(commentId);
         List<Picture> pictures = new ArrayList<>(files.size());
         for (File file : files) {
-            String path = StringUtils.substringAfter(file.getPath(), FileUtil.ROOT_PATH);
+            String path = FileUtil.getDbPath(file.getPath());
             Picture picture = new Picture();
             picture.setComment(comment);
             picture.setPath(path);

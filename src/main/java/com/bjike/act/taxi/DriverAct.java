@@ -31,7 +31,8 @@ import java.util.List;
  * @Copy: [com.bjike]
  */
 @LoginAuth
-@RestController("driver")
+@RequestMapping("driver")
+@RestController
 public class DriverAct {
 
     @Autowired

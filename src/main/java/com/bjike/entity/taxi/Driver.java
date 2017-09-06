@@ -5,6 +5,7 @@ import com.bjike.entity.user.User;
 import com.bjike.type.taxi.VerifyType;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
 /**
  * 司机信息
@@ -45,11 +46,36 @@ public class Driver extends BaseEntity {
      */
     @Column(columnDefinition = "VARCHAR(8) COMMENT '车牌' ", nullable = false)
     private String plateNumber;
+    /**
+     * 车主姓名
+     */
+    @Column(columnDefinition = "VARCHAR(50) COMMENT '车主姓名' ", nullable = false)
+    private String carUsername;
+    /**
+     * 司机姓名
+     */
+    @Column(columnDefinition = "VARCHAR(50) COMMENT '车主姓名' ", nullable = false)
+    private String driverUsername;
+    /**
+     * 第一次获得驾照日期
+     */
+
+    @Column(name = "gainDate", columnDefinition = "DATE  COMMENT '第一次获得驾照日期'", nullable = false)
+    private LocalDate gainDate;
+
+
+    /**
+     * 车辆注册日期
+     */
+
+    @Column(name = "registerDate", columnDefinition = "DATE  COMMENT '车辆注册日期'", nullable = false)
+    private LocalDate registerDate;
+
 
     /**
      * 审核
      */
-    @Column(columnDefinition = "TINYINT(2) COMMENT '审核状态'",nullable = false)
+    @Column(columnDefinition = "TINYINT(2) COMMENT '审核状态'", nullable = false)
     private VerifyType verifyType;
 
     public User getUser() {
@@ -98,5 +124,37 @@ public class Driver extends BaseEntity {
 
     public void setVerifyType(VerifyType verifyType) {
         this.verifyType = verifyType;
+    }
+
+    public String getCarUsername() {
+        return carUsername;
+    }
+
+    public void setCarUsername(String carUsername) {
+        this.carUsername = carUsername;
+    }
+
+    public String getDriverUsername() {
+        return driverUsername;
+    }
+
+    public void setDriverUsername(String driverUsername) {
+        this.driverUsername = driverUsername;
+    }
+
+    public LocalDate getGainDate() {
+        return gainDate;
+    }
+
+    public void setGainDate(LocalDate gainDate) {
+        this.gainDate = gainDate;
+    }
+
+    public LocalDate getRegisterDate() {
+        return registerDate;
+    }
+
+    public void setRegisterDate(LocalDate registerDate) {
+        this.registerDate = registerDate;
     }
 }

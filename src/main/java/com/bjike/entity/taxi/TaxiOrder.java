@@ -2,6 +2,7 @@ package com.bjike.entity.taxi;
 
 import com.bjike.entity.BaseEntity;
 import com.bjike.entity.user.User;
+import com.bjike.type.taxi.OrderStatus;
 
 import javax.persistence.*;
 
@@ -35,10 +36,10 @@ public class TaxiOrder extends BaseEntity {
     @Column(columnDefinition = "VARCHAR(255) COMMENT '纬度' ", nullable = false)
     private String latitude;
     /**
-     * 已接单
+     * 订单状态
      */
-    @Column(name = "is_received", columnDefinition = "TINYINT(1) DEFAULT 0 COMMENT '已接单'",nullable = false)
-    private Boolean received;
+    @Column(name = "status",columnDefinition = "TINYINT(1) DEFAULT 0 COMMENT '订单状态' ", nullable = false, insertable = false)
+    private OrderStatus status;
     /**
      * 司机
      */
@@ -90,12 +91,12 @@ public class TaxiOrder extends BaseEntity {
         this.latitude = latitude;
     }
 
-    public Boolean getReceived() {
-        return received;
+    public OrderStatus getStatus() {
+        return status;
     }
 
-    public void setReceived(Boolean received) {
-        this.received = received;
+    public void setStatus(OrderStatus status) {
+        this.status = status;
     }
 
     public Driver getDriver() {

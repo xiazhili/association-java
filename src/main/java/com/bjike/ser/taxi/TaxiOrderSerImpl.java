@@ -11,6 +11,7 @@ import com.bjike.entity.taxi.TaxiOrder;
 import com.bjike.entity.user.User;
 import com.bjike.ser.ServiceImpl;
 import com.bjike.to.taxi.TaxiOrderTO;
+import com.bjike.type.taxi.OrderStatus;
 import com.bjike.type.user.SexType;
 import com.bjike.vo.taxi.NearbyVO;
 import com.bjike.vo.taxi.TaxiOrderVO;
@@ -41,7 +42,7 @@ public class TaxiOrderSerImpl extends ServiceImpl<TaxiOrder, TaxiOrderDTO> imple
         User user = UserUtil.currentUser(false);
         TaxiOrder taxiOrder = BeanCopy.copyProperties(to, TaxiOrder.class);
         taxiOrder.setUser(user);
-        taxiOrder.setReceived(false);
+        taxiOrder.setStatus(OrderStatus.PENDING);
         super.save(taxiOrder);
         return true;
     }
@@ -53,7 +54,7 @@ public class TaxiOrderSerImpl extends ServiceImpl<TaxiOrder, TaxiOrderDTO> imple
         dto.getConditions().add(Restrict.eq("received", false));
         TaxiOrder taxiOrder = super.findOne(dto);
         if (null != taxiOrder) {
-            taxiOrder.setReceived(true);
+            taxiOrder.setStatus(OrderStatus.RECEIVED);
         } else {
             throw new SerException("订单不存在,或已被抢单了");
         }
@@ -75,7 +76,7 @@ public class TaxiOrderSerImpl extends ServiceImpl<TaxiOrder, TaxiOrderDTO> imple
 
         String sql = " select a.id,a.start_point as startPoint,a.destination ,b.nickname,b.head_path as headPath ,b.sex_type as sexType, " +
                 " a.longitude,a.latitude from taxi_order a" +
-                " ,user b where a.user_id=b.id longitude>=? and longitude <=? and latitude>=? and latitude<=? ";
+                " ,user b where a.user_id=b.id longitude>=? and longitude <=? and latitude>=? and latitude<=? and a.status=0";
         sql = String.format(sql, minlng, maxlng, minlat, maxlat);
         String[] fields = new String[]{"id", "startPoint", "destination", "nickname", "headPath", "sexType", "longitude", "latitude",};
         List<NearbyVO> nearbyVOS = super.findBySql(sql, TaxiOrderVO.class, fields);

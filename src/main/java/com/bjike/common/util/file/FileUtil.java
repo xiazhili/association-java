@@ -1,13 +1,17 @@
 package com.bjike.common.util.file;
 
 import com.bjike.common.exception.SerException;
+import com.bjike.common.util.UserUtil;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,6 +26,7 @@ import static org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload.i
  */
 public class FileUtil {
     public static final String ROOT_PATH = "/root/storage";
+    private static final Logger LOGGER = LoggerFactory.getLogger(FileUtil.class);
 
 
     /**
@@ -54,11 +59,11 @@ public class FileUtil {
      * @throws SerException
      */
     public static List<File> save(HttpServletRequest request, String path) throws SerException {
-        if (StringUtils.isNotBlank(path)) {
-            path = getRealPath(path);
-            if (isMultipartContent(request)) {
-                List<MultipartFile> multipartFiles = getMultipartFile(request);
-                if (null != multipartFiles && multipartFiles.size() > 0) {
+        if (isMultipartContent(request)) { //格式正确
+            List<MultipartFile> multipartFiles = getMultipartFile(request);
+            if (null != multipartFiles && multipartFiles.size() > 0) {//包含上传文件
+                if (StringUtils.isNotBlank(path)) { //路径不为空
+                    path = getRealPath(path);
                     List<File> files = new ArrayList<>(multipartFiles.size());
                     for (MultipartFile mfile : multipartFiles) {
                         File folder = new File(path);
@@ -73,16 +78,17 @@ public class FileUtil {
                         files.add(file);
                     }
                     return files;
-                } else {
-                    throw new SerException("没有检测到上传文件");
 
+                } else {
+                    throw new SerException("path存储路径不能为空");
                 }
             } else {
-                throw new SerException("不符合文件上传格式");
+                LOGGER.info("上传文件为空");
+                return new ArrayList<>(0);
             }
-
         } else {
-            throw new SerException("path存储路径不能为空");
+            LOGGER.info("不符合文件上传格式");
+            return new ArrayList<>(0);
         }
 
     }
@@ -220,4 +226,30 @@ public class FileUtil {
 
     }
 
+    /**
+     * 根据模块生成该模块文件保存的路径
+     *
+     * @param folder 保存文件夹名
+     * @return
+     * @throws SerException
+     */
+    public static String getModulePath(String folder) throws SerException {
+        return "/" + UserUtil.currentUserID() + "/" + folder;
+    }
+
+    /**
+     * 根据模块生成该模块文件保存的路径
+     *
+     * @param folder 保存文件夹名
+     * @param date   加入日期文件夹
+     * @return
+     * @throws SerException
+     */
+    public static String getModulePath(String folder, boolean date) throws SerException {
+        String path = "/" + UserUtil.currentUserID() + "/" + folder;
+        if (date) {
+            path += ("/" + LocalDate.now().toString().replaceAll("-", ""));
+        }
+        return path;
+    }
 }

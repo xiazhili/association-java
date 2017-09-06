@@ -53,8 +53,7 @@ public class CommentAct {
     @PostMapping("add")
     public Result add(@Validated(ADD.class) CommentTO to, BindingResult result, HttpServletRequest request) throws ActException {
         try {
-            String userId = UserUtil.currentUserID();
-            String path = "/" + userId + "/comment/" + DateUtil.dateToString(LocalDate.now()).replaceAll("-", "");
+            String path =FileUtil.getModulePath("comment",true);
             List<File> files = FileUtil.save(request,path);
             Comment comment = commentSer.add(to, files);
             CommentVO vo = BeanCopy.copyProperties(comment, CommentVO.class);
@@ -183,7 +182,7 @@ public class CommentAct {
     public Result uploadImg(@PathVariable String commentId, HttpServletRequest request) throws ActException {
         try {
             String userId = UserUtil.currentUserID();
-            String path = "/" + userId + "/comment/" + DateUtil.dateToString(LocalDate.now()).replaceAll("-", "");
+            String path =FileUtil.getModulePath("comment",true);
             List<File> files = FileUtil.save(request, path);
             commentSer.uploadImg(commentId, files);
             return new ActResult("success");

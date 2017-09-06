@@ -3,6 +3,7 @@ package com.bjike.to.taxi;
 import com.bjike.common.aspect.ADD;
 import com.bjike.common.aspect.EDIT;
 import com.bjike.to.BaseTO;
+import com.bjike.type.taxi.OrderStatus;
 import org.hibernate.validator.constraints.NotBlank;
 
 
@@ -32,9 +33,9 @@ public class TaxiOrderTO extends BaseTO {
     @NotBlank(message = "请填写纬度", groups = {TaxiOrderTO.PUBLISH.class})
     private String latitude;
     /**
-     * 已接单
+     * 订单状态
      */
-    private Boolean received;
+    private OrderStatus status;
 
     /**
      * 估计费用
@@ -72,14 +73,13 @@ public class TaxiOrderTO extends BaseTO {
         this.latitude = latitude;
     }
 
-    public Boolean getReceived() {
-        return received;
+    public OrderStatus getStatus() {
+        return status;
     }
 
-    public void setReceived(Boolean received) {
-        this.received = received;
+    public void setStatus(OrderStatus status) {
+        this.status = status;
     }
-
 
     public Double getCost() {
         return cost;

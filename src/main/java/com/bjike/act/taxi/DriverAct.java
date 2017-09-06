@@ -49,7 +49,7 @@ public class DriverAct {
     public Result apply(DriverTO to, HttpServletRequest request) throws ActException {
         try {
             String userId = UserUtil.currentUserID();
-            String path = "/" + userId + "/driver/" + DateUtil.dateToString(LocalDate.now()).replaceAll("-", "");
+            String path =FileUtil.getModulePath("driver",true);
             List<File> files = FileUtil.save(request, path);
             Boolean rs = driverSer.apply(to, files);
             return ActResult.initialize(rs);
@@ -69,8 +69,7 @@ public class DriverAct {
     @PostMapping("img/upload")
     public Result imgUpload(HttpServletRequest request) throws ActException {
         try {
-            String userId = UserUtil.currentUserID();
-            String path = "/" + userId + "/driver/" + DateUtil.dateToString(LocalDate.now()).replaceAll("-", "");
+            String path =FileUtil.getModulePath("driver",true);
             List<File> files = FileUtil.save(request, path);
             Boolean rs = driverSer.imgUpload(files);
             return ActResult.initialize(rs);

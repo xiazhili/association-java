@@ -1,5 +1,6 @@
 package com.bjike.vo.taxi;
 
+import com.bjike.type.taxi.OrderStatus;
 import com.bjike.vo.BaseVO;
 
 
@@ -23,9 +24,9 @@ public class TaxiOrderVO extends BaseVO {
      */
     private String latitude;
     /**
-     * 已接单
+     * 订单状态
      */
-    private Boolean received;
+    private OrderStatus status;;
 
     /**
      * 估计费用
@@ -61,12 +62,12 @@ public class TaxiOrderVO extends BaseVO {
         this.latitude = latitude;
     }
 
-    public Boolean getReceived() {
-        return received;
+    public OrderStatus getStatus() {
+        return status;
     }
 
-    public void setReceived(Boolean received) {
-        this.received = received;
+    public void setStatus(OrderStatus status) {
+        this.status = status;
     }
 
     public Double getCost() {
